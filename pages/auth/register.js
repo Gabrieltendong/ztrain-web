@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { register } from "../../store/auth/actionAuth";
 import styles from './style.module.css'
+import Image from "next/image";
 
 
 const Register = () => {
@@ -27,8 +28,10 @@ const Register = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.col_1}>
-            <img
+            <Image
                 className={styles.carousel_img}
+                height={1000}
+                width={1000}
                 src="/assets/2.jpg"
                 alt="First slide"
             />
