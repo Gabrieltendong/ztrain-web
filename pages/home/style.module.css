@@ -57,7 +57,7 @@
 #header_home{
     height: 100vh;
     background-color: #FF7643;
-    background-image: url("../../public/assets/header_bg4.jpg");
+    background-image: url("/assets/header_bg4.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
