@@ -71,7 +71,7 @@ const Register = () => {
               {
                 Array.isArray(error)?
                 error.map((item, index) => (
-                  <p className={styles.messageError}>* {item}</p>
+                  <p key={index} className={styles.messageError}>{" * "} {item}</p>
                 ))
                 :error.length > 0?
                 <p className={styles.messageError}>{error}</p>:null
@@ -94,7 +94,7 @@ const Register = () => {
               </button>
             </form>
             <div id = {styles.link_signup_wrapper}>
-                <span>vous avez déja un compte? </span>
+                <span>{" Vous avez déja un compte? "} </span>
                 <Link href={'/auth/login'} id={styles.link_signup}>Se connecter</Link>
             </div>
           </div>

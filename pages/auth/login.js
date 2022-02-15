@@ -77,8 +77,8 @@ const Login = () => {
               </button>
             </form>
             <div id = {styles.link_signup_wrapper}>
-                <span>vous n'avez pas encore de compte? </span>
-                <Link href={'/auth/register'} id={styles.link_signup}>S'inscrire</Link>
+                <span>{" vous n'avez pas encore de compte? "} </span>
+                <Link href={'/auth/register'} id={styles.link_signup}>{" S'inscrire "}</Link>
             </div>
           </div>
         </div>

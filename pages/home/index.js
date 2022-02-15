@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { FaSearch, FaShoppingBasket } from 'react-icons/fa';
 import styles from './style.module.css'
+import Image from 'next/image';
 
 const Home = () => {
 
@@ -47,7 +48,7 @@ const Home = () => {
             </nav>
             <header id={styles.header_home}>
                 <div className={styles.content_text_header}>
-                    <h1>Flat up to 50% off for men's</h1>
+                    <h1>{" Flat up to 50% off for men's "}</h1>
                 </div>
             </header>
             <main id={styles.content_home}>
@@ -55,9 +56,10 @@ const Home = () => {
                 <div id = {styles.popular_product_wrapper}>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://static2.chaussminimaxi.fr/13471-catalog_medium/homme-presse-daim-cognac-paire-fils.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -68,9 +70,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://static2.chaussminimaxi.fr/12306-large_default/boots-chelsea.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -81,9 +84,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://media.achat-ville.com/uploads/mulhouse/Produit/cb/imp_photo_25629_1634310102.png" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -94,9 +98,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://lookhomme.com/wp-content/uploads/2018/11/Chaussure-homme-tendance-7.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -107,9 +112,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://i.pinimg.com/originals/00/6b/0f/006b0f4879428f8123d351d62acfc3cb.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -120,9 +126,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://i.pinimg.com/550x/2a/cc/4b/2acc4b6837a30e6d78fa17d315404c19.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -133,9 +140,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://s-media-cache-ak0.pinimg.com/736x/16/c2/e7/16c2e7b058de566cf045daa2c7eb48ce--leather-chelsea-boots-ted-baker.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -146,9 +154,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://sneakers123.s3.amazonaws.com/release/331496/conversions/timberland-cambridge-square-chelsea-a2gsp-thumb.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -159,9 +168,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://uploads-ssl.webflow.com/5fb638ef16441f801761b4e1/5fc52e3900500fa6e70505fa_Edward-Green-Malvern-Selection-PG1.jpeg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -172,9 +182,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://shop.manfield.fr/publicmedia/formatted/110/891/676/fr/1CH-15-17-56_V1.png;h=2400,w=2400.png" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -185,9 +196,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://shop.manfield.fr/publicmedia/formatted/133/202/191/fr/1CH-15-84-45_V1.jpg;h=2400,w=2400.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
@@ -198,9 +210,10 @@ const Home = () => {
                     </div>
                     <div className={styles.card}>
                         <div className={styles.card_body}>
-                            <img 
+                            <Image 
                                 src="https://static.monbottier.fr/49328-large_default/chaussures-churchs-richelieu-carla-noir.jpg" 
-                                alt="" 
+                                height={250}
+                                width={250} 
                                 className={styles.card_body_img}
                             />
                         </div>
