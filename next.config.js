@@ -14,6 +14,7 @@ module.exports = {
   },
   images: {
     domains: [
+      'i.natgeofe.com',
       'static.monbottier.fr',
       'shop.manfield.fr',
       'uploads-ssl.webflow.com',

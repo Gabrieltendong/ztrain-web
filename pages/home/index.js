@@ -1,23 +1,41 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { FaSearch, FaShoppingBasket } from 'react-icons/fa';
+import { FiShoppingCart } from 'react-icons/fi';
 import styles from './style.module.css'
 import Image from 'next/image';
+import Cart from '../../components/Cart';
+import { getAllProduct } from '../../store/product/actionProduct';
+import ProductItem from '../../components/ProductItem';
 
 const Home = () => {
 
+    const dispatch = useDispatch()
+    const [show, setShow] = useState(false)
     const { user } = useSelector(state => state.auth?.user_infos)
+    const { data, isLoading } = useSelector(state => state.product.list_product)
     const router = useRouter()
+
+    console.log(data)
+
+    const onShowCart = () => {
+        setShow(true)
+    }
 
     useEffect(() => {
         if(!user){
             router.push('/auth/login')
         }
+        dispatch(getAllProduct())
     }, [])
 
     return(
         <div>
+            <Cart 
+                showCart={show}
+                onClose = {() => setShow(false)}
+            />
             <nav id={styles.header_navBar}>
                 <div id={styles.content_lolo}>
                     <h1>ZTrain</h1>
@@ -41,8 +59,8 @@ const Home = () => {
                         <FaSearch />
                     </div>
                 </div>
-                <div id={styles.content_cart_wrapper}>
-                    <FaShoppingBasket />
+                <div id={styles.content_cart_wrapper} onClick={onShowCart}>
+                    <FiShoppingCart />
                     <span> 0 produit</span>
                 </div>
             </nav>
@@ -54,174 +72,9 @@ const Home = () => {
             <main id={styles.content_home}>
                 <h2 className={styles.section_title}>Popular product</h2>
                 <div id = {styles.popular_product_wrapper}>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://static2.chaussminimaxi.fr/13471-catalog_medium/homme-presse-daim-cognac-paire-fils.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://static2.chaussminimaxi.fr/12306-large_default/boots-chelsea.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://media.achat-ville.com/uploads/mulhouse/Produit/cb/imp_photo_25629_1634310102.png" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://lookhomme.com/wp-content/uploads/2018/11/Chaussure-homme-tendance-7.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://i.pinimg.com/originals/00/6b/0f/006b0f4879428f8123d351d62acfc3cb.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://i.pinimg.com/550x/2a/cc/4b/2acc4b6837a30e6d78fa17d315404c19.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://s-media-cache-ak0.pinimg.com/736x/16/c2/e7/16c2e7b058de566cf045daa2c7eb48ce--leather-chelsea-boots-ted-baker.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://sneakers123.s3.amazonaws.com/release/331496/conversions/timberland-cambridge-square-chelsea-a2gsp-thumb.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://uploads-ssl.webflow.com/5fb638ef16441f801761b4e1/5fc52e3900500fa6e70505fa_Edward-Green-Malvern-Selection-PG1.jpeg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://shop.manfield.fr/publicmedia/formatted/110/891/676/fr/1CH-15-17-56_V1.png;h=2400,w=2400.png" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://shop.manfield.fr/publicmedia/formatted/133/202/191/fr/1CH-15-84-45_V1.jpg;h=2400,w=2400.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <div className={styles.card_body}>
-                            <Image 
-                                src="https://static.monbottier.fr/49328-large_default/chaussures-churchs-richelieu-carla-noir.jpg" 
-                                height={250}
-                                width={250} 
-                                className={styles.card_body_img}
-                            />
-                        </div>
-                        <div className={styles.card_footer}>
-                            <h5>Basket with Handle</h5>
-                            <p>$1000</p>
-                        </div>
-                    </div>
+                    {
+                        data.map((item) => <ProductItem item={item} />)
+                    }
                 </div>
             </main>
             <footer id={styles.footer_home}>

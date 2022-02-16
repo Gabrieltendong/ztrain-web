@@ -31,6 +31,7 @@
     max-width: 120px;
     border-radius: 25px;
     box-shadow: 1px 1px 10px 1px #d3d3d3;
+    cursor: pointer;
 }
 #content_cart_wrapper>span{
     margin-left: 5px;
@@ -86,46 +87,9 @@
     padding: 50px;
     
 }
-/* #footer_home:before{
-    content: '';
-    position: absolute;
-    height: 500px;
-    width: 100%;
-    left: 0px;
-    margin-top: -50px;
-} */
 #content_footer{
     display: grid;
     grid-template-columns: 35% 25% 20% 20%;
-}
-.card{
-    /* width: 25vw; */
-    margin: 10px 5px;
-    transition: all 1s;
-}
-.card:hover{
-    transform: scale(1.04);
-}
-.card_body{
-    height: 300px;
-    background-color: rgb(238, 238, 238);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.card_body_img{
-    height: 250px;
-    width: 250px;
-    object-fit: cover;
-}
-.card_footer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Montserrat', sans-serif;
-}
-.card_footer>p{
-    color: #777;
 }
 .section_title{
     font-family: 'Montserrat', sans-serif;
@@ -139,7 +103,6 @@
     justify-content: center;
     align-items: center;
     padding: 0 50px;
-    /* border-right: 1px solid white; */
 }
 
 #section_logo>h1{
@@ -152,9 +115,6 @@
 #content_item_our_socitety{
     display: grid;
     grid-template-columns: 50% 50%;
-}
-#section_our_society,#section_contact_us {
-    /* border-right: 1px solid white; */
 }
 #footer_home h5{
     color: white;

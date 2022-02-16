@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
+
+.card{
+    margin: 10px 5px;
+    transition: all 1s;
+    position: relative;
+}
+.card:hover .card_body_img{
+    transform: scale(1.2) rotate(10deg);
+}
+.card:hover .btn_add_cart{
+    display: block;
+}
+.card_body{
+    height: 300px;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card_body_img{
+    height: 250px;
+    width: 250px;
+    transform: scale(1) rotate(0deg);
+    object-fit: cover;
+    transition: all 2s;
+}
+.card_footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.card_footer>p{
+    color: #777;
+}
+.btn_add_cart{
+    height: 40px;
+    border:1px solid #FF7643;
+    background-color: white;
+    color: #FF7643;
+    border-radius: 25px;
+    padding: 0 20px;
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
