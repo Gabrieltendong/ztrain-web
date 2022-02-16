@@ -73,7 +73,7 @@ const Home = () => {
                 <h2 className={styles.section_title}>Popular product</h2>
                 <div id = {styles.popular_product_wrapper}>
                     {
-                        data.map((item) => <ProductItem item={item} />)
+                        data.map((item, index) => <ProductItem key={index} item={item} />)
                     }
                 </div>
             </main>
