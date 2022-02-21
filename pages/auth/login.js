@@ -4,7 +4,7 @@ import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 
 import { auth } from "../../store/auth/actionAuth";
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -51,7 +51,8 @@ const Login = () => {
               />
               <input
                 id="standard-basic" 
-                placeholder="Mot de passe" 
+                placeholder="Mot de passe"
+                type='password'
                 className={styles.input}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -78,7 +79,9 @@ const Login = () => {
             </form>
             <div id = {styles.link_signup_wrapper}>
                 <span>{" vous n'avez pas encore de compte? "} </span>
-                <Link href={'/auth/register'} id={styles.link_signup}>{" S'inscrire "}</Link>
+                <Link href={'/auth/register'}>
+                  <a className={styles.link}>{" S'inscrire "}</a>
+                </Link>
             </div>
           </div>
         </div>

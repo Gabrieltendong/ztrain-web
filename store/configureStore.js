@@ -3,6 +3,7 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 import authReducer from './auth/reducerAuth';
 import productReducer from './product/reducerProduct';
+import cartReducer from './cart/reducerCart';
 
 const client = axios.create({
   baseURL: process.env.baseUrl,
@@ -14,7 +15,8 @@ const client = axios.create({
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    product: productReducer
+    product: productReducer,
+    cart: cartReducer
 })
 
 let store = createStore(

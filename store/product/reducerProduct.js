@@ -7,7 +7,7 @@ const initialState = {
         error: ""
     },
     add_product_cart: {
-        data: {},
+        message: "",
         isLoading: false,
         error: ""
     }
@@ -57,7 +57,7 @@ const productReducer = (state = initialState, action) => {
                 add_product_cart: {
                     ...state.add_product_cart,
                     isLoading: false,
-                    data: action.payload.data,
+                    message: action.payload,
                     error: ""
                 }
             }
@@ -67,7 +67,7 @@ const productReducer = (state = initialState, action) => {
                 add_product_cart: {
                     ...state.add_product_cart,
                     isLoading: false,
-                    data: {},
+                    message: "",
                     error: "probleme sur le serveur"
                 }
             }

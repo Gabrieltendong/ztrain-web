@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500&family=Pacifico&display=swap');
+@import '/styles/mixins';
+
+#header_navBar{
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 20% 65% 15%;
+    align-items: center;
+    position: fixed;
+    padding-right: 20px;
+    z-index: 10;
+
+    #content_input_wrapper{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: 1px solid #d3d3d3;
+        height: 50px;
+        border-radius: 25px;
+        padding-right: 20px;
+        margin: 0 10vw;
+    }
+    #content_logo{
+        padding-left: 100px;
+        font-family: 'Pacifico', cursive;
+    }
+    #select_cat{
+        height: 48px;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        background-color: #FF7643;
+        padding: 0 20px;
+    }
+    #input_navbar_search{
+        flex: 1;
+        border: none;
+        padding-left: 10px;
+    }
+    #input_navbar_search:focus{
+        outline: none;
+    }
+    #content_cart_wrapper{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: 50px;
+        min-width: 50px;
+        max-width: 120px;
+        border-radius: 25px;
+        @include shadow(5px);
+        cursor: pointer;
+    }
+    #content_cart_wrapper>span{
+        margin-left: 5px;
+    }
+}

@@ -1,0 +1,3 @@
+@mixin shadow($opacity) {
+    box-shadow: 1px 1px $opacity 1px #d3d3d3;;
+}

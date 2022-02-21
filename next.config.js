@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   async redirects() {
     return [
@@ -25,5 +27,8 @@ module.exports = {
       'media.achat-ville.com',
       'static2.chaussminimaxi.fr'
     ],
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
 }

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { register } from "../../store/auth/actionAuth";
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import Image from "next/image";
 
 
@@ -53,7 +53,8 @@ const Register = () => {
               <input
                 id={styles.input_password}
                 className={styles.input}
-                placeholder="Mot de passe" 
+                placeholder="Mot de passe"
+                type='password'
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
@@ -95,7 +96,9 @@ const Register = () => {
             </form>
             <div id = {styles.link_signup_wrapper}>
                 <span>{" Vous avez déja un compte? "} </span>
-                <Link href={'/auth/login'} id={styles.link_signup}>Se connecter</Link>
+                <Link href={'/auth/login'}>
+                  <a className={styles.link}>Se connecter</a>
+                </Link>
             </div>
           </div>
         </div>

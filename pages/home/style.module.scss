@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500&family=Pacifico&display=swap');
+@import '/styles/mixins';
+
+#header_home{
+    height: 100vh;
+    background-color: #FF7643;
+    background-image: url("/assets/header_bg4.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 50%;
+    padding: 100px;
+}
+#header_home> .content_text_header{
+    padding: 0 50px;
+}
+#header_home> .content_text_header> h1{
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7vw;
+}
+#content_home{
+    padding: 0 100px;
+
+    .section_title{
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 50px 0;
+    }
+}
+#popular_product_wrapper{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}

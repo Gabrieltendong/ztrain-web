@@ -1,12 +1,12 @@
-import styles from './style.module.css'
+import styles from './style.module.scss'
 import Image from 'next/image';
 import { FaCartPlus } from "react-icons/fa";
 
-const ProductItem = ({item, addProductCart}) => {
+const ProductItem = ({item, addProductCart, onShowDetail}) => {
 
     return(
         <div className={styles.card}>
-            <div className={styles.card_body}>
+            <div className={styles.card_body} onClick={() => onShowDetail(item)}>
                 <Image 
                     src={item.image} 
                     height={250}
