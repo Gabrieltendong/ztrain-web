@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,11 +16,17 @@ const Login = () => {
   const router = useRouter()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [isVisible, setIsVisible]= useState()
   const {isLoading, error} = useSelector(state => state.auth.login)
 
   const handleLogin = (event) => {
     event.preventDefault()
     dispatch(auth({email, password}, router))
+  }
+
+  const onVisiblePass = (e) => {
+    e.preventDefault()
+    setIsVisible(!isVisible)
   }
 
   return (
@@ -44,18 +50,27 @@ const Login = () => {
           <div>
             <form id = {styles.content_form} onSubmit={handleLogin}>
               <input
-                id="standard-basic"
+                id="email"
                 className={styles.input}
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                id="standard-basic" 
-                placeholder="Mot de passe"
-                type='password'
-                className={styles.input}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div id={styles.container_input_password}>
+                <input
+                  id={styles.input_password}
+                  placeholder="Mot de passe"
+                  type={isVisible?'text':'password'}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button onClick={onVisiblePass}>
+                  {
+                    isVisible?
+                    <FiEye />
+                    :
+                    <FiEyeOff />
+                  }
+                </button>
+              </div>
               {
                 error &&
                 <p className={styles.messageError}>{error}</p>

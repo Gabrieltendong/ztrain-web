@@ -112,6 +112,31 @@
     border-bottom: 1px solid #FF7643;
     outline: none;
 }
+#container_input_password{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #cccccc;
+    height: 50;
+    margin-top: 20px;
+    padding: 10px;
+
+    #input_password{
+        flex: 1;
+        border: none;
+
+        &:focus, &:active {
+            outline: none;
+        }
+    }
+    button{
+        display: flex;
+        background-color: transparent;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+    }
+}
 
 @keyframes animImg {
     from{

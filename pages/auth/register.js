@@ -3,6 +3,7 @@ import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import { register } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
@@ -13,6 +14,7 @@ const Register = () => {
   
   const dispatch = useDispatch()
   const router = useRouter()
+  const [isVisible, setIsVisible]= useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [adress, setAdress] = useState()
@@ -22,6 +24,11 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault()
     dispatch(register({email, password, adress, age}, router))
+  }
+
+  const onVisiblePass = (e) => {
+    e.preventDefault()
+    setIsVisible(!isVisible)
   }
 
   return (
@@ -50,13 +57,22 @@ const Register = () => {
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                id={styles.input_password}
-                className={styles.input}
-                placeholder="Mot de passe"
-                type='password'
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div id={styles.container_input_password}>
+                <input
+                  id={styles.input_password}
+                  placeholder="Mot de passe"
+                  type={isVisible?'text':'password'}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button onClick={onVisiblePass}>
+                  {
+                    isVisible?
+                    <FiEye />
+                    :
+                    <FiEyeOff />
+                  }
+                </button>
+              </div>
               <input
                 id={styles.input_address}
                 className={styles.input}
