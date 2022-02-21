@@ -8,7 +8,7 @@ import ProductItem from '../../components/ProductItem';
 import { getAllProductCart } from '../../store/cart/actionCart';
 import ProductDetail from '../../components/ProductDetail';
 import Footer from '../../components/Footer';
-import Navbar from '../../components/NavBar';
+import Navbar from '../../components/Navbar';
 import Toast from '../../components/Toast';
 import { ADD_PRODUCT_CART } from '../../store/product/type';
 
