@@ -26,8 +26,7 @@ const Register = () => {
     dispatch(register({email, password, adress, age}, router))
   }
 
-  const onVisiblePass = (e) => {
-    e.preventDefault()
+  const onVisiblePass = () => {
     setIsVisible(!isVisible)
   }
 
@@ -64,14 +63,14 @@ const Register = () => {
                   type={isVisible?'text':'password'}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button onClick={onVisiblePass}>
+                <div onClick={onVisiblePass}>
                   {
                     isVisible?
                     <FiEye />
                     :
                     <FiEyeOff />
                   }
-                </button>
+                </div>
               </div>
               <input
                 id={styles.input_address}

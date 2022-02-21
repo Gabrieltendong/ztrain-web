@@ -24,8 +24,7 @@ const Login = () => {
     dispatch(auth({email, password}, router))
   }
 
-  const onVisiblePass = (e) => {
-    e.preventDefault()
+  const onVisiblePass = () => {
     setIsVisible(!isVisible)
   }
 
@@ -62,14 +61,14 @@ const Login = () => {
                   type={isVisible?'text':'password'}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button onClick={onVisiblePass}>
+                <div onClick={onVisiblePass}>
                   {
                     isVisible?
                     <FiEye />
                     :
                     <FiEyeOff />
                   }
-                </button>
+                </div>
               </div>
               {
                 error &&
