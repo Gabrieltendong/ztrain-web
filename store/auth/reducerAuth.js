@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, SET_USER } from "./type";
+import { LOGIN, REGISTER, RESET_PASSWORD, SET_USER } from "./type";
 
 const initialState = {
     login: {
@@ -10,6 +10,11 @@ const initialState = {
         data: {},
         isLoading: false,
         error: []
+    },
+    reset_password: {
+        data: {},
+        isLoading: false,
+        error: ""
     },
     user_infos: {}
 }
@@ -67,6 +72,34 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 register: {
                     ...state.register,
+                    isLoading: false,
+                    data: {},
+                    error: action.error
+                }
+            }
+        case RESET_PASSWORD:
+            return {
+                ...state,
+                reset_password: {
+                    ...state.reset_password,
+                    isLoading: true
+                }
+            }
+        case `${RESET_PASSWORD}_SUCCESS`:
+            return {
+                ...state,
+                reset_password: {
+                    ...state.reset_password,
+                    isLoading: false,
+                    data: action.payload,
+                    error: ""
+                }
+            }
+        case `${RESET_PASSWORD}_FAIL`:
+            return {
+                ...state,
+                reset_password: {
+                    ...state.reset_password,
                     isLoading: false,
                     data: {},
                     error: action.error

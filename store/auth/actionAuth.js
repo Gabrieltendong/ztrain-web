@@ -1,5 +1,5 @@
 
-import { LOGIN, REGISTER, SET_USER } from "./type";
+import { LOGIN, REGISTER, RESET_PASSWORD, SET_USER } from "./type";
 
 const setUser = (data) => {
     return{
@@ -60,6 +60,36 @@ export const register = (data, router) => {
                     console.log('error login', error.response)
                     dispatch({
                         type: `${REGISTER}_FAIL`,
+                        error: error.response.data.message
+                    })
+                }
+            }
+        }
+    }
+}
+
+export const resetPassword = (data, router) => {
+    return {
+        type: RESET_PASSWORD,
+        payload: {
+            request:{
+                method: 'PUT',
+                url:'/user/resetpassword/',
+                data: data
+            },
+            options: {
+                onSuccess({getState, dispatch, response}){
+                    console.log('resetpass renponse', response.data)
+                    dispatch({
+                        type: `${RESET_PASSWORD}_SUCCESS`,
+                        payload: response.data
+                    })
+                    router.push('/auth/login')
+                },
+                onError({getState, dispatch, error}){
+                    console.log('error resetpass', error.response.data)
+                    dispatch({
+                        type: `${RESET_PASSWORD}_FAIL`,
                         error: error.response.data.message
                     })
                 }

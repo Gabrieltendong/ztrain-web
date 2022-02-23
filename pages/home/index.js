@@ -57,6 +57,18 @@ const Home = () => {
         setQuantity(1)
     }
 
+    const isValidHttpUrl = (string) => {
+        let url;
+        
+        try {
+          url = new URL(string);
+        } catch (_) {
+          return false;  
+        }
+      
+        return url.protocol === "http:" || url.protocol === "https:";
+    }
+
     useEffect(() => {
         if(message) {
             setTimeout(() => {
@@ -107,12 +119,14 @@ const Home = () => {
                 <div id = {styles.popular_product_wrapper}>
                     {
                         data.map((item, index) => (
+                            isValidHttpUrl(item.image)?
                             <ProductItem 
                                 key={index} 
                                 item={item}
                                 onShowDetail={onShowDetail}
                                 addProductCart={handleAddProductCart}  
                             />
+                            :null
                         ))
                     }
                 </div>

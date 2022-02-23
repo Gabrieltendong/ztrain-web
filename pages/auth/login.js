@@ -70,6 +70,9 @@ const Login = () => {
                   }
                 </div>
               </div>
+              <Link href={'/auth/resetPassword'}>
+                <a className={styles.forgotpass}>{"Mot de passe oublié?"}</a>
+              </Link>
               {
                 error &&
                 <p className={styles.messageError}>{error}</p>
