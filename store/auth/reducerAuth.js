@@ -12,7 +12,7 @@ const initialState = {
         error: []
     },
     reset_password: {
-        data: {},
+        message: '',
         isLoading: false,
         error: ""
     },
@@ -91,7 +91,7 @@ const authReducer = (state = initialState, action) => {
                 reset_password: {
                     ...state.reset_password,
                     isLoading: false,
-                    data: action.payload,
+                    message: action.payload,
                     error: ""
                 }
             }
@@ -101,7 +101,7 @@ const authReducer = (state = initialState, action) => {
                 reset_password: {
                     ...state.reset_password,
                     isLoading: false,
-                    data: {},
+                    message: '',
                     error: action.error
                 }
             }

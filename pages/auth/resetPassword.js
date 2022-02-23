@@ -1,11 +1,13 @@
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 import styles from './style.module.scss'
 import { resetPassword } from '../../store/auth/actionAuth';
+import Toast from '../../components/Toast';
+import { RESET_PASSWORD } from '../../store/auth/type';
 
 const ResetPassword = () => {
 
@@ -14,7 +16,7 @@ const ResetPassword = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [isVisible, setIsVisible]= useState()
-    const {isLoading, error} = useSelector(state => state.auth.reset_password)
+    const {isLoading, error, message} = useSelector(state => state.auth.reset_password)
 
     const handleResetPassword = (e) => {
         e.preventDefault()
@@ -22,18 +24,35 @@ const ResetPassword = () => {
             email,
             newPassword: password
         }
-        dispatch(resetPassword(data, router))
+        dispatch(resetPassword(data))
     }
 
     const onVisiblePass = () => {
         setIsVisible(!isVisible)
     }
 
+    useEffect(() => {
+        if(message) {
+            setTimeout(() => {
+                dispatch({
+                    type: `${RESET_PASSWORD}_SUCCESS`,
+                    payload: ''
+                })
+            }, 2000);
+        }
+    }, [message])
+
     return(
         <div id={styles.container_forgot_pass}>
             <header>
 
             </header>
+            { 
+                message && 
+                <Toast
+                    text = {'Votre mot de passe à été réinitialisé'} 
+                />
+            }
             <div id={styles.card}>
                 <h1>Réeinitialiser votre mot de passe</h1>
                 <form  onSubmit={handleResetPassword}>

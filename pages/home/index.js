@@ -90,7 +90,7 @@ const Home = () => {
            { 
                 message && 
                 <Toast
-                    showToast = {!message} 
+                    text = {'Votre panier a ete mis à jour'} 
                 />
            }
             <Cart 

@@ -68,7 +68,7 @@ export const register = (data, router) => {
     }
 }
 
-export const resetPassword = (data, router) => {
+export const resetPassword = (data) => {
     return {
         type: RESET_PASSWORD,
         payload: {
@@ -79,12 +79,14 @@ export const resetPassword = (data, router) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    console.log('resetpass renponse', response.data)
-                    dispatch({
-                        type: `${RESET_PASSWORD}_SUCCESS`,
-                        payload: response.data
-                    })
-                    router.push('/auth/login')
+                    
+                    if(response.data.message){
+                        console.log('resetpass renponse', response.data)
+                        dispatch({
+                            type: `${RESET_PASSWORD}_SUCCESS`,
+                            payload: response.data.message
+                        })
+                    }
                 },
                 onError({getState, dispatch, error}){
                     console.log('error resetpass', error.response.data)
