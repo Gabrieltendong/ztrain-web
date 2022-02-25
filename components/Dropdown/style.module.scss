@@ -1,0 +1,32 @@
+@import '/styles//mixins';
+@import '/styles//colors';
+
+%dropdown_wrapper{
+    height: 200px;
+    width: 200px;
+    background-color: white;
+    z-index: 100;
+    position: absolute;
+    top: 60px;
+    right: 70px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    @include shadow(2px);
+
+    a{
+        height: 50px;
+
+        &:hover{
+            color: $primaryColor
+        }
+    }
+}
+
+#showDropdown{
+    @extend %dropdown_wrapper;
+}
+#hideDropdown{
+    @extend %dropdown_wrapper;
+    display: none;
+}

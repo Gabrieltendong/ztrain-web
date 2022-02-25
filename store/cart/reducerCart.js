@@ -39,7 +39,7 @@ const cartReducer = (state = initialState, action) => {
                 products_cart: {
                     ...state.products_cart,
                     isLoading: false,
-                    data: action.payload.data,
+                    data: action.payload,
                     error: ""
                 }
             }

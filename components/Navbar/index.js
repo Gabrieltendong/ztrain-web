@@ -1,10 +1,13 @@
 import styles from './style.module.scss'
 import { FaSearch } from 'react-icons/fa';
-import { FiShoppingCart } from 'react-icons/fi';
+import { FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
+import Dropdown from '../Dropdown';
+import { useState } from 'react';
 
 const Navbar = ({onShowCart}) => {
 
+    const [isShown, setIsShown] = useState(false);
     const products_cart = useSelector(state => state.cart.products_cart.data)
 
     return(
@@ -35,6 +38,18 @@ const Navbar = ({onShowCart}) => {
                 <FiShoppingCart />
                 <span> {products_cart.length} produit{products_cart.length>1?'s':null}</span>
             </div>
+            <div 
+                id={styles.avatar_wrapper}
+                onMouseEnter={() => setIsShown(true)}
+            >
+                <FiUser />
+                <span>Compte</span>
+                <FiChevronDown />
+            </div>
+            <Dropdown
+             isVisible={isShown}
+             onMouseLeave={() => setIsShown(false)}
+            />
         </nav>
     )
 }

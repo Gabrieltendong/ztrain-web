@@ -1,4 +1,5 @@
 import { getToken, token } from "../../config";
+import { SET_USER } from "../auth/type";
 import { store } from "../configureStore";
 import { GET_PRODUCT_CART, REMOVE_PRODUCT_CART, UPDATE_QUANTITY } from "./type";
 
@@ -12,6 +13,24 @@ export const getAllProductCart = (user_id) => {
                     "Authorization": getToken()
                 },
             },
+            options: {
+                onSuccess({getState, dispatch, response}){
+                    dispatch({
+                        type: `${GET_PRODUCT_CART}_SUCCESS`,
+                        payload: response.data
+                    })
+                },
+                onError({getState, dispatch, error}){
+                    dispatch({
+                        type: SET_USER,
+                        payload: {}
+                    })
+                    dispatch({
+                        type: `${GET_PRODUCT_CART}_FAIL`,
+                        error: ''
+                    })
+                }
+            }
         }
     }
 }

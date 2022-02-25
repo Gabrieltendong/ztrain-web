@@ -29,7 +29,7 @@ const productReducer = (state = initialState, action) => {
                 list_product: {
                     ...state.list_product,
                     isLoading: false,
-                    data: action.payload.data,
+                    data: action.payload,
                     error: ""
                 }
             }

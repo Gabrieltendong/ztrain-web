@@ -1,4 +1,5 @@
 import { getToken } from "../../config";
+import { SET_USER } from "../auth/type";
 import { getAllProductCart } from "../cart/actionCart";
 import { GET_PRODUCT_CART } from "../cart/type";
 import { ADD_PRODUCT_CART, GET_PRODUCT } from "./type";
@@ -10,6 +11,25 @@ export const getAllProduct = () => {
             request:{
                 url:'/product/',
             },
+            options: {
+                onSuccess({getState, dispatch, response}){
+                    dispatch({
+                        type: `${GET_PRODUCT}_SUCCESS`,
+                        payload: response.data
+                    })
+                },
+                onError({getState, dispatch, error}){
+                    console.log('error login', error.response)
+                    dispatch({
+                        type: SET_USER,
+                        payload: {}
+                    })
+                    dispatch({
+                        type: `${GET_PRODUCT}_FAIL`,
+                        error: ''
+                    })
+                }
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <div className={styles.col_1}>
+        <div className={[styles.col_1]}>
             <Image
                 className={styles.carousel_img}
                 height={1000}

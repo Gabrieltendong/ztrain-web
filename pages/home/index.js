@@ -78,12 +78,13 @@ const Home = () => {
                 })
             }, 2000);
         }
+        console.log('user', user)
         if(!user){
             router.push('/auth/login')
         }
-        dispatch(getAllProductCart(user_id))
         dispatch(getAllProduct())
-    }, [message])
+        dispatch(getAllProductCart(user_id))
+    }, [message, user])
 
     return(
         <div>

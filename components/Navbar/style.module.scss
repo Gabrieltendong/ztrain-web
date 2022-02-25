@@ -6,7 +6,7 @@
     width: 100%;
     background-color: white;
     display: grid;
-    grid-template-columns: 20% 65% 15%;
+    grid-template-columns: 20% 60% 10% 10%;
     align-items: center;
     position: fixed;
     padding-right: 20px;
@@ -54,5 +54,15 @@
     }
     #content_cart_wrapper>span{
         margin-left: 5px;
+    }
+    #avatar_wrapper{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+
+        span{
+            margin: 0 5px;
+        }
     }
 }
