@@ -49,14 +49,15 @@ const Login = () => {
           <div>
             <form id = {styles.content_form} onSubmit={handleLogin}>
               <input
-                id="email"
+                id="email_login"
                 className={styles.input}
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <div id={styles.container_input_password}>
                 <input
-                  id={styles.input_password}
+                  id='password_login'
+                  className={styles.input_password}
                   placeholder="Mot de passe"
                   type={isVisible?'text':'password'}
                   onChange={(e) => setPassword(e.target.value)}
