@@ -123,7 +123,7 @@ const cartReducer = (state = initialState, action) => {
                 clearCart: {
                     ...state.clearCart,
                     isLoading: false,
-                    data: action.payload.data,
+                    data: action.payload,
                     error: ""
                 }
             }
