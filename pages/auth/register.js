@@ -94,6 +94,7 @@ const Register = () => {
                 <p className={styles.messageError}>{error}</p>:null
               }
               <button 
+                id="btn_register"
                 className = {styles.btn}
                 type="submit"
               >

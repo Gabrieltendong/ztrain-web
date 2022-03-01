@@ -78,7 +78,8 @@ const Login = () => {
                 error &&
                 <p className={styles.messageError}>{error}</p>
               }
-              <button 
+              <button
+                id="btn_login"
                 className = {styles.btn}
                 type="submit"
               >

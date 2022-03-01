@@ -88,6 +88,7 @@ const ResetPassword = () => {
                         <p className={styles.messageError}>{error}</p>:null
                     }
                     <button 
+                        id='btn_reset_password'
                         className = {styles.btn}
                         type="submit"
                     >
