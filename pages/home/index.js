@@ -11,6 +11,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import Toast from '../../components/Toast';
 import { ADD_PRODUCT_CART } from '../../store/product/type';
+import CheckoutForm from '../../components/CheckoutForm';
 
 const Home = () => {
 
@@ -107,6 +108,7 @@ const Home = () => {
                 addProductCart={handleAddProductCart}
                 onClose = {onCloseDetail}
             />
+            {/* <CheckoutForm /> */}
             <Navbar
                 onShowCart = {onShowCart}
             />

@@ -8,7 +8,7 @@ const ProductItem = ({item, addProductCart, onShowDetail}) => {
         <div className={styles.card}>
             <div className={styles.card_body} onClick={() => onShowDetail(item)}>
                 <Image 
-                    src={item.image}
+                    src={`/api/imageproxy?url=${encodeURIComponent(item.image)}`}
                     height={250}
                     width={250}
                     className={styles.card_body_img}
