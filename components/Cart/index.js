@@ -1,15 +1,21 @@
 import Image from 'next/image';
 import { FiArrowRight, FiTrash2, FiPlus, FiMinus, FiX } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeAllProduct } from '../../store/cart/actionCart';
 import Loading from '../Loading';
 import CartItem from './CartItem';
 import styles from './style.module.scss'
 
 const Cart = ({showCart, onClose}) => {
 
+    const dispatch = useDispatch()
     const products_cart = useSelector(state => state.cart.products_cart.data)
     const {isLoading} = useSelector(state => state.cart.removeProduct)
+    const user_id = useSelector(state => state.auth?.login.data?.user?._id)
 
+    const onDeleteCart = () => {
+        dispatch(removeAllProduct(user_id))
+    }
 
     return(
         <div 
@@ -50,7 +56,10 @@ const Cart = ({showCart, onClose}) => {
                         <h5>Total</h5>
                         <h5>$2500</h5>
                     </div>
-                    <button id={styles.btn_cart}>Commander</button>
+                    <div id={styles.btn_wrapper}>
+                        <button id={styles.btn_trash_cart} onClick = {onDeleteCart}>Vider le panier</button>
+                        <button id={styles.btn_cart}>Commander</button>
+                    </div>
                 </div>
             }
         </div>

@@ -25,7 +25,6 @@ module.exports = {
       'i.pinimg.com',
       'lookhomme.com',
       'media.achat-ville.com',
-      'static2.chaussminimaxi.fr'
     ],
   },
   sassOptions: {

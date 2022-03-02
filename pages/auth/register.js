@@ -51,14 +51,15 @@ const Register = () => {
           <div>
             <form id = {styles.content_form} onSubmit={handleRegister}>
               <input
-                id={styles.input_email}
+                id='email_register'
                 className={styles.input}
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <div id={styles.container_input_password}>
                 <input
-                  id={styles.input_password}
+                  id="password_register"
+                  className={styles.input_password}
                   placeholder="Mot de passe"
                   type={isVisible?'text':'password'}
                   onChange={(e) => setPassword(e.target.value)}
@@ -93,6 +94,7 @@ const Register = () => {
                 <p className={styles.messageError}>{error}</p>:null
               }
               <button 
+                id="btn_register"
                 className = {styles.btn}
                 type="submit"
               >

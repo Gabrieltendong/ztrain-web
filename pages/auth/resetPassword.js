@@ -57,14 +57,15 @@ const ResetPassword = () => {
                 <h1>Réeinitialiser votre mot de passe</h1>
                 <form  onSubmit={handleResetPassword}>
                     <input
-                        id="email"
+                        id="email_reset_pass"
                         className={styles.input}
                         placeholder="Votre email"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <div id={styles.container_input_password}>
                         <input
-                            id={styles.input_password}
+                            id = "reset_password"
+                            className={styles.input_password}
                             placeholder="Nouveau mot de passe"
                             type={isVisible?'text':'password'}
                             onChange={(e) => setPassword(e.target.value)}
@@ -87,6 +88,7 @@ const ResetPassword = () => {
                         <p className={styles.messageError}>{error}</p>:null
                     }
                     <button 
+                        id='btn_reset_password'
                         className = {styles.btn}
                         type="submit"
                     >

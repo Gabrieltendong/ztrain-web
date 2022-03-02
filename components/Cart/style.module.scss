@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
 @import '/styles/mixins';
+@import '/styles//colors';
 
 .container_cart{
     width: 30%;
@@ -14,6 +15,15 @@
     margin-top: 20px;
     border-radius: 5px;
     right: -500px;
+
+    %btn{
+        height: 50px;
+        width: 100%;
+        border: none;
+        border-radius: 25px;
+        font-family: 'Montserrat', sans-serif;
+        cursor: pointer;
+    }
 
     h3{
         font-family: 'Montserrat', sans-serif;
@@ -90,11 +100,7 @@
         @include shadow(10px);
     }
     #btn_cart{
-        height: 50px;
-        width: 100%;
-        border: none;
-        border-radius: 25px;
-        font-family: 'Montserrat', sans-serif;
+        @extend %btn;
         background-color: #FF7643;
         color: white;
     }
@@ -108,6 +114,16 @@
         h5{
             margin: 0;
         }
+    }
+    #btn_wrapper{
+        display: flex;
+        flex-direction: row;
+    }
+    #btn_trash_cart{
+        @extend %btn;
+        border: 1px solid $primaryColor;
+        background-color: white;
+        margin-right: 10px;
     }
 
     ::-webkit-scrollbar{
