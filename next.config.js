@@ -12,7 +12,7 @@ module.exports = {
   },
   reactStrictMode: true,
   env: {
-    baseUrl: "http://192.168.56.1:5000"
+    baseUrl: "https://ztrain-shop.herokuapp.com"
   },
   images: {
     domains: [
