@@ -1,4 +1,4 @@
-import { GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_QUANTITY} from "./type";
+import { CREATE_COMMANDE, GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_QUANTITY} from "./type";
 
 const initialState = {
     products_cart: {
@@ -17,6 +17,11 @@ const initialState = {
         error: ""
     },
     clearCart:{
+        data: {},
+        isLoading: false,
+        error: ""
+    },
+    command: {
         data: {},
         isLoading: false,
         error: ""
@@ -132,6 +137,34 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 clearCart: {
                     ...state.clearCart,
+                    isLoading: false,
+                    data: {},
+                    error: "probleme sur le serveur"
+                }
+            }
+        case CREATE_COMMANDE:
+            return {
+                ...state,
+                command: {
+                    ...state.command,
+                    isLoading: true
+                }
+            }
+        case `${CREATE_COMMANDE}_SUCCESS`:
+            return {
+                ...state,
+                command: {
+                    ...state.command,
+                    isLoading: false,
+                    data: action.payload,
+                    error: ""
+                }
+            }
+        case `${CREATE_COMMANDE}_FAIL`:
+            return {
+                ...state,
+                command: {
+                    ...state.command,
                     isLoading: false,
                     data: {},
                     error: "probleme sur le serveur"

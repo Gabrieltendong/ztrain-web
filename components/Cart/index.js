@@ -6,7 +6,7 @@ import Loading from '../Loading';
 import CartItem from './CartItem';
 import styles from './style.module.scss'
 
-const Cart = ({showCart, onClose}) => {
+const Cart = ({showCart, onClose, onShowCheckout}) => {
 
     const dispatch = useDispatch()
     const products_cart = useSelector(state => state.cart.products_cart.data)
@@ -58,7 +58,7 @@ const Cart = ({showCart, onClose}) => {
                     </div>
                     <div id={styles.btn_wrapper}>
                         <button id={styles.btn_trash_cart} onClick = {onDeleteCart}>Vider le panier</button>
-                        <button id={styles.btn_cart}>Commander</button>
+                        <button id={styles.btn_cart} onClick={onShowCheckout}>Commander</button>
                     </div>
                 </div>
             }

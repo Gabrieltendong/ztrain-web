@@ -25,11 +25,6 @@
     border-top-right-radius: 400px;
     border-bottom-right-radius: 400px;
 }
-.bg_login{
-    height: 100%;
-    width: 100%;
-    background-image: url('/assets/1.jpg');
-}
 .header_subTitle{
     color: white;
     padding: 0 100px;
@@ -131,7 +126,7 @@
     margin-top: 20px;
     padding: 10px;
 
-    .input_password{
+    #input_password{
         flex: 1;
         border: none;
 

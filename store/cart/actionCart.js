@@ -1,7 +1,7 @@
 import { getToken, token } from "../../config";
 import { SET_USER } from "../auth/type";
 import { store } from "../configureStore";
-import { GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_QUANTITY } from "./type";
+import { CREATE_COMMANDE, GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_QUANTITY } from "./type";
 
 export const getAllProductCart = (user_id) => {
     return {
@@ -106,6 +106,38 @@ export const removeAllProduct = (user_id) => {
                     console.log('error login', error.response)
                     dispatch({
                         type: `${REMOVE__ALL_PRODUCT_CART}_FAIL`,
+                        error: ''
+                    })
+                }
+            }
+        }
+    }
+}
+
+export const createCommand = (data) => {
+    return {
+        type: CREATE_COMMANDE,
+        payload: {
+            request:{
+                method: 'POST',
+                url:`/command/create`,
+                headers: {
+                    "Authorization": getToken()
+                },
+                data
+            },
+            options: {
+                onSuccess({getState, dispatch, response}){
+                    dispatch(getAllProductCart(data.user_id))
+                    dispatch({
+                        type: `${CREATE_COMMANDE}_SUCCESS`,
+                        payload: response.data
+                    })
+                },
+                onError({getState, dispatch, error}){
+                    console.log('error create commande', error.response)
+                    dispatch({
+                        type: `${CREATE_COMMANDE}_FAIL`,
                         error: ''
                     })
                 }

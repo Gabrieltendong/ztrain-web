@@ -12,11 +12,13 @@ import Navbar from '../../components/Navbar';
 import Toast from '../../components/Toast';
 import { ADD_PRODUCT_CART } from '../../store/product/type';
 import CheckoutForm from '../../components/CheckoutForm';
+import Stripecontainer from '../../stripe/StripeContainer';
 
 const Home = () => {
 
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
+    const [isShowCheckout, setIsShowCheckout] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [productDetail, setProductDetail] = useState()
@@ -98,6 +100,7 @@ const Home = () => {
             <Cart 
                 showCart={show}
                 onClose = {() => setShow(false)}
+                onShowCheckout = {() => setIsShowCheckout(true)}
             />
             <ProductDetail
                 isVisible={isVisible}
@@ -108,7 +111,10 @@ const Home = () => {
                 addProductCart={handleAddProductCart}
                 onClose = {onCloseDetail}
             />
-            {/* <CheckoutForm /> */}
+            <CheckoutForm
+                isVisible={isShowCheckout}
+                onClose={() => setIsShowCheckout(false)}
+            />
             <Navbar
                 onShowCart = {onShowCart}
             />

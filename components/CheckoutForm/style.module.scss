@@ -1,0 +1,94 @@
+@import '/styles/colors';
+
+%container{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    #checkout_wrapper{
+        position: relative;
+        height: 50vh;
+        width: 40vw;
+        background-color: white;
+        padding: 0 50px;
+        animation: show 0.5s 1;
+    
+        %btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: none;
+        }
+        #form_wrapper{
+            margin-top: 50px;
+        }
+        #cartInput{
+            border-bottom: 1px solid $primaryColor;
+            padding-bottom: 10px;
+        }
+        #input_address{
+            height: 56px;
+            width: 100%;
+            margin-top: 20px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid $primaryColor;
+
+            &:active, &:focus{
+                outline: none;
+            }
+        }
+        #btn_close{
+            height: 30px;
+            width: 30px;
+            border-radius: 100%;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            @extend %btn;
+        }
+        #btnSubmit{
+            height: 56px;
+            width: 100%;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            margin-top: 50px;
+            background-color: $primaryColor;
+        }
+    }
+}
+
+#showcheckout{  
+    @extend %container;
+}
+#hidecheckout{
+    display: none;
+    @extend %container;
+    animation: hide 1s 1;
+}
+
+@keyframes show{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes hide{
+    0%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0);
+    }
+}
