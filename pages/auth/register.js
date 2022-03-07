@@ -74,13 +74,13 @@ const Register = () => {
                 </div>
               </div>
               <input
-                id={styles.input_address}
+                id="input_address"
                 className={styles.input}
                 placeholder="Adresse"
                 onChange={(e) => setAdress(e.target.value)}
               />
               <input
-                id={styles.input_birthday}
+                id="input_birthday"
                 className={styles.input}
                 placeholder="Age" 
                 onChange={(e) => setAge(e.target.value)}

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct, updateQuantityProduct } from '../../store/cart/actionCart';
 import styles from './style.module.scss'
 
-const CartItem = ({item}) => {
+const CartItem = ({item, setTotalPrice, totalPrice}) => {
 
     const dispatch = useDispatch()
     const [product, setProduct] = useState()
@@ -55,6 +55,8 @@ const CartItem = ({item}) => {
 
     useEffect(() => {
         getProduct()
+        console.log('price', product?.price)
+        setTotalPrice(totalPrice + (quantity*product?.price))
     }, [item]);
 
     return(
