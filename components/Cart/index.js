@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiArrowRight, FiTrash2, FiPlus, FiMinus, FiX } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllProduct } from '../../store/cart/actionCart';
@@ -13,10 +13,16 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
     const products_cart = useSelector(state => state.cart.products_cart.data)
     const {isLoading} = useSelector(state => state.cart.removeProduct)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
-    const [totalPrice, setTotalPrice] = useState(0)
 
     const onDeleteCart = () => {
         dispatch(removeAllProduct(user_id))
+    }
+
+    const getTotalPrice = (products_cart) => {
+        return products_cart.reduce(
+            (previousValue, currentValue) => previousValue + (currentValue.quantity*currentValue.product.price),
+            0
+        );
     }
 
     return(
@@ -47,8 +53,6 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
                         <CartItem
                             key={index}
                             item = {item}
-                            totalPrice={totalPrice}
-                            setTotalPrice={setTotalPrice}
                         />
                     ))
                 }
@@ -58,7 +62,7 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
                 <div id={styles.cart_footer}>
                     <div id={styles.totalPrice}>
                         <h5>Total</h5>
-                        <h5>$ {totalPrice}</h5>
+                        <h5>$ {getTotalPrice(products_cart)}</h5>
                     </div>
                     <div id={styles.btn_wrapper}>
                         <button id={styles.btn_trash_cart} onClick = {onDeleteCart}>Vider le panier</button>

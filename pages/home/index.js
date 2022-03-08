@@ -32,9 +32,11 @@ const Home = () => {
         setShow(true)
     }
 
-    const handleAddProductCart = (product_id) => {
+    console.log('userId', user_id)
+
+    const handleAddProductCart = (product) => {
        const data = {
-            product_id,user_id,
+            product,user_id,
             quantity
         }
         dispatch(addProductCart(data))

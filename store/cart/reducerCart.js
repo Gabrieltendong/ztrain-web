@@ -1,4 +1,4 @@
-import { CREATE_COMMANDE, GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_QUANTITY} from "./type";
+import { CREATE_COMMANDE, GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_PRICE, UPDATE_QUANTITY} from "./type";
 
 const initialState = {
     products_cart: {
@@ -25,7 +25,8 @@ const initialState = {
         data: {},
         isLoading: false,
         error: ""
-    }
+    },
+    totalPrice: 0
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -72,7 +73,7 @@ const cartReducer = (state = initialState, action) => {
                 product: {
                     ...state.product,
                     isLoading: false,
-                    data: action.payload.data,
+                    data: action.payload,
                     error: ""
                 }
             }
@@ -169,6 +170,11 @@ const cartReducer = (state = initialState, action) => {
                     data: {},
                     error: "probleme sur le serveur"
                 }
+            }
+        case UPDATE_PRICE:
+            return {
+                ...state,
+                totalPrice: action.payload
             }
         default:
             return state;
