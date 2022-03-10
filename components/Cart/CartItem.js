@@ -95,23 +95,21 @@ const CartItem = ({item}) => {
                 <p>${item?.product?.price}</p>
             </div>
             <div className={styles.quantity_wrapper}>
-                {/* <span className={styles.quantity_dec} onClick={handleDecrement}>
+                <span className={styles.quantity_dec} onClick={handleDecrement}>
                     <FiMinus />
-                </span> */}
+                </span>
                 <form onSubmit={handleUpdate}>
                     <input
                         ref={qtRef}
-                        value={item.quantity}
-                        defaultValue={quantity}
+                        value={quantity !=item.quantity?quantity:item.quantity}
                         className={styles.quantity}
                         onChange={handleChangeQuantity}
                         type='number'
                     />
                 </form>
-{/*                 
                 <span className={styles.quantity_in} onClick={handleIncrement}>
                     <FiPlus />
-                </span> */}
+                </span>
             </div>
             <div className={styles.trash_product_cart} onClick={handleRemoveProduct}>
                 <FiTrash2 />
