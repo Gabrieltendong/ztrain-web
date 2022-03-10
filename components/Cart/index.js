@@ -25,6 +25,10 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
         );
     }
 
+    useEffect(() => {
+        console.log('getProduct')
+    }, [products_cart])
+
     return(
         <div 
             className={styles.container_cart} 

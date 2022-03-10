@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct, updateQuantityProduct } from '../../store/cart/actionCart';
@@ -10,6 +10,7 @@ import styles from './style.module.scss'
 const CartItem = ({item}) => {
 
     const dispatch = useDispatch()
+    const qtRef = useRef()
     const [product, setProduct] = useState()
     const {totalPrice} = useSelector(state => state.cart)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
@@ -60,6 +61,19 @@ const CartItem = ({item}) => {
         handleUpdateQuantity(qt)
     }
 
+    const handleChangeQuantity = (e) => {
+        e.preventDefault()
+        setQuantity(e.target.value)
+    }
+
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        qtRef.current.blur()
+        if(quantity == 0) handleRemoveProduct()
+        else handleUpdateQuantity(quantity)
+        
+    }
+
     useEffect(() => {
         // getProduct()
     }, [item]);
@@ -81,13 +95,23 @@ const CartItem = ({item}) => {
                 <p>${item?.product?.price}</p>
             </div>
             <div className={styles.quantity_wrapper}>
-                <span className={styles.quantity_dec} onClick={handleDecrement}>
+                {/* <span className={styles.quantity_dec} onClick={handleDecrement}>
                     <FiMinus />
-                </span>
-                <span className={styles.quantity}>{quantity}</span>
+                </span> */}
+                <form onSubmit={handleUpdate}>
+                    <input
+                        ref={qtRef}
+                        value={item.quantity}
+                        defaultValue={quantity}
+                        className={styles.quantity}
+                        onChange={handleChangeQuantity}
+                        type='number'
+                    />
+                </form>
+{/*                 
                 <span className={styles.quantity_in} onClick={handleIncrement}>
                     <FiPlus />
-                </span>
+                </span> */}
             </div>
             <div className={styles.trash_product_cart} onClick={handleRemoveProduct}>
                 <FiTrash2 />

@@ -57,6 +57,11 @@ const Home = () => {
         }
     }
 
+    const onChangeQuantity = (e) => {
+        e.preventDefault()
+        setQuantity(e.target.value)
+    }
+
     const onCloseDetail = () => {
         setIsVisible(false)
         setQuantity(1)
@@ -109,6 +114,7 @@ const Home = () => {
                 product={productDetail}
                 onIncrement = {onIncrement}
                 onDecrement = {onDecrement}
+                onChangeQuantity={onChangeQuantity}
                 quantity = {quantity}
                 addProductCart={handleAddProductCart}
                 onClose = {onCloseDetail}

@@ -66,6 +66,10 @@
                     background-color: transparent;
                     @extend %btn
                 }
+                .input_quantity{
+                    max-width: 40px;
+                    border: none;
+                }
             }
             #btn_add_cart{
                 background-color: $primaryColor;

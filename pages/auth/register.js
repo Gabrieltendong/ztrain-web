@@ -43,7 +43,7 @@ const Register = () => {
             />
             <div id = {styles.content_header_title}>
               <h1 className={styles.header_title}>Bienvenue!!!</h1>
-              <p className={styles.header_subTitle}>La façon la plus simple de faire le commerce en ligne, En quelques clics seulement faites vos achats et à des prix raisonnable ...</p>
+              <p className={styles.header_subTitle}>Vos courses au quotidien, en quelques clics...</p>
             </div>
         </div>
         <div className={styles.col_2}>

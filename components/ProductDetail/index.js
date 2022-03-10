@@ -10,6 +10,8 @@ const ProductDetail = ({
     onClose,
     onIncrement,
     onDecrement,
+    onUpdate,
+    onChangeQuantity,
     quantity,
     addProductCart
 }) => {
@@ -45,7 +47,13 @@ const ProductDetail = ({
                         >
                             <FiMinus />
                         </button>
-                        <span>{quantity}</span>
+                        <form onSubmit={onUpdate}>
+                            <input 
+                                value={quantity}
+                                className={styles.input_quantity}
+                                onChange={(e) => onChangeQuantity(e, product._id)}
+                            />
+                        </form>
                         <button 
                             className={styles.btn_quantity}
                             onClick={onIncrement}
