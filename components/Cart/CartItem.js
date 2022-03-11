@@ -16,12 +16,6 @@ const CartItem = ({item}) => {
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
     const [quantity, setQuantity] = useState(item?.quantity)
 
-    const getProduct = async () => {
-        const resp = await axios.get(process.env.baseUrl + `/product/${item.product_id}`)
-        setProduct(resp.data)
-        setTotalPrice(resp.data.price)
-    }
-
     const handleUpdateQuantity = (quantity) => {
         const data = {
              product: item.product._id,
@@ -47,13 +41,13 @@ const CartItem = ({item}) => {
     }
 
     const handleIncrement = () => {
-        const qt = quantity + 1
+        const qt = parseInt(quantity) + 1
         setQuantity(qt)
         handleUpdateQuantity(qt)
     }
 
     const handleDecrement = () => {
-        const qt = quantity - 1
+        const qt = parseInt(quantity) - 1
         if(qt == 0){
             handleRemoveProduct()
         }
@@ -101,7 +95,8 @@ const CartItem = ({item}) => {
                 <form onSubmit={handleUpdate}>
                     <input
                         ref={qtRef}
-                        value={quantity !=item.quantity?quantity:item.quantity}
+                        value={item.quantity}
+                        defaultValue={quantity}
                         className={styles.quantity}
                         onChange={handleChangeQuantity}
                         type='number'
