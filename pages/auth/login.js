@@ -57,6 +57,7 @@ const Login = () => {
               <div id={styles.container_input_password}>
                 <input
                   id='password_login'
+                  value={password}
                   className={styles.input_password}
                   placeholder="Mot de passe"
                   type={isVisible?'text':'password'}
