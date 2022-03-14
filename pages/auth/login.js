@@ -32,13 +32,13 @@ const Login = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={[styles.col_1]}>
-            <Image
+            {/* <Image
                 className={styles.carousel_img}
                 height={1000}
                 width={1000}
                 src="/assets/1.jpg"
                 alt="First slide"
-            />
+            /> */}
             <div id = {styles.content_header_title}>
               <h1 className={styles.header_title}>Bienvenue!!!</h1>
               <p className={styles.header_subTitle}>Vos courses au quotidien, en quelques clics...</p>
