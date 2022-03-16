@@ -130,6 +130,10 @@ const Home = () => {
                 <div className={styles.content_text_header}>
                     <h1>{" Flat up to 50% off for men's "}</h1>
                 </div>
+                <div className={styles.content_img}>
+                    <div></div>
+                </div>
+                <div className={styles.form}></div>
             </header>
             <main id={styles.content_home}>
                 <h2 className={styles.section_title}>Popular product</h2>

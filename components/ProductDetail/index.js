@@ -29,7 +29,7 @@ const ProductDetail = ({
                     {
                         product?.image &&
                         <Image
-                            src={product?.image}
+                            src={`/api/imageproxy?url=${encodeURIComponent(product?.image)}`}
                             height={500}
                             width={500}
                             id={styles.img}

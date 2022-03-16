@@ -31,9 +31,15 @@
         flex-direction: column;
         align-items: center;
         font-family: 'Montserrat', sans-serif;
-    }
-    .card_footer>p{
-        color: #777;
+
+        p{
+            color: #777;
+            margin: 0px;
+        }
+        h5{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     }
     .btn_add_cart{
         height: 40px;

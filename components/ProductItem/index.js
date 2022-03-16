@@ -16,7 +16,7 @@ const ProductItem = ({item, addProductCart, onShowDetail}) => {
             </div>
             <div className={styles.card_footer}>
                 <h5>{item.name}</h5>
-                <p>$ {item.price}</p>
+                <p >$ {item.price}</p>
                 <button onClick={() => addProductCart(item._id)} className={styles.btn_add_cart}>
                     <FaCartPlus />
                 </button>

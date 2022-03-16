@@ -1,26 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500&family=Pacifico&display=swap');
 @import '/styles/mixins';
+@import '/styles/colors';
 
 #header_home{
     height: 100vh;
-    background-color: #FF7643;
-    background-image: url("/assets/header_bg4.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #eee;
     display: grid;
-    grid-template-columns: 50%;
+    grid-template-columns: 50% 50%;
     padding: 100px;
+    z-index: 10;
+
+    .content_img{
+        height: 100%;
+        background-image: url("/assets/header_bg9.png"), linear-gradient(to right, #f2b86d, $primaryColor);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: top right;
+        border-radius: 100%;
+        transform: rotateZ(180deg) rotateX(180deg);
+       
+        // div {
+        //     height: 100%;
+        //     width: 500px;
+        //     background-color: rgb(0, 0, 0, 1);
+        // }
+    }
+
+    .form{
+        background: linear-gradient(to right, #f2b86d, $primaryColor);
+        display: block;
+        height: 250px;
+        position: absolute;
+        right: 0;
+        width: 250px;
+        border-radius: 100%;
+      }
+
+    .content_text_header{
+        padding: 0 50px;
+
+        h1{
+            color: rgb(8, 8, 8);
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7vw;
+        }
+    }
 }
-#header_home> .content_text_header{
-    padding: 0 50px;
-}
-#header_home> .content_text_header> h1{
-    color: white;
-    text-transform: uppercase;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 7vw;
-}
+
 #content_home{
     padding: 0 100px;
 
@@ -34,4 +62,43 @@
 #popular_product_wrapper{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
+}
+
+@media (max-width: 850px) {
+    #header_home{
+        height: 500px;
+        padding: 100px 20px;
+
+        .content_text_header{
+            padding: 0;
+
+            h1{
+                font-size: 8vw;
+            }
+        }
+    }
+    #popular_product_wrapper{
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media (max-width: 550px) {
+    #header_home{
+        height: 400px;
+        padding: 100px 20px;
+
+        .content_text_header{
+            padding: 0;
+
+            h1{
+                font-size: 8vw;
+            }
+        }
+    }
+    #content_home{
+        padding: 0 10px;
+    }
+    #popular_product_wrapper{
+        grid-template-columns: 100%;
+    }
 }

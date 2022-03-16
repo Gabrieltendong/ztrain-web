@@ -13,7 +13,7 @@ const Navbar = ({onShowCart}) => {
     return(
         <nav id={styles.header_navBar}>
             <div id={styles.content_logo}>
-                <h1>ZTrain</h1>
+                <h1>Z-Train</h1>
             </div>
             <div id={styles.content_input_wrapper}>
                 <select name="pets" id={styles.select_cat}>

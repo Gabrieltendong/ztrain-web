@@ -66,3 +66,21 @@
         }
     }
 }
+
+@media (max-width: 950px) { 
+    #avatar_wrapper{
+        span{
+            display: none;
+        }
+        span + svg{
+            display: none;
+        }
+    }
+    #content_cart_wrapper{
+        span{
+            span{
+                display: none;
+            }
+        }
+    }
+}
