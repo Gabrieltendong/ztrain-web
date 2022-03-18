@@ -12,10 +12,10 @@
 
     #checkout_wrapper{
         position: relative;
-        height: 50vh;
+        // height: 50vh;
         width: 40vw;
         background-color: white;
-        padding: 0 50px;
+        padding: 20px 50px;
         animation: show 0.5s 1;
     
         %btn{
@@ -44,6 +44,9 @@
             &:active, &:focus{
                 outline: none;
             }
+        }
+        .errorMessage{
+            color: brown;
         }
         #btn_close{
             height: 30px;

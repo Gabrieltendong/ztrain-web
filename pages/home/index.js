@@ -13,6 +13,7 @@ import Toast from '../../components/Toast';
 import { ADD_PRODUCT_CART } from '../../store/product/type';
 import CheckoutForm from '../../components/CheckoutForm';
 import Stripecontainer from '../../stripe/StripeContainer';
+import { CREATE_COMMANDE } from '../../store/cart/type';
 
 const Home = () => {
 
@@ -26,19 +27,19 @@ const Home = () => {
     const { user } = useSelector(state => state.auth?.user_infos)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
     const { data } = useSelector(state => state.product.list_product)
+    const dataCommand = useSelector(state => state.cart.command.data)
     const router = useRouter()
 
     const onShowCart = () => {
         setShow(true)
     }
 
-    console.log('userId', user_id)
-
     const handleAddProductCart = (product) => {
        const data = {
             product,user_id,
-            quantity
+            quantity: parseInt(quantity)
         }
+        console.log('data', data)
         dispatch(addProductCart(data))
     }
 
@@ -53,6 +54,7 @@ const Home = () => {
 
     const onDecrement = () => {
         if(quantity != 1){
+            console.log('descrement', quantity)
             setQuantity(quantity - 1)
         }
     }
@@ -65,6 +67,10 @@ const Home = () => {
     const onCloseDetail = () => {
         setIsVisible(false)
         setQuantity(1)
+    }
+
+    const onCloseCheckout = () => {
+        setIsShowCheckout(false)
     }
 
     const isValidHttpUrl = (string) => {
@@ -80,29 +86,35 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if(message) {
+        if(dataCommand){
+            onCloseCheckout()
+        }
+        if(message || dataCommand) {
             setTimeout(() => {
                 dispatch({
                     type: `${ADD_PRODUCT_CART}_SUCCESS`,
                     payload: ''
                 })
+                dispatch({
+                    type: `${CREATE_COMMANDE}_SUCCESS`,
+                    payload: ''
+                })
             }, 2000);
         }
-        console.log('user', user)
         if(!user){
             router.push('/auth/login')
         }
         dispatch(getAllProduct())
         dispatch(getAllProductCart(user_id))
-    }, [message, user])
+    }, [message, user, dataCommand])
 
     return(
         <div>
            { 
-                message && 
+                dataCommand.message || message?
                 <Toast
-                    text = {'Votre panier a ete mis à jour'} 
-                />
+                    text = {dataCommand.message?dataCommand.message: message} 
+                />:null
            }
             <Cart 
                 showCart={show}
@@ -121,7 +133,7 @@ const Home = () => {
             />
             <CheckoutForm
                 isVisible={isShowCheckout}
-                onClose={() => setIsShowCheckout(false)}
+                onClose={onCloseCheckout}
             />
             <Navbar
                 onShowCart = {onShowCart}

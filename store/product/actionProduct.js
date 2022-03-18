@@ -19,7 +19,6 @@ export const getAllProduct = () => {
                     })
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login', error.response)
                     dispatch({
                         type: SET_USER,
                         payload: {}
@@ -48,7 +47,6 @@ export const addProductCart = (data) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    console.log('register renponse', response.data)
                     dispatch(getAllProductCart(data.user_id))
                     dispatch({
                         type: `${ADD_PRODUCT_CART}_SUCCESS`,
@@ -56,7 +54,6 @@ export const addProductCart = (data) => {
                     })
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login', error.response)
                     dispatch({
                         type: `${ADD_PRODUCT_CART}_FAIL`,
                         error: ''

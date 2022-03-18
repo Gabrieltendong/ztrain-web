@@ -27,7 +27,6 @@ export const auth = (data, router) => {
                     router.push('/home')
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login')
                     dispatch({
                         type: `${LOGIN}_FAIL`,
                     })
@@ -48,7 +47,6 @@ export const register = (data, router) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    console.log('register renponse', response.data)
                     dispatch(setUser(response.data))
                     dispatch({
                         type: `${REGISTER}_SUCCESS`,
@@ -57,7 +55,6 @@ export const register = (data, router) => {
                     router.push('/home')
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login', error.response)
                     dispatch({
                         type: `${REGISTER}_FAIL`,
                         error: error.response.data.message

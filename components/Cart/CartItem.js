@@ -41,13 +41,14 @@ const CartItem = ({item}) => {
     }
 
     const handleIncrement = () => {
-        const qt = parseInt(quantity) + 1
+        const qt = parseInt(item?.quantity) + 1
         setQuantity(qt)
         handleUpdateQuantity(qt)
     }
 
     const handleDecrement = () => {
-        const qt = parseInt(quantity) - 1
+        console.log('decrement', item?.quantity)
+        const qt = parseInt(item?.quantity) - 1
         if(qt == 0){
             handleRemoveProduct()
         }

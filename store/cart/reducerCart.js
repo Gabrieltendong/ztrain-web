@@ -168,7 +168,7 @@ const cartReducer = (state = initialState, action) => {
                     ...state.command,
                     isLoading: false,
                     data: {},
-                    error: "probleme sur le serveur"
+                    error: action.error
                 }
             }
         case UPDATE_PRICE:

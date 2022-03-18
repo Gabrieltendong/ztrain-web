@@ -62,7 +62,6 @@ export const updateQuantityProduct = (data) => {
                     })
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login', error.response)
                     dispatch({
                         type: `${UPDATE_QUANTITY}_FAIL`,
                         error: ''
@@ -94,7 +93,6 @@ export const removeProduct = (data) => {
                     })
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login', error.response)
                     dispatch({
                         type: `${REMOVE_PRODUCT_CART}_FAIL`,
                         error: ''
@@ -125,7 +123,6 @@ export const removeAllProduct = (user_id) => {
                     })
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error login', error.response)
                     dispatch({
                         type: `${REMOVE__ALL_PRODUCT_CART}_FAIL`,
                         error: ''
@@ -150,17 +147,17 @@ export const createCommand = (data) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    dispatch(getAllProductCart(data.user_id))
+                    const {user_id} = JSON.parse(data)
+                    dispatch(getAllProductCart(user_id))
                     dispatch({
                         type: `${CREATE_COMMANDE}_SUCCESS`,
                         payload: response.data
                     })
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error create commande', error.response)
                     dispatch({
                         type: `${CREATE_COMMANDE}_FAIL`,
-                        error: ''
+                        error: error.response.data.message
                     })
                 }
             }
