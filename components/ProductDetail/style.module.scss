@@ -114,3 +114,9 @@
         transform: scale(0);
     }
 }
+
+@media (max-width: 550px) {
+    #content_detail{
+        width: 100%!important;
+    }
+}
