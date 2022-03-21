@@ -8,7 +8,9 @@
     background-color: #eee;
     display: grid;
     grid-template-columns: 50% 50%;
-    padding: 100px;
+    padding-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
     z-index: 10;
 
     .content_img{
@@ -17,7 +19,7 @@
         background-repeat: no-repeat;
         background-size: contain;
         background-position: top right;
-        border-radius: 100%;
+        border-radius: 50%;
         transform: rotateZ(180deg) rotateX(180deg);
        
         // div {
@@ -84,8 +86,8 @@
 
 @media (max-width: 550px) {
     #header_home{
-        height: 400px;
-        padding: 100px 20px;
+        height: 350px;
+        padding: 100px 20px 20px 20px;
 
         .content_text_header{
             padding: 0;
@@ -93,6 +95,10 @@
             h1{
                 font-size: 8vw;
             }
+        }
+
+        .form{
+            display: none;
         }
     }
     #content_home{

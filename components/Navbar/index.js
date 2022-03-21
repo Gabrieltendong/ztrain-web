@@ -36,7 +36,7 @@ const Navbar = ({onShowCart}) => {
             </div>
             <div id={styles.content_cart_wrapper} onClick={onShowCart}>
                 <FiShoppingCart />
-                <span> {products_cart.length} produit{products_cart.length>1?'s':null}</span>
+                <span> {products_cart.length}</span>
             </div>
             <div 
                 id={styles.avatar_wrapper}

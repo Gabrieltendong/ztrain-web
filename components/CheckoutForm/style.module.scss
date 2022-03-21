@@ -95,3 +95,9 @@
         transform: scale(0);
     }
 }
+
+@media (max-width: 550px) {
+    #checkout_wrapper{
+        width: 100%!important;
+    }
+}
