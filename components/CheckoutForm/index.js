@@ -63,7 +63,7 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 error: ''
             })
         }
-    }, [error, address])
+    }, [error])
 
     return (
         <div id={isVisible?styles.showcheckout:styles.hidecheckout}>
