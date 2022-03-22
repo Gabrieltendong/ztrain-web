@@ -24,7 +24,7 @@ const ResetPassword = () => {
             email,
             newPassword: password
         }
-        dispatch(resetPassword(data))
+        dispatch(resetPassword(data, router))
     }
 
     const onVisiblePass = () => {
@@ -54,7 +54,7 @@ const ResetPassword = () => {
                 />
             }
             <div id={styles.card}>
-                <h1>Réeinitialiser votre mot de passe</h1>
+                <h1>Réinitialiser votre mot de passe</h1>
                 <form  onSubmit={handleResetPassword}>
                     <input
                         id="email_reset_pass"
@@ -101,7 +101,7 @@ const ResetPassword = () => {
                             size={30} 
                         />
                         :
-                        'Réenitialiser'
+                        'Réinitialiser'
                         }
                     </button>
                 </form>

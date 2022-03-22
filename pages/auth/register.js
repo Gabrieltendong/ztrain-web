@@ -29,7 +29,7 @@ const Register = () => {
       setErrorPassword(errorMessage)
     }
     else 
-      dispatch(register({email, password, adress, age}, router))
+      dispatch(register({email, password}, router))
   }
 
   const onVisiblePass = () => {
@@ -38,6 +38,7 @@ const Register = () => {
 
   const handleChange = (e) => {
     const value = e.target.value
+    setPasswordConfirm(value)
     if(password != value){
       setErrorPassword(errorMessage)
     }
