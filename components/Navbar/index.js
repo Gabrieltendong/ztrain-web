@@ -18,12 +18,9 @@ const Navbar = ({onShowCart}) => {
             <div id={styles.content_input_wrapper}>
                 <select name="pets" id={styles.select_cat}>
                     <option value="">Toutes les categories</option>
-                    <option value="dog">Dog</option>
-                    <option value="cat">Cat</option>
-                    <option value="hamster">Hamster</option>
-                    <option value="parrot">Parrot</option>
-                    <option value="spider">Spider</option>
-                    <option value="goldfish">Goldfish</option>
+                    <option value="Maison">Maison</option>
+                    <option value="Accéssoires">Accéssoires</option>
+                    <option value="Chaussures">Chaussures</option>
                 </select>
                 <input 
                     type="text"
