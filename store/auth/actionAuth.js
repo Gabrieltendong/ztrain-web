@@ -47,12 +47,11 @@ export const register = (data, router) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    dispatch(setUser(response.data))
                     dispatch({
                         type: `${REGISTER}_SUCCESS`,
                         payload: response.data
                     })
-                    router.push('/auth/login')
+                    dispatch(auth(data, router))
                 },
                 onError({getState, dispatch, error}){
                     dispatch({
