@@ -9,6 +9,7 @@ import { register } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
 import Image from "next/image";
 
+const errorMessage = 'Les deux mots de passe ne sont pas identiques'
 
 const Register = () => {
   
@@ -17,17 +18,32 @@ const Register = () => {
   const [isVisible, setIsVisible]= useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const [adress, setAdress] = useState()
-  const [age, setAge] = useState()
+  const [passwordConfirm, setPasswordConfirm] = useState()
+  const [isVisibleConfirm, setIsVisibleConfirm] = useState()
   const {isLoading, error} = useSelector(state => state.auth.register)
+  const [errorPassword, setErrorPassword]=useState()
 
   const handleRegister = (e) => {
     e.preventDefault()
-    dispatch(register({email, password, adress, age}, router))
+    if(password != passwordConfirm){
+      setErrorPassword(errorMessage)
+    }
+    else 
+      dispatch(register({email, password, adress, age}, router))
   }
 
   const onVisiblePass = () => {
     setIsVisible(!isVisible)
+  }
+
+  const handleChange = (e) => {
+    const value = e.target.value
+    if(password != value){
+      setErrorPassword(errorMessage)
+    }
+    else{
+      setErrorPassword('')
+    }
   }
 
   return (
@@ -66,18 +82,24 @@ const Register = () => {
                   }
                 </div>
               </div>
-              <input
-                id="input_address"
-                className={styles.input}
-                placeholder="Adresse"
-                onChange={(e) => setAdress(e.target.value)}
-              />
-              <input
-                id="input_birthday"
-                className={styles.input}
-                placeholder="Age" 
-                onChange={(e) => setAge(e.target.value)}
-              />
+              <span className={styles.smallText}>* Le mot de passe doit avoir au moins 8 caractères</span>
+              <div id={styles.container_input_password}>
+                <input
+                  id="confirm_password_register"
+                  className={styles.input_password}
+                  placeholder="Confirmer votre mot de passe"
+                  type={isVisibleConfirm?'text':'password'}
+                  onChange={handleChange}
+                />
+                <div onClick={() => setIsVisibleConfirm(!isVisibleConfirm)}>
+                  {
+                    isVisibleConfirm?
+                    <FiEye />
+                    :
+                    <FiEyeOff />
+                  }
+                </div>
+              </div>
               {
                 Array.isArray(error)?
                 error.map((item, index) => (
@@ -85,6 +107,10 @@ const Register = () => {
                 ))
                 :error.length > 0?
                 <p className={styles.messageError}>{error}</p>:null
+              }
+              {
+                errorPassword && 
+                <p className={styles.messageError}>{errorPassword}</p>
               }
               <button 
                 id="btn_register"
