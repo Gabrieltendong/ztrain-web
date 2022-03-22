@@ -52,7 +52,7 @@ export const register = (data, router) => {
                         type: `${REGISTER}_SUCCESS`,
                         payload: response.data
                     })
-                    router.push('/home')
+                    router.push('/auth/login')
                 },
                 onError({getState, dispatch, error}){
                     dispatch({
