@@ -25,9 +25,9 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
         );
     }
 
-    useEffect(() => {
-        console.log('getProduct')
-    }, [products_cart])
+    // useEffect(() => {
+    //     console.log('getProduct')
+    // }, [products_cart])
 
     return(
         <div 
@@ -66,7 +66,7 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
                 <div id={styles.cart_footer}>
                     <div id={styles.totalPrice}>
                         <h5>Total</h5>
-                        <h5>$ {getTotalPrice(products_cart)}</h5>
+                        <h5>$ {getTotalPrice(products_cart).toFixed(2)}</h5>
                     </div>
                     <div id={styles.btn_wrapper}>
                         <button id={styles.btn_trash_cart} onClick = {onDeleteCart}>Vider le panier</button>

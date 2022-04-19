@@ -12,33 +12,33 @@ const Footer = () => {
                     <h5>Our society</h5>
                     <div id={styles.content_item_our_socitety}>
                         <div className={styles.content_menu_item}>
-                            <a className={styles.item_menu} href="#">About</a>
-                            <a className={styles.item_menu} href="#">Contact</a>
-                            <a className={styles.item_menu} href="#">our Product</a>
-                            <a className={styles.item_menu} href="#">Join us</a>
+                            <a className={styles.item_menu}>About</a>
+                            <a className={styles.item_menu}>Contact</a>
+                            <a className={styles.item_menu}>our Product</a>
+                            <a className={styles.item_menu}>Join us</a>
                         </div>
                         <div className={styles.content_menu_item}>
-                            <a className={styles.item_menu} href="#">FAQ</a>
-                            <a className={styles.item_menu} href="#">CGV</a>
-                            <a className={styles.item_menu} href="#">Terms of services</a>
-                            <a className={styles.item_menu} href="#">Privacy policy</a>
+                            <a className={styles.item_menu}>FAQ</a>
+                            <a className={styles.item_menu}>CGV</a>
+                            <a className={styles.item_menu}>Terms of services</a>
+                            <a className={styles.item_menu}>Privacy policy</a>
                         </div>
                     </div>
                 </div>
                 <div id={styles.section_contact_us}>
                     <h5>Contact us</h5>
                     <div className={styles.content_menu_item}>
-                        <a className={styles.item_menu} href="#">contact@ztrain.com</a>
-                        <a className={styles.item_menu} href="#">Moulin de la Vierge (Rue du)</a>
-                        <a className={styles.item_menu} href="#">+ 33 656 78 78 41</a>
+                        <a className={styles.item_menu}>contact@ztrain.com</a>
+                        <a className={styles.item_menu}>Moulin de la Vierge (Rue du)</a>
+                        <a className={styles.item_menu}>+ 33 656 78 78 41</a>
                     </div>
                 </div>
                 <div id={styles.section_follow_us}>
                     <h5>Follow us</h5>
                     <div className={styles.content_menu_item}>
-                        <a className={styles.item_menu} href="#">Facebook</a>
-                        <a className={styles.item_menu} href="#">Twitter</a>
-                        <a className={styles.item_menu} href="#">Instagram</a>
+                        <a className={styles.item_menu}>Facebook</a>
+                        <a className={styles.item_menu}>Twitter</a>
+                        <a className={styles.item_menu}>Instagram</a>
                     </div>
                 </div>
             </div>

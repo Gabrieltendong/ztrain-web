@@ -41,14 +41,13 @@ const CartItem = ({item}) => {
     }
 
     const handleIncrement = () => {
-        const qt = parseInt(item?.quantity) + 1
+        const qt = quantity + 1
         setQuantity(qt)
         handleUpdateQuantity(qt)
     }
 
     const handleDecrement = () => {
-        console.log('decrement', item?.quantity)
-        const qt = parseInt(item?.quantity) - 1
+        const qt = quantity - 1
         if(qt == 0){
             handleRemoveProduct()
         }
@@ -70,8 +69,8 @@ const CartItem = ({item}) => {
     }
 
     useEffect(() => {
-        // getProduct()
-    }, [item]);
+
+    }, [quantity])
 
     return(
         <div className={styles.card}>
@@ -87,22 +86,13 @@ const CartItem = ({item}) => {
             </div>
             <div className={styles.card_body}>
                 <p className={styles.productName}>{item?.product?.name.substring(0, 15)}{item?.product?.name.length >15?'...':''}</p>
-                <p>${item?.product?.price}</p>
+                <p>${(item?.product?.price*quantity).toFixed(2)}</p>
             </div>
             <div className={styles.quantity_wrapper}>
                 <span className={styles.quantity_dec} onClick={handleDecrement}>
                     <FiMinus />
                 </span>
-                <form onSubmit={handleUpdate}>
-                    <input
-                        ref={qtRef}
-                        value={item.quantity}
-                        defaultValue={quantity}
-                        className={styles.quantity}
-                        onChange={handleChangeQuantity}
-                        type='number'
-                    />
-                </form>
+                <span className={styles.quantity}>{quantity}</span>
                 <span className={styles.quantity_in} onClick={handleIncrement}>
                     <FiPlus />
                 </span>
