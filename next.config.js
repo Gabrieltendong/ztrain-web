@@ -1,6 +1,7 @@
 const path = require('path')
+const nextTranslate = require('next-translate');
 
-module.exports = {
+module.exports = nextTranslate({
   async redirects() {
     return [
       {
@@ -30,4 +31,4 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-}
+})

@@ -2,6 +2,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
+import useTranslation from 'next-translate/useTranslation'
 
 import { auth } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
@@ -18,6 +19,8 @@ const Login = () => {
   const [password, setPassword] = useState()
   const [isVisible, setIsVisible]= useState()
   const {isLoading, error} = useSelector(state => state.auth.login)
+  const { t, lang } = useTranslation('ns1')
+  
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -33,7 +36,7 @@ const Login = () => {
       <main className={styles.main}>
         <div className={[styles.col_1]}>
             <div id = {styles.content_header_title}>
-              <h1 className={styles.header_title}>Bienvenue!!!</h1>
+              <h1 className={styles.header_title}>{t`Bienvenue`}!!!</h1>
               <p className={styles.header_subTitle}>Vos courses au quotidien, en quelques clics...</p>
             </div>
         </div>

@@ -3,10 +3,15 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { createFilter } from 'redux-persist-transform-filter';
 
 import authReducer from './auth/reducerAuth';
 import productReducer from './product/reducerProduct';
 import cartReducer from './cart/reducerCart';
+
+const persitingAuth = createFilter(
+  `auth.login`
+);
 
 const client = axios.create({
   baseURL: process.env.baseUrl,
@@ -19,7 +24,6 @@ const client = axios.create({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth']
 }
 
 const rootReducer = combineReducers({

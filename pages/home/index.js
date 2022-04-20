@@ -39,8 +39,8 @@ const Home = () => {
             product,user_id,
             quantity: parseInt(quantity)
         }
-        console.log('data', data)
         dispatch(addProductCart(data))
+        onCloseDetail()
     }
 
     const onShowDetail = (item) => {
@@ -54,7 +54,6 @@ const Home = () => {
 
     const onDecrement = () => {
         if(quantity != 1){
-            console.log('descrement', quantity)
             setQuantity(quantity - 1)
         }
     }
@@ -86,10 +85,10 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if(dataCommand){
+        if(Object.keys(dataCommand).length != 0){
             onCloseCheckout()
         }
-        if(message || dataCommand) {
+        if(message || Object.keys(dataCommand).length != 0) {
             setTimeout(() => {
                 dispatch({
                     type: `${ADD_PRODUCT_CART}_SUCCESS`,

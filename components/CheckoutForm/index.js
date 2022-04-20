@@ -7,6 +7,8 @@ import HashLoader from "react-spinners/HashLoader";
 import { createCommand } from '../../store/cart/actionCart';
 import { CREATE_COMMANDE } from '../../store/cart/type';
 
+const messageCardError = 'Numéro de carte invalide'
+
 const CheckoutForm = ({isVisible, onClose}) => {
 
     const dispatch = useDispatch()
@@ -16,28 +18,18 @@ const CheckoutForm = ({isVisible, onClose}) => {
     const [expiry, setExpiry]=useState('')
     const [cvc, setCVC]=useState()
     const [address, setAddress]=useState()
-    const [err, setError] = useState({
-        address: '',
-        card: ''
-    })
+    const [cardError, setCardError] = useState('')
+    const [addressError, setAddressError]= useState('')
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         if(!cardNumber || cardNumber && cardNumber.replace(/ /g, "").length != 16){
-            setError({
-                ...err,
-                card: 'Numéro de carte invalide',
-                address: ''
-            })
+            setCardError(messageCardError)
         }
         if(!address){
-            setError({
-                ...err,
-                address: "Veuillez spécifier l'adresse de livraison",
-                card: ''
-            })
+            setAddressError("Veuillez spécifier l'adresse de livraison")
         }
-        if(address && cardNumber && expiry && cvc){
+        if(address && cardNumber.replace(/ /g, "").length == 16 && expiry && cvc){
             const data = {
                 user_id,
                 address,
@@ -55,6 +47,13 @@ const CheckoutForm = ({isVisible, onClose}) => {
         // console.log('expiry', data)
     };
 
+    const onBlurCardNumer = (e) => {
+        console.log("onBlur", cardNumber.replace(/ /g, "").length)
+        if(cardNumber.replace(/ /g, "").length == 15){
+            setCardError('')
+        }
+    }
+
     useEffect(() => {
 
         return() => {
@@ -63,7 +62,7 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 error: ''
             })
         }
-    }, [error])
+    }, [])
 
     return (
         <div id={isVisible?styles.showcheckout:styles.hidecheckout}>
@@ -75,7 +74,12 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 <form onSubmit={handleSubmit} id={styles.form_wrapper} >
                     <CreditCardInput
                         onError = {(err) => console.log(err)}
-                        cardNumberInputProps={{ value: cardNumber, onChange: (e) => setCardNumber(e.target.value) }}
+                        cardNumberInputProps={{ 
+                            value: cardNumber,
+                            onBlur: onBlurCardNumer,
+                            onChange: (e) => setCardNumber(e.target.value),
+                            onError: (err) => setCardError(messageCardError)
+                        }}
                         cardExpiryInputProps={{ value: expiry, onChange: (e) => setExpiry(e.target.value) }}
                         cardCVCInputProps={{ value: cvc, onChange: (e) => setCVC(e.target.value) }}
                         fieldClassName="input"
@@ -86,11 +90,12 @@ const CheckoutForm = ({isVisible, onClose}) => {
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder='Votre adresse de livraison'
                     />
-                    {err.address && <p className={styles.errorMessage}>* {err.address}</p>}
-                    {err.card && <p className={styles.errorMessage}>* {err.card}</p>}
+                    {cardError && <p className={styles.errorMessage}>* {cardError}</p>}
+                    {addressError && <p className={styles.errorMessage}>* {addressError}</p>}
                     {error && <p className={styles.errorMessage}>* {error}</p>}
                     <button
                         id={styles.btnSubmit}
+                        disabled={cardError?true:false}
                     >
                         {
                             isLoading?
