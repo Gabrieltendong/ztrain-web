@@ -147,7 +147,7 @@ const Home = () => {
                 <div className={styles.form}></div>
             </header>
             <main id={styles.content_home}>
-                <h2 className={styles.section_title}>Popular product</h2>
+                <h2 className={styles.section_title}>Les produits</h2>
                 <div id = {styles.popular_product_wrapper}>
                     {
                         data.map((item, index) => (

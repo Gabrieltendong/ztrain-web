@@ -1,5 +1,6 @@
 import styles from './style.module.scss'
 import { FaSearch } from 'react-icons/fa';
+import Link from 'next/link'
 import { FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import Dropdown from '../Dropdown';
@@ -13,7 +14,9 @@ const Navbar = ({onShowCart}) => {
     return(
         <nav id={styles.header_navBar}>
             <div id={styles.content_logo}>
-                <h1>Z-Train</h1>
+                <Link href={"/home"}>
+                    <h1>Z-Train</h1>
+                </Link>
             </div>
             <div id={styles.content_input_wrapper}>
                 {/* <select name="pets" id={styles.select_cat}>

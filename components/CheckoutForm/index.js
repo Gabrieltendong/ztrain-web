@@ -72,18 +72,20 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 </button>
                 <h1>Valider votre commande</h1>
                 <form onSubmit={handleSubmit} id={styles.form_wrapper} >
-                    <CreditCardInput
-                        onError = {(err) => console.log(err)}
-                        cardNumberInputProps={{ 
-                            value: cardNumber,
-                            onBlur: onBlurCardNumer,
-                            onChange: (e) => setCardNumber(e.target.value),
-                            onError: (err) => setCardError(messageCardError)
-                        }}
-                        cardExpiryInputProps={{ value: expiry, onChange: (e) => setExpiry(e.target.value) }}
-                        cardCVCInputProps={{ value: cvc, onChange: (e) => setCVC(e.target.value) }}
-                        fieldClassName="input"
-                    />
+                    <div id={styles.card_input_wrapper}>
+                        <CreditCardInput
+                            onError = {(err) => console.log(err)}
+                            cardNumberInputProps={{ 
+                                value: cardNumber,
+                                onBlur: onBlurCardNumer,
+                                onChange: (e) => setCardNumber(e.target.value),
+                                onError: (err) => setCardError(messageCardError)
+                            }}
+                            cardExpiryInputProps={{ value: expiry, onChange: (e) => setExpiry(e.target.value) }}
+                            cardCVCInputProps={{ value: cvc, onChange: (e) => setCVC(e.target.value) }}
+                            fieldClassName="input"
+                        />
+                    </div>
                     <input 
                         type="text" 
                         id={styles.input_address}
