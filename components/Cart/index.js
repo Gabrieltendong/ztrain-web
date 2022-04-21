@@ -12,6 +12,7 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
     const dispatch = useDispatch()
     const products_cart = useSelector(state => state.cart.products_cart.data)
     const {isLoading} = useSelector(state => state.cart.removeProduct)
+    const loadingClearCart = useSelector(state => state.cart.clearCart.isLoading)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
 
     const onDeleteCart = () => {
@@ -25,16 +26,12 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
         );
     }
 
-    // useEffect(() => {
-    //     console.log('getProduct')
-    // }, [products_cart])
-
     return(
         <div 
             className={styles.container_cart} 
             id={showCart?styles.container_show_cart:styles.container_hide_cart}
         >
-            {isLoading && <Loading />}
+            {isLoading || loadingClearCart? <Loading />: null}
             <div id={styles.content_cart_header}>
                 <div onClick={onClose}>
                     <FiArrowRight />

@@ -11,7 +11,7 @@ import Navbar from "../../components/Navbar"
 import ProductDetail from '../../components/ProductDetail'
 import ProductItem from '../../components/ProductItem'
 import Toast from '../../components/Toast'
-import { CREATE_COMMANDE } from '../../store/cart/type'
+import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type'
 import { get_all_favorites } from '../../store/favorite/actionFavorite'
 import { addProductCart } from '../../store/product/actionProduct'
 import { ADD_PRODUCT_CART } from '../../store/product/type'
@@ -33,8 +33,6 @@ const Favorites = () => {
     const { message } = useSelector(state => state.product.add_product_cart)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
-
-    console.log("data", data)
 
     const onShowDetail = (item) => {
         setProductDetail(item)
@@ -76,7 +74,12 @@ const Favorites = () => {
          }
          dispatch(addProductCart(data))
          onCloseDetail()
-     }
+    }
+
+    const onClearCart = () => {
+        setShow(false)
+        dispatch({type: `${REMOVE__ALL_PRODUCT_CART}_SUCCESS`, payload: {}})
+    }
 
     useEffect(() => {
         if(Object.keys(dataCommand).length != 0){

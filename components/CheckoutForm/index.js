@@ -43,12 +43,9 @@ const CheckoutForm = ({isVisible, onClose}) => {
             
             dispatch(createCommand(JSON.stringify(data)))
         }
-        
-        // console.log('expiry', data)
     };
 
     const onBlurCardNumer = (e) => {
-        console.log("onBlur", cardNumber.replace(/ /g, "").length)
         if(cardNumber.replace(/ /g, "").length == 15){
             setCardError('')
         }
@@ -74,7 +71,6 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 <form onSubmit={handleSubmit} id={styles.form_wrapper} >
                     <div id={styles.card_input_wrapper}>
                         <CreditCardInput
-                            onError = {(err) => console.log(err)}
                             cardNumberInputProps={{ 
                                 value: cardNumber,
                                 onBlur: onBlurCardNumer,

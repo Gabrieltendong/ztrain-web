@@ -77,7 +77,6 @@ export const resetPassword = (data, router) => {
                 onSuccess({getState, dispatch, response}){
                     
                     if(response.data.message){
-                        console.log('resetpass renponse', response.data)
                         dispatch({
                             type: `${RESET_PASSWORD}_SUCCESS`,
                             payload: response.data.message
@@ -86,7 +85,6 @@ export const resetPassword = (data, router) => {
                     }
                 },
                 onError({getState, dispatch, error}){
-                    console.log('error resetpass', error.response.data)
                     dispatch({
                         type: `${RESET_PASSWORD}_FAIL`,
                         error: error.response.data.message

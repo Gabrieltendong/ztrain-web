@@ -55,7 +55,6 @@ const favoriteReducer = (state = initialState, action) => {
                 }
             }
         case `${LIST_FAVORITE}_SUCCESS`:
-            console.log("succes ")
             return {
                 ...state,
                 list_favorite: {
@@ -66,7 +65,6 @@ const favoriteReducer = (state = initialState, action) => {
                 }
             }
         case `${LIST_FAVORITE}_FAIL`:
-            console.log("error ")
             return {
                 ...state,
                 list_favorite: {

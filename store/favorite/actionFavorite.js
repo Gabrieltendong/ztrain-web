@@ -17,7 +17,6 @@ export const toggle_favorite = (data) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    console.log('toggle response', response.data)
                     dispatch(get_all_favorites())
                     dispatch({
                         type: `${TOGGLE_FAVORITE}_SUCCESS`,
