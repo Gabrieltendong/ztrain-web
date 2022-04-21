@@ -139,7 +139,7 @@ const Home = () => {
             />
             <header id={styles.header_home}>
                 <div className={styles.content_text_header}>
-                    <h1>{" Flat up to 50% off for men's "}</h1>
+                    <h1>{"Achetez en ligne et faites-vous livrer en moins de 2H gratuitement en magasin"}</h1>
                 </div>
                 <div className={styles.content_img}>
                     <div></div>

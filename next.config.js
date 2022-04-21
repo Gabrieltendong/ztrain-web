@@ -8,7 +8,7 @@ module.exports = nextTranslate({
       {
         source: '/',
         destination: '/home',
-        permanent: true,
+        permanent: false,
       },
     ]
   },
