@@ -8,6 +8,7 @@ const Dropdown = ({isVisible, onMouseLeave}) => {
     const dispatch = useDispatch()
 
     const logOut = () => {
+        console.log('logout')
         dispatch({
             type: SET_USER,
             payload: {}
