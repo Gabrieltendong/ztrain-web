@@ -1,12 +1,17 @@
+import Link from 'next/link'
+
 import styles from './style.module.scss'
+
 
 const Footer = () => {
     return(
         <footer id={styles.footer_home}>
             <div id={styles.content_footer}>
                 <div id={styles.section_logo}>
-                    <h1>ZTrain</h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting</p>
+                    <Link href={"/home"}>
+                        <h1>Z-Train</h1>
+                    </Link>
+                    <p>Pour les courses ou le shopping, un vaste choix de produits à petit prix livrés à domicile, en magasin, en consigne ou en point relais.</p>
                 </div>
                 <div id={styles.section_our_society}>
                     <h5>Our society</h5>
