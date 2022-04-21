@@ -86,7 +86,7 @@ const CartItem = ({item}) => {
             </div>
             <div className={styles.card_body}>
                 <p className={styles.productName}>{item?.product?.name.substring(0, 15)}{item?.product?.name.length >15?'...':''}</p>
-                <p>${(item?.product?.price*quantity).toFixed(2)}</p>
+                <p>{(item?.product?.price*quantity).toFixed(2)} €</p>
             </div>
             <div className={styles.quantity_wrapper}>
                 <span className={styles.quantity_dec} onClick={handleDecrement}>

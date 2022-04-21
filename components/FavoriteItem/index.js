@@ -16,7 +16,7 @@ const FavoriteItem = ({item, addProductCart, onShowDetail}) => {
             </div>
             <div className={styles.card_footer}>
                 <h5>{item.name}</h5>
-                <p >$ {item.price}</p>
+                <p >{item.price} €</p>
             </div>
         </div>
     )

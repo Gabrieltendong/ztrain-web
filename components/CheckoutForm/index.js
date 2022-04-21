@@ -86,13 +86,13 @@ const CheckoutForm = ({isVisible, onClose}) => {
                             fieldClassName="input"
                         />
                     </div>
+                    {/* {cardError && <p className={styles.errorMessage}>* {cardError}</p>} */}
                     <input 
                         type="text" 
                         id={styles.input_address}
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder='Votre adresse de livraison'
                     />
-                    {cardError && <p className={styles.errorMessage}>* {cardError}</p>}
                     {addressError && <p className={styles.errorMessage}>* {addressError}</p>}
                     {error && <p className={styles.errorMessage}>* {error}</p>}
                     <button

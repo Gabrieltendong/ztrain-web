@@ -72,6 +72,11 @@ const Home = () => {
         setIsShowCheckout(false)
     }
 
+    const onCloseMadal = () => {
+        console.log('click div')
+        setShow(false)
+    }
+
     const isValidHttpUrl = (string) => {
         let url;
         
@@ -108,7 +113,7 @@ const Home = () => {
     }, [message, user, dataCommand])
 
     return(
-        <div>
+        <div >
            { 
                 dataCommand.message || message?
                 <Toast
@@ -137,7 +142,7 @@ const Home = () => {
             <Navbar
                 onShowCart = {onShowCart}
             />
-            <header id={styles.header_home}>
+            <header id={styles.header_home} onMouseDown={onCloseMadal}>
                 <div className={styles.content_text_header}>
                     <h1>{"Achetez en ligne et faites-vous livrer en moins de 2H gratuitement en magasin"}</h1>
                 </div>
@@ -146,7 +151,7 @@ const Home = () => {
                 </div>
                 <div className={styles.form}></div>
             </header>
-            <main id={styles.content_home}>
+            <main id={styles.content_home} onMouseDown={onCloseMadal} >
                 <h2 className={styles.section_title}>Les produits</h2>
                 <div id = {styles.popular_product_wrapper}>
                     {
