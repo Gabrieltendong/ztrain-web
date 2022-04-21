@@ -28,7 +28,7 @@ const Navbar = ({onShowCart}) => {
                 <input 
                     type="text"
                     id={styles.input_navbar_search}
-                    placeholder='Rechercher un produit ou une categorie'
+                    placeholder='Rechercher un produit'
                 />
                 <div>
                     <FaSearch />

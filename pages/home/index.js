@@ -13,7 +13,7 @@ import Toast from '../../components/Toast';
 import { ADD_PRODUCT_CART } from '../../store/product/type';
 import CheckoutForm from '../../components/CheckoutForm';
 import Stripecontainer from '../../stripe/StripeContainer';
-import { CREATE_COMMANDE } from '../../store/cart/type';
+import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type';
 
 const Home = () => {
 
@@ -28,6 +28,7 @@ const Home = () => {
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
     const { data } = useSelector(state => state.product.list_product)
     const dataCommand = useSelector(state => state.cart.command.data)
+    const clearCartData = useSelector(state => state.cart.clearCart.data)
     const router = useRouter()
 
     const onShowCart = () => {
@@ -73,7 +74,6 @@ const Home = () => {
     }
 
     const onCloseMadal = () => {
-        console.log('click div')
         setShow(false)
     }
 
@@ -89,9 +89,18 @@ const Home = () => {
         return url.protocol === "http:" || url.protocol === "https:";
     }
 
+    const onClearCart = () => {
+        setShow(false)
+        dispatch({type: `${REMOVE__ALL_PRODUCT_CART}_SUCCESS`, payload: {}})
+    }
+
     useEffect(() => {
         if(Object.keys(dataCommand).length != 0){
             onCloseCheckout()
+            setShow(false)
+        }
+        if(Object.keys(clearCartData).length != 0){
+            onClearCart()
         }
         if(message || Object.keys(dataCommand).length != 0) {
             setTimeout(() => {
@@ -110,7 +119,7 @@ const Home = () => {
         }
         dispatch(getAllProduct())
         dispatch(getAllProductCart(user_id))
-    }, [message, user, dataCommand])
+    }, [message, user, dataCommand, clearCartData])
 
     return(
         <div >

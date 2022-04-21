@@ -37,7 +37,7 @@ const Favorites = () => {
             router.push('/auth/login')
         }
         dispatch(get_all_favorites())
-    }, [])
+    }, [user])
 
     return(
         <div>
