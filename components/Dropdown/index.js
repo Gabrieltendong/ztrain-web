@@ -20,9 +20,9 @@ const Dropdown = ({isVisible, onMouseLeave}) => {
             onMouseLeave = {onMouseLeave}
             id={isVisible?styles.showDropdown: styles.hideDropdown}
         >
-            <Link href="">
+            {/* <Link href="">
                 <a href="">Mes commandes</a>
-            </Link>
+            </Link> */}
             <Link href="/myfavorite">
                 <a href="">Mes favoris</a>
             </Link>

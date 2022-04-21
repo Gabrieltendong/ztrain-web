@@ -20,37 +20,24 @@ const ProductDetail = ({
 
     const dispatch = useDispatch()
     const {isLoading} = useSelector(state => state.product.add_product_cart)
-    const isLoadingFavoris = useSelector(state => state.favorite.list_favorite.isLoading)
+    const isLoadinglistFavoris = useSelector(state => state.favorite.list_favorite.isLoading)
+    const isLoadingaddFavoris = useSelector(state => state.favorite.toggle_Favorite.isLoading)
     const user_id = useSelector(state => state.auth.login.data?.user?._id)
     const { data } = useSelector(state => state.favorite.list_favorite)
     const initfavoriteState = data.filter(item => item.product._id == product?._id).length>0
-    const [isFavorite, setIsFavorite]=useState(initfavoriteState)
 
     const onFavorite = () => {
-        setIsFavorite(!isFavorite)
         dispatch(toggle_favorite({
             user: user_id,
             product: product._id
         }))
     }
-
-    useEffect(() => {
-        window.addEventListener('keydown', (event) => {
-            console.log('isFavorite', initfavoriteState)
-          });
-        
-        setIsFavorite(data.filter(item => item.product._id == product?._id).length>0)
-
-        // return () => {
-        //     console.log("cleaned up");
-        //   };
-    }, [data, isFavorite])
     
 
     return(
         <div id={isVisible?styles.showDetail:styles.hideDetail}>
             <main id={styles.content_detail}>
-                {isLoading && <Loading />}
+                {isLoading || isLoadinglistFavoris || isLoadingaddFavoris ? <Loading />:null}
                 <button id={styles.btn_close} onClick={onClose}>
                     <FiX />
                 </button>
@@ -58,7 +45,7 @@ const ProductDetail = ({
                     <button id={styles.btn_heart} onClick={onFavorite}>
                         <FiHeart 
                             size={20}
-                            color={isFavorite?"#FF7643": "#000"} 
+                            color={initfavoriteState?"#FF7643": "#000"} 
                         />
                     </button>
                     {
@@ -73,7 +60,7 @@ const ProductDetail = ({
                 </div>
                 <div id = {styles.detail_wrapper}>
                     <h3>{product?.name}</h3>
-                    <p id={styles.price}>$ {product?.price}</p>
+                    <p id={styles.price}>{product?.price} €</p>
 
                     <div id={styles.quantity_wrapper}>
                         <button 
