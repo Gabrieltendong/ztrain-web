@@ -35,6 +35,20 @@
             top: 10px;
             @extend %btn;
         }
+        #wrapper_image{
+            position: relative;
+
+            #btn_heart{
+                height: 40px;
+                width: 40px;
+                border-radius: 100%;
+                position: absolute;
+                right: 50px;
+                top: 10px;
+                z-index: 10;
+                @extend %btn;
+            }
+        }
         #img{
             height: 600px;
             border: 10px solid $primaryColor;

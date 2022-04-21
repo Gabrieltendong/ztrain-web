@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import { FiShoppingCart, FiPlus, FiMinus, FiX } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { FiShoppingCart, FiPlus, FiMinus, FiX, FiHeart } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggle_favorite } from '../../store/favorite/actionFavorite';
 import Loading from '../Loading';
 import styles from './style.module.scss';
 
@@ -16,7 +18,34 @@ const ProductDetail = ({
     addProductCart
 }) => {
 
+    const dispatch = useDispatch()
     const {isLoading} = useSelector(state => state.product.add_product_cart)
+    const isLoadingFavoris = useSelector(state => state.favorite.list_favorite.isLoading)
+    const user_id = useSelector(state => state.auth.login.data?.user?._id)
+    const { data } = useSelector(state => state.favorite.list_favorite)
+    const initfavoriteState = data.filter(item => item.product._id == product?._id).length>0
+    const [isFavorite, setIsFavorite]=useState(initfavoriteState)
+
+    const onFavorite = () => {
+        setIsFavorite(!isFavorite)
+        dispatch(toggle_favorite({
+            user: user_id,
+            product: product._id
+        }))
+    }
+
+    useEffect(() => {
+        window.addEventListener('keydown', (event) => {
+            console.log('isFavorite', initfavoriteState)
+          });
+        
+        setIsFavorite(data.filter(item => item.product._id == product?._id).length>0)
+
+        // return () => {
+        //     console.log("cleaned up");
+        //   };
+    }, [data, isFavorite])
+    
 
     return(
         <div id={isVisible?styles.showDetail:styles.hideDetail}>
@@ -25,7 +54,13 @@ const ProductDetail = ({
                 <button id={styles.btn_close} onClick={onClose}>
                     <FiX />
                 </button>
-                <div>
+                <div id={styles.wrapper_image}>
+                    <button id={styles.btn_heart} onClick={onFavorite}>
+                        <FiHeart 
+                            size={20}
+                            color={isFavorite?"#FF7643": "#000"} 
+                        />
+                    </button>
                     {
                         product?.image &&
                         <Image

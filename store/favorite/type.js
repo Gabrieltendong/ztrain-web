@@ -1,0 +1,2 @@
+export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE"
+export const LIST_FAVORITE = "LIST_FAVORITE"

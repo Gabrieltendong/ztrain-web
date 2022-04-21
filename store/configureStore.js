@@ -8,6 +8,7 @@ import { createFilter } from 'redux-persist-transform-filter';
 import authReducer from './auth/reducerAuth';
 import productReducer from './product/reducerProduct';
 import cartReducer from './cart/reducerCart';
+import favoriteReducer from './favorite/reducerFavorite';
 
 const persitingAuth = createFilter(
   `auth.login`
@@ -29,7 +30,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authReducer,
     product: productReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    favorite: favoriteReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

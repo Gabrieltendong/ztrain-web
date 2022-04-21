@@ -22,7 +22,7 @@ const Dropdown = ({isVisible, onMouseLeave}) => {
             <Link href="">
                 <a href="">Mes commandes</a>
             </Link>
-            <Link href="">
+            <Link href="/myfavorite">
                 <a href="">Mes favoris</a>
             </Link>
             <Link href="">
