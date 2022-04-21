@@ -10,6 +10,7 @@ const Navbar = ({onShowCart}) => {
 
     const [isShown, setIsShown] = useState(false);
     const products_cart = useSelector(state => state.cart.products_cart.data)
+    const { user } = useSelector(state => state.auth?.user_infos)
 
     return(
         <nav id={styles.header_navBar}>
@@ -42,7 +43,9 @@ const Navbar = ({onShowCart}) => {
                 id={styles.avatar_wrapper}
                 onMouseEnter={() => setIsShown(true)}
             >
-                <FiUser />
+                <FiUser
+                    color={user?"#27ae60": "#000"}
+                />
                 <span>Compte</span>
                 <FiChevronDown />
             </div>
