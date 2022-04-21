@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500&family=Pacifico&display=swap');
+@import '/styles/mixins';
+@import '/styles/colors';
+
+#header{
+    height: 500px;
+    background-color: $primaryColor;
+    background-image: url("/assets/2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:after{
+        content: "";
+        height: 500px;
+        width: 100%;
+        position: absolute;
+        background-color: rgba(255, 118, 67, 0.5);
+    }
+
+    h3{
+        color: #fff;
+        font-size: 60px;
+        z-index: 2;
+        font-family: Montserrat;
+    }
+}
+#container{
+    min-height: 500px;
+    padding: 50px;
+
+    #popular_product_wrapper{
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+
+    #empty_favorite_wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 850px) {
+    #popular_product_wrapper{
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media (max-width: 550px) {
+    #popular_product_wrapper{
+        grid-template-columns: 100%;
+    }
+}

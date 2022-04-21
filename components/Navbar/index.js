@@ -16,12 +16,12 @@ const Navbar = ({onShowCart}) => {
                 <h1>Z-Train</h1>
             </div>
             <div id={styles.content_input_wrapper}>
-                <select name="pets" id={styles.select_cat}>
+                {/* <select name="pets" id={styles.select_cat}>
                     <option value="">Toutes les categories</option>
                     <option value="Maison">Maison</option>
                     <option value="Accéssoires">Accéssoires</option>
                     <option value="Chaussures">Chaussures</option>
-                </select>
+                </select> */}
                 <input 
                     type="text"
                     id={styles.input_navbar_search}

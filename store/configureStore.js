@@ -7,6 +7,7 @@ import storage from 'redux-persist/lib/storage'
 import authReducer from './auth/reducerAuth';
 import productReducer from './product/reducerProduct';
 import cartReducer from './cart/reducerCart';
+import favoriteReducer from './favorite/reducerFavorite';
 
 const client = axios.create({
   baseURL: process.env.baseUrl,
@@ -25,7 +26,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authReducer,
     product: productReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    favorite: favoriteReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

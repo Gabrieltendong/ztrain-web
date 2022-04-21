@@ -83,7 +83,7 @@ const Register = () => {
                   }
                 </div>
               </div>
-              <span className={styles.smallText}>* Le mot de passe doit avoir au moins 8 caractères</span>
+              {/* <span className={styles.smallText}>* Le mot de passe doit avoir au moins 8 caractères</span> */}
               <div id={styles.container_input_password}>
                 <input
                   id="confirm_password_register"
