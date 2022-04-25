@@ -10,7 +10,7 @@ import ProductDetail from '../../components/ProductDetail';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import Toast from '../../components/Toast';
-import { ADD_PRODUCT_CART } from '../../store/product/type';
+import { ADD_PRODUCT_CART, GET_PRODUCT } from '../../store/product/type';
 import CheckoutForm from '../../components/CheckoutForm';
 import Stripecontainer from '../../stripe/StripeContainer';
 import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type';
@@ -19,6 +19,7 @@ const Home = () => {
 
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
+    const [isFocusSearchBar, setIsFocusSearchBar]=useState(false)
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
     const [quantity, setQuantity] = useState(1)
@@ -27,6 +28,8 @@ const Home = () => {
     const { user } = useSelector(state => state.auth?.user_infos)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
     const { data } = useSelector(state => state.product.list_product)
+    const [listSearch, setListSearch]=useState([])
+    const [searchTerm, setSearchTerm]=useState()
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
     const router = useRouter()
@@ -94,14 +97,30 @@ const Home = () => {
         dispatch({type: `${REMOVE__ALL_PRODUCT_CART}_SUCCESS`, payload: {}})
     }
 
+    const onSearch = (searchTerm) => {
+        const newData = data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        setListSearch(newData)
+        setSearchTerm(searchTerm)
+    }
+
     useEffect(() => {
+
+        if(isFocusSearchBar){
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            })
+        }
+
         if(Object.keys(dataCommand).length != 0){
             onCloseCheckout()
             setShow(false)
         }
+
         if(Object.keys(clearCartData).length != 0){
             onClearCart()
         }
+
         if(message || Object.keys(dataCommand).length != 0) {
             setTimeout(() => {
                 dispatch({
@@ -114,12 +133,14 @@ const Home = () => {
                 })
             }, 2000);
         }
+
         if(!user){
             router.push('/auth/login')
         }
+
         dispatch(getAllProduct())
         dispatch(getAllProductCart(user_id))
-    }, [message, user, dataCommand, clearCartData])
+    }, [message, user, dataCommand, clearCartData, isFocusSearchBar, listSearch])
 
     return(
         <div >
@@ -150,6 +171,9 @@ const Home = () => {
             />
             <Navbar
                 onShowCart = {onShowCart}
+                onSearch={onSearch}
+                onBlur={() => setIsFocusSearchBar(false)}
+                onFocus={() => setIsFocusSearchBar(true)}
             />
             <header id={styles.header_home} onMouseDown={onCloseMadal}>
                 <div className={styles.content_text_header}>
@@ -165,6 +189,7 @@ const Home = () => {
                 <h2 className={styles.section_title}>Les produits</h2>
                 <div id = {styles.popular_product_wrapper}>
                     {
+                        !searchTerm?
                         data.map((item, index) => (
                             isValidHttpUrl(item.image)?
                             <ProductItem 
@@ -175,6 +200,19 @@ const Home = () => {
                             />
                             :null
                         ))
+                        :listSearch.length !=0?
+                        listSearch.map((item, index) => (
+                            isValidHttpUrl(item.image)?
+                            <ProductItem 
+                                key={index} 
+                                item={item}
+                                onShowDetail={onShowDetail}
+                                addProductCart={handleAddProductCart}  
+                            />
+                            :null
+                        ))
+                        :
+                        <p id={styles.empty_result}>Aucun produit trouvé</p>
                     }
                 </div>
             </main>

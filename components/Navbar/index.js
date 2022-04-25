@@ -6,7 +6,12 @@ import { useSelector } from 'react-redux';
 import Dropdown from '../Dropdown';
 import { useState } from 'react';
 
-const Navbar = ({onShowCart}) => {
+const Navbar = ({
+    onShowCart,
+    onSearch,
+    onBlur,
+    onFocus
+}) => {
 
     const [isShown, setIsShown] = useState(false);
     const products_cart = useSelector(state => state.cart.products_cart.data)
@@ -30,6 +35,9 @@ const Navbar = ({onShowCart}) => {
                     type="text"
                     id={styles.input_navbar_search}
                     placeholder='Rechercher un produit'
+                    onChange={(e) => onSearch(e.target.value)}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                 />
                 <div>
                     <FaSearch />

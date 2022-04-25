@@ -71,18 +71,21 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 <form onSubmit={handleSubmit} id={styles.form_wrapper} >
                     <div id={styles.card_input_wrapper}>
                         <CreditCardInput
+                            customTextLabels={{
+                                invalidCardNumber: " "
+                            }}
                             cardNumberInputProps={{ 
                                 value: cardNumber,
                                 onBlur: onBlurCardNumer,
                                 onChange: (e) => setCardNumber(e.target.value),
-                                onError: (err) => setCardError(messageCardError)
+                                // onError: (err) => setCardError(messageCardError)
                             }}
                             cardExpiryInputProps={{ value: expiry, onChange: (e) => setExpiry(e.target.value) }}
                             cardCVCInputProps={{ value: cvc, onChange: (e) => setCVC(e.target.value) }}
                             fieldClassName="input"
                         />
                     </div>
-                    {/* {cardError && <p className={styles.errorMessage}>* {cardError}</p>} */}
+                    {cardError && <p className={styles.errorMessage}>* {cardError}</p>}
                     <input 
                         type="text" 
                         id={styles.input_address}
