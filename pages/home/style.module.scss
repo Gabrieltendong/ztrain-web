@@ -14,7 +14,7 @@
     z-index: 10;
 
     .content_img{
-        height: 80%;
+        height: 100%;
         background-image: url("/assets/header_bg9.png"), linear-gradient(to right, #f2b86d, $primaryColor);
         background-repeat: no-repeat;
         background-size: contain;
@@ -41,12 +41,16 @@
       }
 
     .content_text_header{
+        display: flex;
+        flex-direction: column;
         padding: 0 50px;
+        // align-items: center;
+        justify-content: center;
 
         h1{
             color: rgb(8, 8, 8);
             font-family: 'Montserrat', sans-serif;
-            font-size: 3vw;
+            font-size: 4vw;
         }
     }
 }

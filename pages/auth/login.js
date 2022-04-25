@@ -9,6 +9,7 @@ import styles from './style.module.scss'
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { IsEmail } from '../../utils/isEmail';
 
 
 const Login = () => {
@@ -19,12 +20,16 @@ const Login = () => {
   const [password, setPassword] = useState()
   const [isVisible, setIsVisible]= useState()
   const {isLoading, error} = useSelector(state => state.auth.login)
-  const { t, lang } = useTranslation('ns1')
+  const [invalidEmail, setInvalEmail]=useState("")
   
 
   const handleLogin = (event) => {
     event.preventDefault()
-    dispatch(auth({email, password}, router))
+    if(!IsEmail(email)){
+      setInvalEmail("Le format de l'email est invalid")
+    }else{
+      dispatch(auth({email, password}, router))
+    }
   }
 
   const onVisiblePass = () => {
@@ -36,7 +41,7 @@ const Login = () => {
       <main className={styles.main}>
         <div className={[styles.col_1]}>
             <div id = {styles.content_header_title}>
-              <h1 className={styles.header_title}>{t`Bienvenue`}!!!</h1>
+              <h1 className={styles.header_title}>{`Bienvenue`}!!!</h1>
               <p className={styles.header_subTitle}>Vos courses au quotidien, en quelques clics...</p>
             </div>
         </div>
@@ -48,8 +53,16 @@ const Login = () => {
                 id="email_login"
                 className={styles.input}
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  if(IsEmail(e.target.value))
+                    setInvalEmail("")
+                }}
               />
+              {
+                invalidEmail &&
+                <p className={styles.messageError}>{invalidEmail}</p>
+              }
               <div id={styles.container_input_password}>
                 <input
                   id='password_login'

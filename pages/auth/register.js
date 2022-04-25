@@ -8,6 +8,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { register } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
 import Image from "next/image";
+import { IsEmail } from "../../utils/isEmail";
 
 const errorMessage = 'Les deux mots de passe ne sont pas identiques'
 
@@ -16,11 +17,15 @@ const Register = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [isVisible, setIsVisible]= useState()
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
-  const [passwordConfirm, setPasswordConfirm] = useState()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordConfirm, setPasswordConfirm] = useState("")
   const [isVisibleConfirm, setIsVisibleConfirm] = useState()
   const {isLoading, error} = useSelector(state => state.auth.register)
+  const [formError, setFormError]=useState({
+    email: '',
+    password: ''
+  })
   const [errorPassword, setErrorPassword]=useState()
 
   const handleRegister = (e) => {
@@ -28,22 +33,55 @@ const Register = () => {
     if(password != passwordConfirm){
       setErrorPassword(errorMessage)
     }
-    else 
-      dispatch(register({email, password}, router))
+
+    if(!IsEmail(email)){
+      setFormError({
+        email: "Le format de l'email est invalid"
+      })
+    }
+
+    if(password.length < 8){
+      setFormError({
+        password: "Le mot de passe doit avoir au moins 8 caractères"
+      })
+    }
+
+    if(
+        password.length >= 8 && 
+        password == passwordConfirm && 
+        IsEmail(email)
+      ){
+        dispatch(register({email, password}, router))
+      }
   }
 
   const onVisiblePass = () => {
     setIsVisible(!isVisible)
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e, label) => {
     const value = e.target.value
-    setPasswordConfirm(value)
-    if(password != value){
-      setErrorPassword(errorMessage)
+    if(label == "email"){
+      setEmail(value)
+      if(IsEmail(value)){
+        setFormError({
+          email: ""
+        })
+      }
     }
-    else{
-      setErrorPassword('')
+
+    if(label == "password"){
+        setPassword(value)
+    }
+
+    if(label == "confirmpassword"){
+      setPasswordConfirm(value)
+      if(password != value){
+        setErrorPassword(errorMessage)
+      }
+      else{
+        setErrorPassword('')
+      }
     }
   }
 
@@ -64,7 +102,7 @@ const Register = () => {
                 id='email_register'
                 className={styles.input}
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => handleChange(e, "email")}
               />
               <div id={styles.container_input_password}>
                 <input
@@ -72,7 +110,7 @@ const Register = () => {
                   className={styles.input_password}
                   placeholder="Mot de passe"
                   type={isVisible?'text':'password'}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handleChange(e, "password")}
                 />
                 <div onClick={onVisiblePass}>
                   {
@@ -83,14 +121,17 @@ const Register = () => {
                   }
                 </div>
               </div>
-              {/* <span className={styles.smallText}>* Le mot de passe doit avoir au moins 8 caractères</span> */}
+              {
+                errorPassword && 
+                <p className={styles.messageError}>{errorPassword}</p>
+              }
               <div id={styles.container_input_password}>
                 <input
                   id="confirm_password_register"
                   className={styles.input_password}
                   placeholder="Confirmer votre mot de passe"
                   type={isVisibleConfirm?'text':'password'}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e, "confirmpassword")}
                 />
                 <div onClick={() => setIsVisibleConfirm(!isVisibleConfirm)}>
                   {
@@ -109,10 +150,8 @@ const Register = () => {
                 :error.length > 0?
                 <p className={styles.messageError}>{error}</p>:null
               }
-              {
-                errorPassword && 
-                <p className={styles.messageError}>{errorPassword}</p>
-              }
+              {formError.email && <p className={styles.messageError}>{formError.email}</p>}
+              {formError.password && <p className={styles.messageError}>{formError.password}</p>}
               <button 
                 id="btn_register"
                 className = {styles.btn}

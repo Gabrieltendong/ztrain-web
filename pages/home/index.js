@@ -153,7 +153,8 @@ const Home = () => {
             />
             <header id={styles.header_home} onMouseDown={onCloseMadal}>
                 <div className={styles.content_text_header}>
-                    <h1>{"Achetez en ligne et faites-vous livrer en moins de 2H gratuitement en magasin"}</h1>
+                    <h1>Normal d'être impatient.</h1>
+                    <p>{"Achetez en ligne et faites-vous livrer en moins de 2H gratuitement en magasin"}</p>
                 </div>
                 <div className={styles.content_img}>
                     <div></div>

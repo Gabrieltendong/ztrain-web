@@ -81,7 +81,9 @@ export const resetPassword = (data, router) => {
                             type: `${RESET_PASSWORD}_SUCCESS`,
                             payload: response.data.message
                         })
-                        router.push('/auth/login')
+                        setTimeout(() => {
+                            router.push('/auth/login')
+                        }, 2000);
                     }
                 },
                 onError({getState, dispatch, error}){

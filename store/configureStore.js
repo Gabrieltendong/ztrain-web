@@ -3,15 +3,16 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { createFilter } from 'redux-persist-transform-filter';
+import { createFilter, createBlacklistFilter} from 'redux-persist-transform-filter';
 
 import authReducer from './auth/reducerAuth';
 import productReducer from './product/reducerProduct';
 import cartReducer from './cart/reducerCart';
 import favoriteReducer from './favorite/reducerFavorite';
 
-const persitingAuth = createFilter(
-  `auth.login`
+const persitingAuth = createBlacklistFilter(
+  `auth`,
+  ['register']
 );
 
 const client = axios.create({
@@ -25,6 +26,7 @@ const client = axios.create({
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['login']
 }
 
 const rootReducer = combineReducers({
