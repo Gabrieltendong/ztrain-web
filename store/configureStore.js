@@ -26,7 +26,7 @@ const client = axios.create({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['login']
+  whitelist: ['login', 'user_infos']
 }
 
 const rootReducer = combineReducers({
