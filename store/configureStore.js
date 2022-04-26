@@ -9,6 +9,7 @@ import authReducer from './auth/reducerAuth';
 import productReducer from './product/reducerProduct';
 import cartReducer from './cart/reducerCart';
 import favoriteReducer from './favorite/reducerFavorite';
+import categoryReducer from './category/reducerCategory';
 
 const persitingAuth = createBlacklistFilter(
   `auth`,
@@ -26,14 +27,15 @@ const client = axios.create({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['login', 'user_infos']
+  whitelist: ['auth']
 }
 
 const rootReducer = combineReducers({
     auth: authReducer,
     product: productReducer,
     cart: cartReducer,
-    favorite: favoriteReducer
+    favorite: favoriteReducer,
+    category: categoryReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

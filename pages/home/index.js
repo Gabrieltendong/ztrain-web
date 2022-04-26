@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import HashLoader from "react-spinners/HashLoader";
+
 import styles from './style.module.scss'
 import Cart from '../../components/Cart';
 import { addProductCart, getAllProduct } from '../../store/product/actionProduct';
@@ -14,6 +16,7 @@ import { ADD_PRODUCT_CART, GET_PRODUCT } from '../../store/product/type';
 import CheckoutForm from '../../components/CheckoutForm';
 import Stripecontainer from '../../stripe/StripeContainer';
 import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type';
+import Loading from '../../components/Loading';
 
 const Home = () => {
 
@@ -22,12 +25,13 @@ const Home = () => {
     const [isFocusSearchBar, setIsFocusSearchBar]=useState(false)
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
+    const [isInit, setIsInit] = useState(true)
     const [quantity, setQuantity] = useState(1)
     const [productDetail, setProductDetail] = useState()
     const { message } = useSelector(state => state.product.add_product_cart)
     const { user } = useSelector(state => state.auth?.user_infos)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
-    const { data } = useSelector(state => state.product.list_product)
+    const { data, isLoading } = useSelector(state => state.product.list_product)
     const [listSearch, setListSearch]=useState([])
     const [searchTerm, setSearchTerm]=useState()
     const dataCommand = useSelector(state => state.cart.command.data)
@@ -138,9 +142,12 @@ const Home = () => {
             router.push('/auth/login')
         }
 
-        dispatch(getAllProduct())
+        if(isInit){
+            setIsInit(false)
+            dispatch(getAllProduct())
+        }
         dispatch(getAllProductCart(user_id))
-    }, [message, user, dataCommand, clearCartData, isFocusSearchBar, listSearch])
+    }, [message, user, dataCommand, clearCartData, isFocusSearchBar, listSearch, data])
 
     return(
         <div >
@@ -187,6 +194,7 @@ const Home = () => {
             </header>
             <main id={styles.content_home} onMouseDown={onCloseMadal} >
                 <h2 className={styles.section_title}>Les produits</h2>
+                {isLoading && <Loading />}
                 <div id = {styles.popular_product_wrapper}>
                     {
                         !searchTerm?

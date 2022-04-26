@@ -2,9 +2,11 @@ import styles from './style.module.scss'
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link'
 import { FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from '../Dropdown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { get_all_category, get_products_category } from '../../store/category/actionCategory';
+import { getAllProduct } from '../../store/product/actionProduct';
 
 const Navbar = ({
     onShowCart,
@@ -13,9 +15,27 @@ const Navbar = ({
     onFocus
 }) => {
 
+    const dispatch = useDispatch()
     const [isShown, setIsShown] = useState(false);
     const products_cart = useSelector(state => state.cart.products_cart.data)
     const { user } = useSelector(state => state.auth?.user_infos)
+    const {data} = useSelector(state => state.category.list_category)
+
+    const findProductByCategory = (value) => {
+        window.scrollTo({
+            top: 500,
+            behavior: "smooth"
+        })
+        if(value != "all"){
+            dispatch(get_products_category(value))
+        }else{
+            dispatch(getAllProduct())
+        }
+    }
+
+    useEffect(() => {
+        dispatch(get_all_category())
+    }, [])
 
     return(
         <nav id={styles.header_navBar}>
@@ -25,12 +45,21 @@ const Navbar = ({
                 </Link>
             </div>
             <div id={styles.content_input_wrapper}>
-                {/* <select name="pets" id={styles.select_cat}>
-                    <option value="">Toutes les categories</option>
-                    <option value="Maison">Maison</option>
-                    <option value="Accéssoires">Accéssoires</option>
-                    <option value="Chaussures">Chaussures</option>
-                </select> */}
+                <select 
+                    name="category" 
+                    id={styles.select_cat}
+                    onChange={(e) => findProductByCategory(e.target.value)}
+                >
+                    <option value="all">Toutes les categories</option>
+                    {
+                        data.length >0 &&
+                        data.map((item) => {
+                            return(
+                                <option value={`${item._id}`}>{item.name}</option>
+                            )
+                        })
+                    }
+                </select>
                 <input 
                     type="text"
                     id={styles.input_navbar_search}

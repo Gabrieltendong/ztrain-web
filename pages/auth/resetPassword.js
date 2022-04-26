@@ -8,6 +8,7 @@ import styles from './style.module.scss'
 import { resetPassword } from '../../store/auth/actionAuth';
 import Toast from '../../components/Toast';
 import { RESET_PASSWORD } from '../../store/auth/type';
+import { IsEmail } from '../../utils/isEmail';
 
 const ResetPassword = () => {
 
@@ -16,6 +17,7 @@ const ResetPassword = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [isVisible, setIsVisible]= useState()
+    const [invalidEmail, setInvalEmail]=useState("")
     const {isLoading, error, message} = useSelector(state => state.auth.reset_password)
 
     const handleResetPassword = (e) => {
@@ -24,7 +26,11 @@ const ResetPassword = () => {
             email,
             newPassword: password
         }
-        dispatch(resetPassword(data, router))
+        if(!IsEmail(email)){
+            setInvalEmail("Le format de l'email est invalid")
+        }else{
+            dispatch(resetPassword(data, router))
+        }
     }
 
     const onVisiblePass = () => {
@@ -60,8 +66,16 @@ const ResetPassword = () => {
                         id="email_reset_pass"
                         className={styles.input}
                         placeholder="Votre email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) =>{
+                            setEmail(e.target.value)
+                            if(IsEmail(e.target.value))
+                                setInvalEmail("")
+                        }}
                     />
+                    {
+                        invalidEmail &&
+                        <p className={styles.messageError}>{invalidEmail}</p>
+                    }
                     <div id={styles.container_input_password}>
                         <input
                             id = "reset_password"
