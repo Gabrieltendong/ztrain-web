@@ -6,6 +6,11 @@ const initialState = {
         isLoading: false,
         error: ""
     },
+    google_login: {
+        data: {},
+        isLoading: false,
+        error: ""
+    },
     register: {
         data: {},
         isLoading: false,

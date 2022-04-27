@@ -4,7 +4,7 @@ import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import useTranslation from 'next-translate/useTranslation'
 
-import { auth } from "../../store/auth/actionAuth";
+import { auth, google_login } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -25,11 +25,12 @@ const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault()
-    if(!IsEmail(email)){
-      setInvalEmail("Le format de l'email est invalid")
-    }else{
-      dispatch(auth({email, password}, router))
-    }
+    // if(!IsEmail(email)){
+    //   setInvalEmail("Le format de l'email est invalid")
+    // }else{
+    //   dispatch(auth({email, password}, router))
+    // }
+    dispatch(google_login())
   }
 
   const onVisiblePass = () => {

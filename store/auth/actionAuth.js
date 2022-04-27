@@ -36,6 +36,34 @@ export const auth = (data, router) => {
     }
 }
 
+export const google_login = () => {
+    return {
+        type: LOGIN,
+        payload: {
+            request:{
+                url:'/user/auth/google'
+            },
+            options: {
+                onSuccess({getState, dispatch, response}){
+                    console.log("response google auth", response.data)
+                    // dispatch(setUser(response.data))
+                    // dispatch({
+                    //     type: `${LOGIN}_SUCCESS`,
+                    //     payload: response.data
+                    // })
+                    // router.push('/home')
+                },
+                onError({getState, dispatch, error}){
+                    console.log("error google auth", error)
+                    dispatch({
+                        type: `${LOGIN}_FAIL`,
+                    })
+                }
+            }
+        }
+    }
+}
+
 export const register = (data, router) => {
     return {
         type: REGISTER,
