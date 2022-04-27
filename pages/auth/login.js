@@ -25,12 +25,12 @@ const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault()
-    // if(!IsEmail(email)){
-    //   setInvalEmail("Le format de l'email est invalid")
-    // }else{
-    //   dispatch(auth({email, password}, router))
-    // }
-    dispatch(google_login())
+    if(!IsEmail(email)){
+      setInvalEmail("Le format de l'email est invalid")
+    }else{
+      dispatch(auth({email, password}, router))
+    }
+    // dispatch(google_login())
   }
 
   const onVisiblePass = () => {
