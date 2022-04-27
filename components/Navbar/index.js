@@ -53,9 +53,9 @@ const Navbar = ({
                     <option value="all">Toutes les categories</option>
                     {
                         data.length >0 &&
-                        data.map((item) => {
+                        data.map((item, index) => {
                             return(
-                                <option value={`${item._id}`}>{item.name}</option>
+                                <option key={index} value={`${item._id}`}>{item.name}</option>
                             )
                         })
                     }
