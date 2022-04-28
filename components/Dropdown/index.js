@@ -1,9 +1,13 @@
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
+import { useGoogleLogout } from 'react-google-login'
+
 import { SET_USER } from '../../store/auth/type'
 import styles from './style.module.scss'
 
 const Dropdown = ({isVisible, onMouseLeave}) => {
+
+    const { signOut, loaded } = useGoogleLogout({clientId: process.env.google_client_id})
 
     const dispatch = useDispatch()
 

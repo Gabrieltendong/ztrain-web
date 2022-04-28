@@ -2,7 +2,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
-import useTranslation from 'next-translate/useTranslation'
+import { GoogleLogin } from 'react-google-login';
 
 import { auth, google_login } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
@@ -30,11 +30,20 @@ const Login = () => {
     }else{
       dispatch(auth({email, password}, router))
     }
-    // dispatch(google_login())
   }
 
   const onVisiblePass = () => {
     setIsVisible(!isVisible)
+  }
+
+  const responseGoogle = (response) => {
+    console.log(response);
+    if(response.Qu){
+      dispatch(google_login({
+        email: response.Qu.Gv,
+        isGoogle: true
+      }, router))
+    }
   }
 
   return (
@@ -107,6 +116,14 @@ const Login = () => {
                 }
               </button>
             </form>
+            <GoogleLogin
+              clientId={process.env.google_client_id}
+              buttonText="Connexion par google"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              className={styles.btn_google}
+              cookiePolicy={'single_host_origin'}
+            />
             <div id = {styles.link_signup_wrapper}>
                 <span>{" vous n'avez pas encore de compte? "} </span>
                 <Link href={'/auth/register'}>
