@@ -43,12 +43,15 @@ const Home = () => {
     }
 
     const handleAddProductCart = (product) => {
-       const data = {
-            product,user_id,
-            quantity: parseInt(quantity)
+        if(product?.promotion && Object.keys(product?.promotion).length != 0){
+            product['price'] = (product?.price - ((product?.promotion?.reduction/100) * product?.price)).toFixed(2)
         }
-        dispatch(addProductCart(data))
-        onCloseDetail()
+        const data = {
+                product,user_id,
+                quantity: parseInt(quantity)
+            }
+            dispatch(addProductCart(data))
+            onCloseDetail()
     }
 
     const onShowDetail = (item) => {

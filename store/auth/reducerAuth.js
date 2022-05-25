@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, RESET_PASSWORD, SET_USER } from "./type";
+import { GOOGLE_AUTH, LOGIN, REGISTER, RESET_PASSWORD, SET_USER } from "./type";
 
 const initialState = {
     login: {
@@ -49,6 +49,34 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 login: {
                     ...state.login,
+                    isLoading: false,
+                    data: {},
+                    error: "Email ou mot de passe incorrect"
+                }
+            }
+        case GOOGLE_AUTH:
+            return {
+                ...state,
+                google_login: {
+                    ...state.google_login,
+                    isLoading: true
+                }
+            }
+        case `${GOOGLE_AUTH}_SUCCESS`:
+            return {
+                ...state,
+                google_login: {
+                    ...state.google_login,
+                    isLoading: false,
+                    data: action.payload,
+                    error: ""
+                }
+            }
+        case `${GOOGLE_AUTH}_FAIL`:
+            return {
+                ...state,
+                google_login: {
+                    ...state.google_login,
                     isLoading: false,
                     data: {},
                     error: "Email ou mot de passe incorrect"

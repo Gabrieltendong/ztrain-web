@@ -21,10 +21,12 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
 
     const getTotalPrice = (products_cart) => {
         return products_cart.reduce(
-            (previousValue, currentValue) => previousValue + (currentValue.quantity*currentValue.product.price),
+            (previousValue, currentValue) => previousValue + (currentValue.quantity*currentValue.price),
             0
         );
     }
+
+    console.log('products_cart', products_cart)
 
     return(
         <div 
@@ -63,7 +65,7 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
                 <div id={styles.cart_footer}>
                     <div id={styles.totalPrice}>
                         <h5>Total</h5>
-                        <h5>$ {getTotalPrice(products_cart).toFixed(2)}</h5>
+                        <h5>{getTotalPrice(products_cart).toFixed(2)} €</h5>
                     </div>
                     <div id={styles.btn_wrapper}>
                         <button id={styles.btn_trash_cart} onClick = {onDeleteCart}>Vider le panier</button>

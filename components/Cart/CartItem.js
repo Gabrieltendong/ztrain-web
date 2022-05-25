@@ -78,7 +78,7 @@ const CartItem = ({item}) => {
                 {
                     item?.product?.image &&
                     <Image
-                        src={`/api/imageproxy?url=${encodeURIComponent(item?.product?.image)}`}
+                        src={`/api/imageproxy?url=${encodeURIComponent(item?.product?.image[0])}`}
                         height={70}
                         width={70} 
                     />
@@ -86,7 +86,7 @@ const CartItem = ({item}) => {
             </div>
             <div className={styles.card_body}>
                 <p className={styles.productName}>{item?.product?.name.substring(0, 15)}{item?.product?.name.length >15?'...':''}</p>
-                <p>{(item?.product?.price*quantity).toFixed(2)} €</p>
+                <p>{(item?.price*quantity).toFixed(2)} €</p>
             </div>
             <div className={styles.quantity_wrapper}>
                 <span className={styles.quantity_dec} onClick={handleDecrement}>
