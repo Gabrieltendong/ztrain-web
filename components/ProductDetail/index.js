@@ -74,7 +74,7 @@ const ProductDetail = ({
                         <div className={styles.container_dot}>
                             {
                                 product?.image.map((img, index) => (
-                                    <Dot slide={index}>
+                                    <Dot key={index} slide={index}>
                                         <Image
                                             src={`/api/imageproxy?url=${encodeURIComponent(img)}`}
                                             height={60}
@@ -87,8 +87,8 @@ const ProductDetail = ({
                         </div>
                         <Slider className={styles.container_slider}>
                             {
-                                product?.image.map((img) => (
-                                    <Slide>
+                                product?.image.map((img, index) => (
+                                    <Slide key={index}>
                                         <Image
                                             src={`/api/imageproxy?url=${encodeURIComponent(img)}`}
                                             height={500}
