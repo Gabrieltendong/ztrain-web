@@ -6,9 +6,13 @@ const ProductItem = ({item, addProductCart, onShowDetail}) => {
     
     return(
         <div className={styles.card}>
+            {
+                item?.promotion && Object.keys(item?.promotion).length != 0 &&
+                <span className={styles.promotion_wrapper}>-{item?.promotion.reduction}%</span>
+            }
             <div className={styles.card_body} onClick={() => onShowDetail(item)}>
                 <Image 
-                    src={`/api/imageproxy?url=${encodeURIComponent(item.image)}`}
+                    src={`/api/imageproxy?url=${encodeURIComponent(item.image[0])}`}
                     height={250}
                     width={250}
                     className={styles.card_body_img}
@@ -16,7 +20,18 @@ const ProductItem = ({item, addProductCart, onShowDetail}) => {
             </div>
             <div className={styles.card_footer}>
                 <h5>{item.name}</h5>
-                <p >{item.price} €</p>
+                <p id={styles.price}>
+                    {
+                        item?.promotion?
+                        <span>{(item?.price - ((item?.promotion?.reduction/100) * item?.price)).toFixed(2)} € </span>
+                        :
+                        <span>{item?.price} € </span>
+                    } 
+                    {
+                        item?.promotion && Object.keys(item?.promotion).length != 0?
+                        <p id={styles.initial_price}>{item?.price} €</p>:null
+                    }
+                </p>
                 <button onClick={() => addProductCart(item._id)} className={styles.btn_add_cart}>
                     <FaCartPlus />
                 </button>

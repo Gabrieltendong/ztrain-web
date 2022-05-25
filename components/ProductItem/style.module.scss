@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
+@import '/styles/colors';
 
 .card{
     margin: 10px 5px;
@@ -10,6 +11,13 @@
     }
     &:hover .btn_add_cart{
         display: block;
+    }
+    .promotion_wrapper{
+        padding: 10px;
+        background-color: $primaryColor;
+        position: absolute;
+        color: #fff;
+        
     }
     .card_body{
         height: 300px;
@@ -32,9 +40,20 @@
         align-items: center;
         font-family: 'Montserrat', sans-serif;
 
-        p{
-            color: #777;
-            margin: 0px;
+        #price{
+            color: $primaryColor;
+            font-weight: bold;
+            display: flex;
+            margin: 0;
+            flex-direction: row;
+            align-items: center;
+
+            #initial_price{
+                color: #777;
+                font-weight: 100;
+                margin-left: 20px;
+                text-decoration:line-through;
+            }
         }
         h5{
             margin-top: 10px;
