@@ -4,6 +4,7 @@ import { store } from "../configureStore";
 import { 
     CREATE_COMMANDE, 
     GET_PRODUCT_CART, 
+    GET_SHIPPING_METHOD, 
     REMOVE_PRODUCT_CART, 
     REMOVE__ALL_PRODUCT_CART,
     UPDATE_QUANTITY 
@@ -21,6 +22,7 @@ export const getAllProductCart = (user_id) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
+                    console.log("get product cart", response.data)
                     dispatch({
                         type: `${GET_PRODUCT_CART}_SUCCESS`,
                         payload: response.data
@@ -36,6 +38,20 @@ export const getAllProductCart = (user_id) => {
                         error: ''
                     })
                 }
+            }
+        }
+    }
+}
+
+export const get_shipping_method_list = () => {
+    return {
+        type: GET_SHIPPING_METHOD,
+        payload: {
+            request:{
+                url:`/shipping-method/`,
+                headers: {
+                    "Authorization": getToken()
+                },
             }
         }
     }

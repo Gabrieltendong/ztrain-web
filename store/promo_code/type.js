@@ -1,0 +1,1 @@
+export const GET_PROMO_CODE = "GET_PROMO_CODE"

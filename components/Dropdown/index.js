@@ -30,7 +30,7 @@ const Dropdown = ({isVisible, onMouseLeave}) => {
                 <a href="">Mes favoris</a>
             </Link>
             <Link href="">
-                <a href="" onClick={logOut}>Se déconnecter</a>
+                <a href="" id='logout' onClick={logOut}>Se déconnecter</a>
             </Link>
         </div>
     )

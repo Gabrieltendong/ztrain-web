@@ -27,6 +27,7 @@ const Home = () => {
     const [isVisible, setIsVisible] = useState(false)
     const [isInit, setIsInit] = useState(true)
     const [quantity, setQuantity] = useState(1)
+    const [code, setPromoCode] = useState()
     const [productDetail, setProductDetail] = useState()
     const { message } = useSelector(state => state.product.add_product_cart)
     const { user } = useSelector(state => state.auth?.user_infos)
@@ -36,6 +37,7 @@ const Home = () => {
     const [searchTerm, setSearchTerm]=useState()
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
+    const promoCodeResp = useSelector(({promo_code}) => promo_code.promoCode)
     const router = useRouter()
 
     const onShowCart = () => {
@@ -43,15 +45,16 @@ const Home = () => {
     }
 
     const handleAddProductCart = (product) => {
-        if(product?.promotion && Object.keys(product?.promotion).length != 0){
-            product['price'] = (product?.price - ((product?.promotion?.reduction/100) * product?.price)).toFixed(2)
-        }
-        const data = {
+        let data = {
                 product,user_id,
                 quantity: parseInt(quantity)
             }
-            dispatch(addProductCart(data))
-            onCloseDetail()
+        if(code){
+            data['promo_code'] = code
+        }
+        console.log(data)
+        dispatch(addProductCart(data))
+        onCloseDetail()
     }
 
     const onShowDetail = (item) => {
@@ -165,16 +168,21 @@ const Home = () => {
                 onClose = {() => setShow(false)}
                 onShowCheckout = {() => setIsShowCheckout(true)}
             />
-            <ProductDetail
-                isVisible={isVisible}
-                product={productDetail}
-                onIncrement = {onIncrement}
-                onDecrement = {onDecrement}
-                onChangeQuantity={onChangeQuantity}
-                quantity = {quantity}
-                addProductCart={handleAddProductCart}
-                onClose = {onCloseDetail}
-            />
+            {
+                isVisible &&
+                <ProductDetail
+                    isVisible={isVisible}
+                    product={productDetail}
+                    onIncrement = {onIncrement}
+                    onDecrement = {onDecrement}
+                    onChangeQuantity={onChangeQuantity}
+                    quantity = {quantity}
+                    addProductCart={handleAddProductCart}
+                    onClose = {onCloseDetail}
+                    code={code}
+                    setPromoCode={setPromoCode}
+                />
+            }
             <CheckoutForm
                 isVisible={isShowCheckout}
                 onClose={onCloseCheckout}

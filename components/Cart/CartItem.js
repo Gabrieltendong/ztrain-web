@@ -68,9 +68,11 @@ const CartItem = ({item}) => {
         
     }
 
-    useEffect(() => {
+    console.log("item", item)
 
-    }, [quantity])
+    useEffect(() => {
+        // setQuantity(item?.quantity)
+    }, [quantity, item])
 
     return(
         <div className={styles.card}>

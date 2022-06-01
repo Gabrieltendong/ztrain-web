@@ -1,9 +1,12 @@
 import styles from './style.module.scss'
 import Image from 'next/image';
 import { FaCartPlus } from "react-icons/fa";
+import { Rating } from 'react-simple-star-rating'
 
 const ProductItem = ({item, addProductCart, onShowDetail}) => {
-    
+
+    const totalRating = item.rating.reduce((s, elt) => s + (elt.note*100)/5, 0)/item.rating.length
+
     return(
         <div className={styles.card}>
             {
@@ -20,6 +23,9 @@ const ProductItem = ({item, addProductCart, onShowDetail}) => {
             </div>
             <div className={styles.card_footer}>
                 <h5>{item.name}</h5>
+                <div id={styles.rating_wrapper}>
+                    <Rating size={20} ratingValue={totalRating} />
+                </div>
                 <p id={styles.price}>
                     {
                         item?.promotion?

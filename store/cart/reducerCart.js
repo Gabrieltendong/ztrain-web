@@ -1,4 +1,4 @@
-import { CREATE_COMMANDE, GET_PRODUCT_CART, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_PRICE, UPDATE_QUANTITY} from "./type";
+import { CREATE_COMMANDE, GET_PRODUCT_CART, GET_SHIPPING_METHOD, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_PRICE, UPDATE_QUANTITY} from "./type";
 
 const initialState = {
     products_cart: {
@@ -26,7 +26,12 @@ const initialState = {
         isLoading: false,
         error: ""
     },
-    totalPrice: 0
+    totalPrice: 0,
+    list_shipping_method: {
+        data: [],
+        isLoading: false,
+        error: ""
+    }
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -171,6 +176,34 @@ const cartReducer = (state = initialState, action) => {
                     error: action.error
                 }
             }
+        case GET_SHIPPING_METHOD:
+            return {
+                ...state,
+                list_shipping_method: {
+                    ...state.list_shipping_method,
+                    isLoading: true
+                }
+            }
+        case `${GET_SHIPPING_METHOD}_SUCCESS`:
+            return {
+                ...state,
+                list_shipping_method: {
+                    ...state.list_shipping_method,
+                    isLoading: false,
+                    data: action.payload.data,
+                    error: ""
+                }
+            }
+        case `${GET_SHIPPING_METHOD}_FAIL`:
+                return {
+                    ...state,
+                    list_shipping_method: {
+                        ...state.list_shipping_method,
+                        isLoading: false,
+                        data: [],
+                        error: action.error
+                    }
+                }
         case UPDATE_PRICE:
             return {
                 ...state,

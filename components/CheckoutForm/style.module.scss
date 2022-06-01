@@ -27,6 +27,21 @@
         }
         #form_wrapper{
             margin-top: 50px;
+
+            #shipping_method_wrapper{
+                margin-bottom: 30px;
+
+                .radio_button_group{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin: 10px 0px;
+
+                    span{
+                        color: #444;
+                    }
+                }
+            }
         }
         #cartInput{
             border-bottom: 1px solid $primaryColor;

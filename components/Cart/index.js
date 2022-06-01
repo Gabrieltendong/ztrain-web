@@ -26,8 +26,6 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
         );
     }
 
-    console.log('products_cart', products_cart)
-
     return(
         <div 
             className={styles.container_cart} 

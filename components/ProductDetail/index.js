@@ -7,6 +7,8 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import { toggle_favorite } from '../../store/favorite/actionFavorite';
 import Loading from '../Loading';
 import styles from './style.module.scss';
+import { getPromoCode } from '../../store/promo_code/actionPromoCode';
+import { GET_PROMO_CODE } from '../../store/promo_code/type';
 
 const ProductDetail = ({
     isVisible, 
@@ -17,7 +19,9 @@ const ProductDetail = ({
     onUpdate,
     onChangeQuantity,
     quantity,
-    addProductCart
+    addProductCart,
+    setPromoCode,
+    code
 }) => {
 
     const dispatch = useDispatch()
@@ -27,6 +31,7 @@ const ProductDetail = ({
     const [isPromoCode, setIsPromoCode]=useState(false)
     const user_id = useSelector(state => state.auth.login.data?.user?._id)
     const { data } = useSelector(state => state.favorite.list_favorite)
+    const promoCodeResp = useSelector(({promo_code}) => promo_code.promoCode)
     const initfavoriteState = data.filter(item => item.product._id == product?._id).length>0
 
     const onFavorite = () => {
@@ -37,16 +42,20 @@ const ProductDetail = ({
     }
 
     const handlePromoCode = () => {
-        if(!isPromoCode) setIsPromoCode(true)
+        dispatch(getPromoCode(code))
     }
 
-    console.log('product', product)
+    console.log('response promo code', promoCodeResp)
 
     useEffect(() => {
 
         return ()=> {
-            console.log('close test________________')
             setIsPromoCode(false)
+            setPromoCode("")
+            dispatch({
+                type: `${GET_PROMO_CODE}_FAIL`,
+                error: ""
+            })
         }
     }, [])
     
@@ -108,8 +117,14 @@ const ProductDetail = ({
                             product?.promotion?
                             <span>{(product?.price - ((product?.promotion?.reduction/100) * product?.price)).toFixed(2)} € </span>
                             :
+                            promoCodeResp.data?
+                            <div className={styles.row}>
+                                <span>{(product?.price - ((promoCodeResp.data?.reduction/100) * product?.price)).toFixed(2)} € </span>
+                                <p id={styles.initial_price}>{product?.price} €</p>
+                            </div>
+                            :
                             <span>{product?.price} € </span>
-                        } 
+                        }
                         {
                             product?.promotion && Object.keys(product?.promotion).length != 0?
                             <p id={styles.initial_price}>{product?.price} €</p>:null
@@ -141,26 +156,39 @@ const ProductDetail = ({
                         <h6>Description</h6>
                         <p>{product?.description}</p>
                     </div>
-                    <div id={styles.promo_code_wrapper}>
-                        {
-                            isPromoCode && 
-                            <input
-                                placeholder='Code promo' 
-                                id={styles.input_promo_code}
-                            />
-                        }
-                        <button 
-                            id={styles.btn_promo_code}
-                            onClick={handlePromoCode}
-                        >
+                    {
+                        !product?.promotion &&
+                        <div id={styles.promo_code_wrapper}>
+                            {
+                                isPromoCode && 
+                                <input
+                                    placeholder='Code promo' 
+                                    id={styles.input_promo_code}
+                                    onChange = {(e) => setPromoCode(e.target.value)}
+                                />
+                            }
                             {
                                 !isPromoCode?
-                                "J'ai un code promo"
+                                <button 
+                                    id={styles.btn_promo_code}
+                                    onClick={() => setIsPromoCode(true)}
+                                >
+                                    J'ai un code promo
+                                </button>
                                 :
-                                "Appliquer"
+                                <button 
+                                    id={styles.btn_promo_code}
+                                    onClick={handlePromoCode}
+                                >
+                                    Appliquer
+                                </button>
                             }
-                        </button>
-                    </div>
+                        </div>
+                    }
+                    {
+                        promoCodeResp.error &&
+                        <span id={styles.messageError}>{promoCodeResp.error}</span>
+                    }
                     <button 
                         id={styles.btn_add_cart}
                         onClick={() => addProductCart(product._id)}

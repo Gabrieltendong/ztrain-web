@@ -10,6 +10,7 @@ import productReducer from './product/reducerProduct';
 import cartReducer from './cart/reducerCart';
 import favoriteReducer from './favorite/reducerFavorite';
 import categoryReducer from './category/reducerCategory';
+import promoCodeReducer from './promo_code/reducerPromoCode';
 
 const persitingAuth = createBlacklistFilter(
   `auth`,
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
     product: productReducer,
     cart: cartReducer,
     favorite: favoriteReducer,
-    category: categoryReducer
+    category: categoryReducer,
+    promo_code: promoCodeReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
