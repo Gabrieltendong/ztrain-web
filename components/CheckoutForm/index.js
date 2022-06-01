@@ -80,7 +80,7 @@ const CheckoutForm = ({isVisible, onClose}) => {
                         {
                             list_shipping_method.length != 0 &&
                             list_shipping_method.map((item, index) => (
-                                <div className={styles.radio_button_group}>
+                                <div key={index} className={styles.radio_button_group}>
                                     <input 
                                         type="radio" 
                                         value={item._id} 
