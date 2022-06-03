@@ -45,7 +45,7 @@ const ProductDetail = ({
         dispatch(getPromoCode(code))
     }
 
-    console.log('response promo code', promoCodeResp)
+    console.log('product', product)
 
     useEffect(() => {
 
@@ -152,6 +152,21 @@ const ProductDetail = ({
                             <FiPlus />
                         </button>
                     </div>
+                    {
+                        product?.attributs && product?.attributs?.colors.length != 0?
+                        <div>
+                            <h6>Couleurs</h6>
+                            <div className={styles.colors_wrapper}>
+                                {
+                                    product?.attributs?.colors.map((color, index) => (
+                                        <div style={{backgroundColor: color}} className={styles.colorStyle}>
+
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>:null
+                    }
                     <div id={styles.description_wrapper}>
                         <h6>Description</h6>
                         <p>{product?.description}</p>
