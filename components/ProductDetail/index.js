@@ -159,7 +159,7 @@ const ProductDetail = ({
                             <div className={styles.colors_wrapper}>
                                 {
                                     product?.attributs?.colors.map((color, index) => (
-                                        <div style={{backgroundColor: color}} className={styles.colorStyle}>
+                                        <div key={index} style={{backgroundColor: color}} className={styles.colorStyle}>
 
                                         </div>
                                     ))
