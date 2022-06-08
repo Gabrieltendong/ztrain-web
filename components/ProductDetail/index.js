@@ -29,6 +29,8 @@ const ProductDetail = ({
     const isLoadinglistFavoris = useSelector(state => state.favorite.list_favorite.isLoading)
     const isLoadingaddFavoris = useSelector(state => state.favorite.toggle_Favorite.isLoading)
     const [isPromoCode, setIsPromoCode]=useState(false)
+    const [colorSelected, setColorSelected]=useState()
+    const [heightSelected, setHeightSelected]=useState()
     const user_id = useSelector(state => state.auth.login.data?.user?._id)
     const { data } = useSelector(state => state.favorite.list_favorite)
     const promoCodeResp = useSelector(({promo_code}) => promo_code.promoCode)
@@ -45,8 +47,6 @@ const ProductDetail = ({
         dispatch(getPromoCode(code))
     }
 
-    console.log('product', product)
-
     useEffect(() => {
 
         return ()=> {
@@ -57,7 +57,7 @@ const ProductDetail = ({
                 error: ""
             })
         }
-    }, [])
+    }, [colorSelected])
     
 
     return(
@@ -152,14 +152,23 @@ const ProductDetail = ({
                             <FiPlus />
                         </button>
                     </div>
+                    <div id={styles.description_wrapper}>
+                        <h6>Description</h6>
+                        <p>{product?.description}</p>
+                    </div>
                     {
                         product?.attributs && product?.attributs?.colors.length != 0?
                         <div>
-                            <h6>Couleurs</h6>
-                            <div className={styles.colors_wrapper}>
+                            
+                            <div className={styles.attribut_wrapper}>
+                                <h6>Couleurs</h6>
                                 {
                                     product?.attributs?.colors.map((color, index) => (
-                                        <div key={index} style={{backgroundColor: color}} className={styles.colorStyle}>
+                                        <div 
+                                            key={index} style={{backgroundColor: color}}
+                                            onClick={() => setColorSelected(color)}
+                                            className={`${styles.colorStyle} ${color==colorSelected?styles.attributSelected:null}`}
+                                        >
 
                                         </div>
                                     ))
@@ -167,10 +176,25 @@ const ProductDetail = ({
                             </div>
                         </div>:null
                     }
-                    <div id={styles.description_wrapper}>
-                        <h6>Description</h6>
-                        <p>{product?.description}</p>
-                    </div>
+                    {
+                        product?.attributs && product?.attributs?.height.length != 0?
+                        <div>
+                            <div className={styles.attribut_wrapper}>
+                                <h6>Taille</h6>
+                                {
+                                    product?.attributs?.height.map((item, index) => (
+                                        <div 
+                                            key={index}
+                                            onClick={() => setHeightSelected(item)}
+                                            className={`${styles.heightStyle} ${item==heightSelected?styles.attributSelected:null}`}
+                                        >
+                                            <span>{item}</span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>:null
+                    }
                     {
                         !product?.promotion &&
                         <div id={styles.promo_code_wrapper}>

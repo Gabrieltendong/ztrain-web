@@ -119,10 +119,29 @@
                     border: none;
                 }
             }
-            .colors_wrapper{
+            .attribut_wrapper{
                 display: flex;
                 flex-direction: row;
-                margin-top: -20px;
+                align-items: center;
+                // margin-top: -10px;
+
+                h6{
+                    width: 50px;
+                }
+            }
+            .heightStyle{
+                height: 30px;
+                width: 30px;
+                // border-radius: 100%;
+                margin: 0 2px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #777;
+                cursor: pointer;
+            }
+            .attributSelected{
+                border: 3px solid $primaryColor!important;
             }
             .colorStyle {
                 height: 30px;
@@ -130,6 +149,7 @@
                 border-radius: 100%;
                 margin: 0 2px;
                 border: 1px solid #777;
+                cursor: pointer;
                 @include shadow(1);
             }
             #promo_code_wrapper{
