@@ -55,23 +55,8 @@ const CartItem = ({item}) => {
         handleUpdateQuantity(qt)
     }
 
-    const handleChangeQuantity = (e) => {
-        e.preventDefault()
-        setQuantity(e.target.value)
-    }
-
-    const handleUpdate = (e) => {
-        e.preventDefault()
-        qtRef.current.blur()
-        if(quantity == 0) handleRemoveProduct()
-        else handleUpdateQuantity(quantity)
-        
-    }
-
-    console.log("item", item)
-
     useEffect(() => {
-        // setQuantity(item?.quantity)
+        setQuantity(item?.quantity)
     }, [quantity, item])
 
     return(

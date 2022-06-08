@@ -22,7 +22,6 @@ export const getAllProductCart = (user_id) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    console.log("get product cart", response.data)
                     dispatch({
                         type: `${GET_PRODUCT_CART}_SUCCESS`,
                         payload: response.data

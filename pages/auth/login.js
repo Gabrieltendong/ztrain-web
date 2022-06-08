@@ -1,5 +1,5 @@
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleLogin } from 'react-google-login';
@@ -16,6 +16,7 @@ const Login = () => {
   
   const dispatch = useDispatch()
   const router = useRouter()
+  const inputRef = useRef()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [isVisible, setIsVisible]= useState()
@@ -34,6 +35,12 @@ const Login = () => {
 
   const onVisiblePass = () => {
     setIsVisible(!isVisible)
+  }
+
+  const onFocusPassword = () => {
+    if(!IsEmail(email)){
+      setInvalEmail("Le format de l'email est invalid")
+    }
   }
 
   const responseGoogle = (response) => {
@@ -76,6 +83,7 @@ const Login = () => {
               <div id={styles.container_input_password}>
                 <input
                   id='password_login'
+                  onFocus={onFocusPassword}
                   value={password}
                   className={styles.input_password}
                   placeholder="Mot de passe"
