@@ -14,7 +14,7 @@ module.exports = {
   },
   reactStrictMode: true,
   env: {
-    baseUrl: "https://api-ztrain-dev.herokuapp.com",
+    baseUrl: "https://api-ztrain.vercel.app",
     google_client_id: "122559722175-81vl2ohvv08nc7925f80mv2in34t7lrm.apps.googleusercontent.com"
   },
   images: {
