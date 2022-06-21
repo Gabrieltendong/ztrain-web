@@ -27,7 +27,7 @@ const Home = () => {
     const [isVisible, setIsVisible] = useState(false)
     const [isInit, setIsInit] = useState(true)
     const [quantity, setQuantity] = useState(1)
-    const [code, setPromoCode] = useState()
+    const [code, setPromoCode] = useState("")
     const [productDetail, setProductDetail] = useState()
     const { message } = useSelector(state => state.product.add_product_cart)
     const { user } = useSelector(state => state.auth?.user_infos)

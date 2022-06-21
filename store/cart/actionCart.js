@@ -2,6 +2,7 @@ import { getToken, token } from "../../config";
 import { SET_USER } from "../auth/type";
 import { store } from "../configureStore";
 import { 
+    ADD_FAVORITE_CART,
     CREATE_COMMANDE, 
     GET_PRODUCT_CART, 
     GET_SHIPPING_METHOD, 
@@ -173,6 +174,37 @@ export const createCommand = (data) => {
                     dispatch({
                         type: `${CREATE_COMMANDE}_FAIL`,
                         error: error.response.data.message
+                    })
+                }
+            }
+        }
+    }
+}
+
+export const add_favorite_cart = () => {
+    const user_id = store.getState().auth.login.data.user._id
+    return {
+        type: ADD_FAVORITE_CART,
+        payload: {
+            request:{
+                method: 'POST',
+                url:`/cart/add_favorite/${user_id}`,
+                headers: {
+                    "Authorization": getToken()
+                }
+            },
+            options: {
+                onSuccess({getState, dispatch, response}){
+                    dispatch(getAllProductCart(user_id))
+                    dispatch({
+                        type: `${ADD_FAVORITE_CART}_SUCCESS`,
+                        payload: response.data
+                    })
+                },
+                onError({getState, dispatch, error}){
+                    dispatch({
+                        type: `${ADD_FAVORITE_CART}_FAIL`,
+                        error: "erreur serveur"
                     })
                 }
             }

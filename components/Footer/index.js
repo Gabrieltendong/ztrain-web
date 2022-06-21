@@ -23,7 +23,9 @@ const Footer = () => {
                             <a className={styles.item_menu}>Join us</a>
                         </div>
                         <div className={styles.content_menu_item}>
-                            <a className={styles.item_menu}>FAQ</a>
+                            <Link href="/faq">
+                                <a className={styles.item_menu}>FAQ</a>
+                            </Link>
                             <a className={styles.item_menu}>CGV</a>
                             <a className={styles.item_menu}>Terms of services</a>
                             <a className={styles.item_menu}>Privacy policy</a>

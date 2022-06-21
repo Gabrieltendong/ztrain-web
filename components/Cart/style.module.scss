@@ -105,6 +105,14 @@
         padding: 20px;
         background-color: white;
         @include shadow(10px);
+
+        #btn_favoris{
+            margin-left: 50px;
+            background-color: transparent;
+            border: none;
+            color: #FF7643;
+            cursor: pointer;
+        }
     }
     #btn_cart{
         @extend %btn;

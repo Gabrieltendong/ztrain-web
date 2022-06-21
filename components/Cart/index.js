@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { FiArrowRight, FiTrash2, FiPlus, FiMinus, FiX } from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeAllProduct } from '../../store/cart/actionCart';
+import { add_favorite_cart, removeAllProduct } from '../../store/cart/actionCart';
 import Loading from '../Loading';
 import CartItem from './CartItem';
 import styles from './style.module.scss'
@@ -13,7 +12,9 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
     const products_cart = useSelector(state => state.cart.products_cart.data)
     const {isLoading} = useSelector(state => state.cart.removeProduct)
     const loadingClearCart = useSelector(state => state.cart.clearCart.isLoading)
+    const loadingfavoriteCart = useSelector(state => state.cart.favorite_to_cart.isLoading)
     const user_id = useSelector(state => state.auth?.login.data?.user?._id)
+    const list_favorite = useSelector(state => state.favorite.list_favorite.data)
 
     const onDeleteCart = () => {
         dispatch(removeAllProduct(user_id))
@@ -26,12 +27,16 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
         );
     }
 
+    const handleAddFavoriteCart = () => {
+        dispatch(add_favorite_cart())
+    }
+
     return(
         <div 
             className={styles.container_cart} 
             id={showCart?styles.container_show_cart:styles.container_hide_cart}
         >
-            {isLoading || loadingClearCart? <Loading />: null}
+            {isLoading || loadingClearCart || loadingfavoriteCart? <Loading />: null}
             <div id={styles.content_cart_header}>
                 <div onClick={onClose}>
                     <FiArrowRight />
@@ -61,6 +66,10 @@ const Cart = ({showCart, onClose, onShowCheckout}) => {
             {
                 products_cart.length != 0 &&
                 <div id={styles.cart_footer}>
+                    {
+                        list_favorite.length != 0 &&
+                        <button onClick={handleAddFavoriteCart} id={styles.btn_favoris}>Ajouter vos produits favoris au panier</button>
+                    }
                     <div id={styles.totalPrice}>
                         <h5>Total</h5>
                         <h5>{getTotalPrice(products_cart).toFixed(2)} €</h5>

@@ -49,9 +49,9 @@ const ProductDetail = ({
 
     useEffect(() => {
 
-        return ()=> {
+        return () => {
             setIsPromoCode(false)
-            setPromoCode("")
+            if(setPromoCode) setPromoCode("")
             dispatch({
                 type: `${GET_PROMO_CODE}_FAIL`,
                 error: ""

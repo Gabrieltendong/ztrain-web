@@ -1,4 +1,4 @@
-import { CREATE_COMMANDE, GET_PRODUCT_CART, GET_SHIPPING_METHOD, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_PRICE, UPDATE_QUANTITY} from "./type";
+import { ADD_FAVORITE_CART, CREATE_COMMANDE, GET_PRODUCT_CART, GET_SHIPPING_METHOD, REMOVE_PRODUCT_CART, REMOVE__ALL_PRODUCT_CART, UPDATE_PRICE, UPDATE_QUANTITY} from "./type";
 
 const initialState = {
     products_cart: {
@@ -29,6 +29,11 @@ const initialState = {
     totalPrice: 0,
     list_shipping_method: {
         data: [],
+        isLoading: false,
+        error: ""
+    },
+    favorite_to_cart: {
+        message: "",
         isLoading: false,
         error: ""
     }
@@ -201,6 +206,34 @@ const cartReducer = (state = initialState, action) => {
                         ...state.list_shipping_method,
                         isLoading: false,
                         data: [],
+                        error: action.error
+                    }
+                }
+            case ADD_FAVORITE_CART:
+                return {
+                    ...state,
+                    favorite_to_cart: {
+                        ...state.favorite_to_cart,
+                        isLoading: true
+                    }
+                }
+            case `${ADD_FAVORITE_CART}_SUCCESS`:
+                return {
+                    ...state,
+                    favorite_to_cart: {
+                        ...state.favorite_to_cart,
+                        isLoading: false,
+                        message: action.payload,
+                        error: ""
+                    }
+                }
+            case `${ADD_FAVORITE_CART}_FAIL`:
+                return {
+                    ...state,
+                    favorite_to_cart: {
+                        ...state.favorite_to_cart,
+                        isLoading: false,
+                        message: "",
                         error: action.error
                     }
                 }
