@@ -1,6 +1,7 @@
 import styles from './style.module.scss'
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link'
+import useTranslation from 'next-translate/useTranslation'
 import { FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from '../Dropdown';
@@ -16,6 +17,7 @@ const Navbar = ({
 }) => {
 
     const dispatch = useDispatch()
+    const { t } = useTranslation()
     const [isShown, setIsShown] = useState(false);
     const products_cart = useSelector(state => state.cart.products_cart.data)
     const { user } = useSelector(state => state.auth?.user_infos)
@@ -50,7 +52,7 @@ const Navbar = ({
                     id={styles.select_cat}
                     onChange={(e) => findProductByCategory(e.target.value)}
                 >
-                    <option value="all">Toutes les categories</option>
+                    <option value="all">{t('navbar:label_category')}</option>
                     {
                         data.length >0 &&
                         data.map((item, index) => {
@@ -63,7 +65,7 @@ const Navbar = ({
                 <input 
                     type="text"
                     id={styles.input_navbar_search}
-                    placeholder='Rechercher un produit'
+                    placeholder={t('navbar:search_placeholder')}
                     onChange={(e) => onSearch(e.target.value)}
                     onFocus={onFocus}
                     onBlur={onBlur}
@@ -83,7 +85,7 @@ const Navbar = ({
                 <FiUser
                     color={user?"#27ae60": "#000"}
                 />
-                <span>Compte</span>
+                <span>{t('navbar:account')}</span>
                 <FiChevronDown />
             </div>
             <Dropdown

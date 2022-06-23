@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import useTranslation from 'next-translate/useTranslation'
 
 import { register } from "../../store/auth/actionAuth";
 import styles from './style.module.scss'
@@ -15,6 +16,7 @@ const errorMessage = 'Les deux mots de passe ne sont pas identiques'
 const Register = () => {
   
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const router = useRouter()
   const [isVisible, setIsVisible]= useState()
   const [email, setEmail] = useState("")
@@ -90,8 +92,8 @@ const Register = () => {
       <main className={styles.main}>
         <div className={styles.col_1}>
             <div id = {styles.content_header_title}>
-              <h1 className={styles.header_title}>Bienvenue!!!</h1>
-              <p className={styles.header_subTitle}>Vos courses au quotidien, en quelques clics...</p>
+              <h1 className={styles.header_title}>{t('common:welcome')}!!!</h1>
+              <p className={styles.header_subTitle}>{t('common:slogan')}...</p>
             </div>
         </div>
         <div className={styles.col_2}>
@@ -101,14 +103,14 @@ const Register = () => {
               <input
                 id='email_register'
                 className={styles.input}
-                placeholder="Email"
+                placeholder={t('common:email')}
                 onChange={(e) => handleChange(e, "email")}
               />
               <div id={styles.container_input_password}>
                 <input
                   id="password_register"
                   className={styles.input_password}
-                  placeholder="Mot de passe"
+                  placeholder={t('common:password')}
                   type={isVisible?'text':'password'}
                   onChange={(e) => handleChange(e, "password")}
                 />

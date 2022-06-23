@@ -1,1 +1,7 @@
-{}
+{
+    "welcome": "Welcome",
+    "slogan": "Your daily shopping, in a few clicks",
+    "email": "Email",
+    "password": "Password",
+    "forgot_pass": "Forgot your password?"
+}

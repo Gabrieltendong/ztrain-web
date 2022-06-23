@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import HashLoader from "react-spinners/HashLoader";
+import useTranslation from 'next-translate/useTranslation'
+import Slider from '@mui/material/Slider';
 
 import styles from './style.module.scss'
 import Cart from '../../components/Cart';
@@ -21,6 +23,7 @@ import Loading from '../../components/Loading';
 const Home = () => {
 
     const dispatch = useDispatch()
+    const { t } = useTranslation()
     const [show, setShow] = useState(false)
     const [isFocusSearchBar, setIsFocusSearchBar]=useState(false)
     const [isShowCheckout, setIsShowCheckout] = useState(false)
@@ -28,6 +31,7 @@ const Home = () => {
     const [isInit, setIsInit] = useState(true)
     const [quantity, setQuantity] = useState(1)
     const [code, setPromoCode] = useState("")
+    const [price, setPrice] = useState([0, 1500]);
     const [productDetail, setProductDetail] = useState()
     const { message } = useSelector(state => state.product.add_product_cart)
     const { user } = useSelector(state => state.auth?.user_infos)
@@ -65,6 +69,10 @@ const Home = () => {
     const onIncrement = () => {
         setQuantity(quantity + 1)
     }
+
+    const handleChangePrice = (event, newValue) => {
+        setPrice(newValue);
+    };
 
     const onDecrement = () => {
         if(quantity != 1){
@@ -195,8 +203,8 @@ const Home = () => {
             />
             <header id={styles.header_home} onMouseDown={onCloseMadal}>
                 <div className={styles.content_text_header}>
-                    <h1>Normal d'être impatient.</h1>
-                    <p>{"Achetez en ligne et faites-vous livrer en moins de 2H gratuitement en magasin"}</p>
+                    <h1>{t('home:title')}</h1>
+                    <p>{t('home:subTitle')}</p>
                 </div>
                 <div className={styles.content_img}>
                     <div></div>
@@ -204,35 +212,50 @@ const Home = () => {
                 <div className={styles.form}></div>
             </header>
             <main id={styles.content_home} onMouseDown={onCloseMadal} >
-                <h2 className={styles.section_title}>Les produits</h2>
-                {isLoading && <Loading />}
-                <div id = {styles.popular_product_wrapper}>
-                    {
-                        !searchTerm?
-                        data.map((item, index) => (
-                            isValidHttpUrl(item.image)?
-                            <ProductItem 
-                                key={index} 
-                                item={item}
-                                onShowDetail={onShowDetail}
-                                addProductCart={handleAddProductCart}  
-                            />
-                            :null
-                        ))
-                        :listSearch.length !=0?
-                        listSearch.map((item, index) => (
-                            isValidHttpUrl(item.image)?
-                            <ProductItem 
-                                key={index} 
-                                item={item}
-                                onShowDetail={onShowDetail}
-                                addProductCart={handleAddProductCart}  
-                            />
-                            :null
-                        ))
-                        :
-                        <p id={styles.empty_result}>Aucun produit trouvé</p>
-                    }
+                <aside id={styles.filter_wrapper}>
+                    <h3>Flitrer par prix</h3>
+                    <Slider
+                        getAriaLabel={() => 'Minimum distance shift'}
+                        value={price}
+                        
+                        onChange={handleChangePrice}
+                        valueLabelDisplay="auto"
+                        getAriaValueText={(value) => `${value}€`}
+                        max={1500}
+                        step={0.01}
+                    />
+                </aside>
+                <div id={styles.main_content}>
+                    <h2 className={styles.section_title}>{t('home:product')}</h2>
+                    {isLoading && <Loading />}
+                    <div id = {styles.popular_product_wrapper}>
+                        {
+                            !searchTerm?
+                            data.map((item, index) => (
+                                isValidHttpUrl(item.image) && price[0] <= item.price && price[1] >= item.price?
+                                <ProductItem 
+                                    key={index} 
+                                    item={item}
+                                    onShowDetail={onShowDetail}
+                                    addProductCart={handleAddProductCart}  
+                                />
+                                :null
+                            ))
+                            :listSearch.length !=0?
+                            listSearch.map((item, index) => (
+                                isValidHttpUrl(item.image) && price[0] <= item.price && price[1] >= item.price?
+                                <ProductItem 
+                                    key={index} 
+                                    item={item}
+                                    onShowDetail={onShowDetail}
+                                    addProductCart={handleAddProductCart}  
+                                />
+                                :null
+                            ))
+                            :
+                            <p id={styles.empty_result}>Aucun produit trouvé</p>
+                        }
+                    </div>
                 </div>
             </main>
             <Footer />

@@ -1,0 +1,9 @@
+{
+    "locales": ["en", "fr"],
+    "defaultLocale": "fr",
+    "pages": {
+      "*": ["common"],
+      "/auth/login": ["login"],
+      "/home": ["home", "navbar"]
+    }
+}
