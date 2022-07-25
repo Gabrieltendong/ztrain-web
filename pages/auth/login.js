@@ -49,10 +49,10 @@ const Login = () => {
   }
 
   const responseGoogle = (response) => {
-    console.log(response.Wu.Nv);
-    if(response.Wu){
+    console.log(response);
+    if(response.profileObj){
       dispatch(google_login({
-        email: response.Wu.Nv,
+        email: response.profileObj.email,
         isGoogle: true
       }, router))
     }
