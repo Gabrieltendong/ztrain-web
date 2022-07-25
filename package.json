@@ -2,7 +2,7 @@
   "name": "z-train-web",
   "private": true,
   "engines": {
-    "node": "16.14.0"
+    "node": "16.15.0"
   },
   "scripts": {
     "dev": "next dev",
