@@ -28,7 +28,9 @@ const Footer = () => {
                             </Link>
                             <a className={styles.item_menu}>CGV</a>
                             <a className={styles.item_menu}>Terms of services</a>
-                            <a className={styles.item_menu}>Privacy policy</a>
+                            <Link href={'/privacy-policy'}>
+                                <a className={styles.item_menu}>Privacy policy</a>
+                            </Link>
                         </div>
                     </div>
                 </div>
