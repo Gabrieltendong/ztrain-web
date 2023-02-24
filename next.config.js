@@ -14,8 +14,8 @@ module.exports = nextTranslate({
   },
   reactStrictMode: true,
   env: {
-    baseUrl: "https://api-ztrain.herokuapp.com", 
-    // baseUrl: "http://localhost:5000/", 
+    // baseUrl: "https://api-ztrain.herokuapp.com", 
+    baseUrl: "http://localhost:5000/", 
     google_client_id: "122559722175-81vl2ohvv08nc7925f80mv2in34t7lrm.apps.googleusercontent.com"
   },
   images: {
