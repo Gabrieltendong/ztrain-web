@@ -105,7 +105,7 @@ return (
                         
                         <div className={styles.formgroup1}>
                           <div className={styles.formwrapper1}> 
-                              <label for="lastName" > {t('common:name')} </label> 
+                              <label htmlFor="lastName" > {t('common:name')} </label> 
                               <input 
                               type="text" 
                               className={styles.formcontrol}  
@@ -120,7 +120,7 @@ return (
                           
 
                           <div className={styles.formwrapper1}>
-                              <label for="firstName"  >{t('common:firstname')}</label>
+                              <label htmlFor="firstName"  >{t('common:firstname')}</label>
                               <input 
                               type="text"
                                 className={styles.formcontrol}   
@@ -138,7 +138,7 @@ return (
                         
 
                             <div className={styles.formwrapper1}>
-                                  <label for="address"  >{t('common:address')}</label> 
+                                  <label htmlFor="address"  >{t('common:address')}</label> 
                                   < input 
                                   type = " text " 
                                   className={styles.formcontrol} 
@@ -152,7 +152,7 @@ return (
                               </div>
 {/* 
                             <div className={styles.formwrapper1}>
-                              <label for="address"  >{t('common:address')}</label> 
+                              <label htmlFor="address"  >{t('common:address')}</label> 
                               <Select 
                               className={styles.select} 
                               options={countries}
@@ -163,7 +163,7 @@ return (
 
 
                             <div className={styles.formwrapper1}>
-                                <label for="phone" >{t('common:phone')}</label>
+                                <label htmlFor="phone" >{t('common:phone')}</label>
                                   <input 
                                       type="tel" 
                                       className={styles.formcontrol} 
@@ -183,7 +183,7 @@ return (
                             
                       <div className={styles.formgroup1}>
                             <div className={styles.formwrapper1}>
-                              <label for="addressFacturation" >{t('common:billing_address')}</label>
+                              <label htmlFor="addressFacturation" >{t('common:billing_address')}</label>
                               <input 
                               type="text" 
                               className={styles.formcontrol} 
@@ -195,7 +195,7 @@ return (
                             </div>
 
                             <div className={styles.formwrapper1}>
-                                <label for="addressLivraison" >{t('common:delivery_address')}</label>
+                                <label htmlFor="addressLivraison" >{t('common:delivery_address')}</label>
                                 < input 
                                   type = " text "  
                                   className={styles.formcontrol} 
@@ -211,7 +211,7 @@ return (
                             
                     
                             <div className={styles.formwrapper1}>
-                                    <label for="civility1" >{t('common:Civility')}</label>
+                                    <label htmlFor="civility1" >{t('common:Civility')}</label>
                                     <select className={styles.select}
                                     onChange={(e) => setcivility(e.target.value)}
                                     >
@@ -225,7 +225,7 @@ return (
 
                               
                               <div className={styles.formwrapper1}>
-                                <label for="password"  >{t('common:password')}</label> 
+                                <label htmlFor="password"  >{t('common:password')}</label> 
                                 <input 
                                 type={isVisible?'text':'password'}
                                 className={styles.formcontrolpassword}   
