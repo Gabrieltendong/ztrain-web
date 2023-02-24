@@ -17,7 +17,7 @@ import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
 
 
-const profile = () => {
+const Profile = () => {
 
     const [show, setShow] = useState(false)
     const dispatch = useDispatch()
@@ -27,15 +27,6 @@ const profile = () => {
     const { message } = useSelector(state => state.product.add_product_cart)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
-
-
-   
-
-
-      
-
-
-   
 
     const onShowCart = () => {
         setShow(true)
@@ -111,4 +102,4 @@ const profile = () => {
     )
 }
 
-export default profile
+export default Profile
