@@ -103,8 +103,8 @@ const Commandes = () => {
             <ul >
               {d.products.map((product) => (
                 <li key={product._id} className={styles.commande_item}>
-                  {/* {product.product.name} = {product.quantity} x {product.price} FCFA */}
-                  product_id({product._id}) = {product.quantity} x {product.price} FCFA
+                  {/* {product.product.name} = {product.quantity} x {product.price} € */}
+                  product_id({product._id}) = {product.quantity} x {product.price} €
                 </li>
               ))}
             </ul>
