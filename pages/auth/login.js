@@ -23,6 +23,7 @@ const Login = () => {
   const inputRef = useRef()
   const { t, lang } = useTranslation();
   const [email, setEmail] = useState()
+  //const [email, setEmail] = useState(user.email)
   const [password, setPassword] = useState()
   const [isVisible, setIsVisible]= useState()
   const {isLoading, error} = useSelector(state => state.auth.login)
@@ -60,7 +61,7 @@ const Login = () => {
 
   const handleLocaleChange = (event) => {
     // const value = event.target.value;
-    const value = event == "US"?"en":"fr"
+    const value = event == "US"?"en":"fr" 
 
     router.push(router.route, router.asPath, {
       locale: value,
@@ -93,6 +94,7 @@ const Login = () => {
                 id="email_login"
                 className={styles.input}
                 placeholder={t('common:email')}
+              //  defaultValue={email}
                 onChange={(e) => {
                   setEmail(e.target.value)
                   if(IsEmail(e.target.value))

@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500&family=Pacifico&display=swap');
+@import '/styles/mixins';
+@import '/styles/colors';
+
+
+
+
+.body {
+	font-family: "Muli-Regular";
+	color: #666;
+	font-size: 13px;
+	margin: 0;}
+
+.container{
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+
+
+.wrapper {
+	min-height: 100vh;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+   
+}
+.container2 {
+	min-width: 850px;
+	margin: auto;
+	padding-top: 68px;
+	padding-bottom: 48px;
+	background: url('./images/bg-registration-form-2.jpg');
+	h3 {
+		text-transform: uppercase;
+		font-size: 22px;
+		font-family: "Muli-Bold";
+		text-align: center;
+		margin-bottom: 32px;
+		color: #333;
+	    letter-spacing: 2px;
+	}
+}
+
+.form {
+    width: 100%;
+    // padding-right: 15px;
+    // padding-left: 15px;
+    width: 50%;
+    padding-left: 45px;
+}
+
+.formgroup1 {
+	display: flex;
+	.formwrapper1 {
+		width: 50%;
+		&:first-child {
+			margin-right: 20px;
+		}
+	}
+}
+
+.formwrapper1 {
+	margin-bottom: 17px;
+	label {
+		margin-bottom: 9px;
+		display: block;
+	}
+}
+
+
+
+.formgroup {
+    margin-bottom: 15px;
+  }
+
+.label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+
+  
+
+.form_check {  
+    display: inline;  
+}  
+
+
+.select1 { 
+    // font-family: Arial, sans-serif; 
+    font-family: "Muli-Bold";
+    height: 40px;
+   padding: 5px 10px; 
+    //padding: 0 20px;
+    border-radius: 20px;
+    border: 5px solid #ccc; 
+	display: block;
+	width: 100%;
+	background:none;
+    &:focus {
+		border: 1px solid #FF7643;
+	}
+}
+
+.select { 
+    font-family: "Muli-Bold"; 
+    // font-size: 14px;
+    height: 30px; 
+    padding: 5px 10px; 
+    // padding: 0 20px;
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    background:none;
+    width: 100%;
+    display: block;
+}
+
+.formcontrolpassword {
+	border: 1px solid #ccc;
+	display: block;
+	width: 50%;
+	height: 40px;
+	padding: 0 20px;
+	border-radius: 20px;
+	font-family: "Muli-Bold";
+	background:none;
+	&:focus {
+		border: 1px solid #FF7643;
+	}
+}
+
+
+  .btn {                
+    background-color:#4CAF50;                          
+
+    border-radius: 5px;                                     
+
+    color:#FFFFFF ;                                 
+
+    padding : 15px 32px ;                              
+
+    text-align : center ;                              
+
+    text-decoration : none ;                          
+
+    display : inline - block ;                         
+    
+    font-size : 16 px ;                              
+
+    margin : 4 px 2 px ;                            
+	}
+
+    .override{
+        display: block;
+        margin: 0 auto;
+    }
+
+    .btn{
+        height: 50px;
+        width: 250px;
+        background-color: $primaryColor;
+        color: white;
+        border-radius: 25px;
+        border: none;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 1s;
+    }
+
+   .btn2 {
+        border: none;
+        width: 152px;
+        height: 40px;
+        margin: auto;
+        margin-top: 29px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: #FF7643;
+        font-size: 13px;
+        color: #fff;
+        text-transform: uppercase;
+        font-family: "Muli-SemiBold";
+        border-radius: 20px;
+        overflow: hidden;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        position: relative;
+        -webkit-transition-property: color;
+        transition-property: color;
+        -webkit-transition-duration: 0.5s;
+        transition-duration: 0.5s;
+        &:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #ae5833;
+            -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            -webkit-transition-property: transform;
+            transition-property: transform;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+        }
+        &:hover {
+            &:before {
+                -webkit-transform: scaleX(1);
+                transform: scaleX(1);
+                -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+                transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+            }
+        }
+    }
+
+
+
+    @media (max-width: 1199px) { 
+	
+    }
+    @media (max-width: 991px) {
+        .container2 {
+            min-width: 768px;
+        }
+    }
+    @media (max-width: 767px) {
+        .container2 {
+            min-width: auto;
+            background:none;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .form {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+    }
+    //--------------------
+
+    .popup_message_container {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+        z-index: 999;
+        font-size: 14px;
+        text-align: center;
+      
+      }
+      
+      
+      .popup_success_message {
+        display: block;
+        color: #2ecc71;
+        border-color: #2ecc71;
+      }
+
+      .popup_error_message {
+        display: block;
+        color: #e74c3c;
+        border-color: #e74c3c;
+      }
+
+
+      .formcontrol {
+        border: 1px solid #ccc;
+        display: block;
+        width: 100%;
+        height: 40px;
+        padding: 0 20px;
+        border-radius: 20px;
+        font-family: "Muli-Bold";
+        background:none;
+        
+        &.valid {
+          border: 1px solid green;
+         // border-color : #008000;
+        }
+        
+        &.invalid {
+          border: 1px solid red;
+          //border-color : #FF0000
+        }
+      }
+      
+
+      
+      

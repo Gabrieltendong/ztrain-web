@@ -3,5 +3,17 @@
     "slogan": "Vos courses au quotidien, en quelques clics",
     "email": "Email",
     "password": "Mot de passe",
-    "forgot_pass": "Mot de passe oublié?"
+    "forgot_pass": "Mot de passe oublié?",
+    "updateform_success_msg" : "Votre profil a été mis à jour avec succès",
+    "name" : "Nom",
+    "firstname" : "Prénom",
+    "address" : "Adresse ",
+    "billing_address" : "Adresse de facturation",
+    "delivery_address" : "Adresse de livraison",
+    "Civility" : "Civilité",
+    "upadate_profile_form_btn" : "Mise à jour",
+    "phone" : "Télephone",
+    "updateform_error_msg" : "Une erreur s'est produite ",
+    "sir" : "Monsieur",
+    "madam" : "Madame"
 }

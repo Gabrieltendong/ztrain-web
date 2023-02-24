@@ -5,6 +5,8 @@ import { useGoogleLogout } from 'react-google-login'
 import { SET_USER } from '../../store/auth/type'
 import styles from './style.module.scss'
 
+
+
 const Dropdown = ({isVisible, onMouseLeave}) => {
 
     const { signOut, loaded } = useGoogleLogout({clientId: process.env.google_client_id})
@@ -18,22 +20,28 @@ const Dropdown = ({isVisible, onMouseLeave}) => {
         })
     }
 
+   
+
     return(
-        <div
-            onMouseLeave = {onMouseLeave}
-            id={isVisible?styles.showDropdown: styles.hideDropdown}
-        >
-            {/* <Link href="">
+        <div onMouseLeave = {onMouseLeave}  id={isVisible?styles.showDropdown: styles.hideDropdown}>
+            <Link href="/commandes">
                 <a href="">Mes commandes</a>
-            </Link> */}
+            </Link>
+            <Link href="/profile">
+                <a href="">Mon compte</a>
+           </Link>
             <Link href="/myfavorite">
                 <a href="">Mes favoris</a>
             </Link>
             <Link href="">
                 <a href="" id='logout' onClick={logOut}>Se déconnecter</a>
             </Link>
+            
         </div>
     )
+
+
+
 }
 
 export default Dropdown

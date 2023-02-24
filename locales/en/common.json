@@ -3,5 +3,19 @@
     "slogan": "Your daily shopping, in a few clicks",
     "email": "Email",
     "password": "Password",
-    "forgot_pass": "Forgot your password?"
+    "forgot_pass": "Forgot your password?",
+    "updateform_success_msg" : "Your profile has been successfully updated",
+    "name" : "Name",
+    "firstname" : "First Name",
+    "address" : "Address",
+    "billing_address" : "Billing Address",
+    "delivery_address" : "Delivery Address",
+    "Civility" : "Civility",
+    "update" : "Update",
+    "phone" : "Phone",
+    "updateform_error_msg" : "An error has occurred",
+    "sir" : "Sir",
+    "madam" : "Madam"
+
+
 }

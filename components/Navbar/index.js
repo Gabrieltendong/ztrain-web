@@ -8,6 +8,11 @@ import Dropdown from '../Dropdown';
 import { useEffect, useState } from 'react';
 import { get_all_category, get_products_category } from '../../store/category/actionCategory';
 import { getAllProduct } from '../../store/product/actionProduct';
+import avatarM from './avatar/male.png';
+import avatarF from './avatar/female.png';
+import DropdownComponent from '../DropdownComponent';
+import {  Avatar } from 'antd';
+import { WomanOutlined, UserOutlined, ShoppingCartOutlined, HeartOutlined , LogoutOutlined } from '@ant-design/icons';
 
 const Navbar = ({
     onShowCart,
@@ -23,6 +28,8 @@ const Navbar = ({
     const { user } = useSelector(state => state.auth?.user_infos)
     const {data} = useSelector(state => state.category.list_category)
 
+
+
     const findProductByCategory = (value) => {
         window.scrollTo({
             top: 500,
@@ -34,6 +41,8 @@ const Navbar = ({
             dispatch(getAllProduct())
         }
     }
+
+    console.log(user);
 
     useEffect(() => {
         dispatch(get_all_category())
@@ -78,20 +87,25 @@ const Navbar = ({
                 <FiShoppingCart />
                 <span> {products_cart.length}</span>
             </div>
-            <div 
-                id={styles.avatar_wrapper}
-                onMouseEnter={() => setIsShown(true)}
-            >
-                <FiUser
-                    color={user?"#27ae60": "#000"}
-                />
-                <span>{t('navbar:account')}</span>
-                <FiChevronDown />
+            
+           {/*} <div id={styles.avatar_wrapper} onMouseEnter={() => setIsShown(true)}>
+                    <img src={avatarM}  className={styles.avatar_image} />
+                    <span>{user.firstname?user.firstname:'inconnu'}</span>
+                    <span>{user.pseudo?user.pseudo:'inconnu'}</span>
+           </div> */}
+           <div id={styles.avatar_wrapper} onMouseEnter={() => setIsShown(true)} >
+                
+                {/* <FiUser color={user?"#27ae60": "#000"}/> */} 
+                {/* <Avatar size="large" icon={user?.gender='male'?<FiUser color="#27ae60"/>:<WomanOutlined />} />  */}
+                <Avatar size="large"  icon={<FiUser color={user?"#27ae60": "#000"}/> } /> 
+                <span>{user?.firstname?user?.firstname:'inconnu'}</span>
+                {/*<span>{t('navbar:Moi')}</span>*/}
+                {/*<span>{user.gender='female'?:'inconnu'}</span>*/}
+                {/* <FiChevronDown /> */}
             </div>
-            <Dropdown
-             isVisible={isShown}
-             onMouseLeave={() => setIsShown(false)}
-            />
+
+            {/* <Dropdown isVisible={isShown} onMouseLeave={() => setIsShown(false)}/> */}
+            <DropdownComponent isVisible={isShown} onMouseLeave={() => setIsShown(false)}/>
         </nav>
     )
 }
