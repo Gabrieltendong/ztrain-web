@@ -42,16 +42,16 @@ const DropdownComponent = ({isVisible, onMouseLeave}) => {
            
             <Menu.Divider />
 
-                    <Menu.Item className={styles.ant_menu_item } key="1" icon={<UserOutlined />}><a className={styles.a } href="/profile">Mon compte</a></Menu.Item>
+                    <Menu.Item className={styles.ant_menu_item } key="1" icon={<UserOutlined />}><Link  className={styles.Link  } href="/profile">Mon compte</Link ></Menu.Item>
 
-                    <Menu.Item className={styles.ant_menu_item } key="2" icon={<ShoppingCartOutlined />}><a className={styles.a } href="/commandes">Mes commandes</a></Menu.Item>
+                    <Menu.Item className={styles.ant_menu_item } key="2" icon={<ShoppingCartOutlined />}><Link  className={styles.Link  } href="/commandes">Mes commandes</Link ></Menu.Item>
 
-                    <Menu.Item  className={styles.ant_menu_item } key="3" icon={<HeartOutlined />}><a className={styles.a } href="/myfavorite">Mes favoris</a></Menu.Item>
+                    <Menu.Item  className={styles.ant_menu_item } key="3" icon={<HeartOutlined />}><Link  className={styles.Link  } href="/myfavorite">Mes favoris</Link ></Menu.Item>
 
             <Menu.Divider />
 
          {/* <Menu.Item className={styles.ant_menu_item }  key="4" ><a className={styles.a}  href="" id='logout' onClick={logOut}>Se déconnecter</a></Menu.Item>   */}
-            <Menu.Item className={styles.ant_menu_item }  key="4" icon={<LogoutOutlined /> }><a className={styles.a}  href="" id='logout' onClick={logOut}>Se déconnecter</a></Menu.Item> 
+            <Menu.Item className={styles.ant_menu_item }  key="4" icon={<LogoutOutlined /> }><Link  className={styles.Link }  href="" id='logout' onClick={logOut}>Se déconnecter</Link ></Menu.Item> 
             
             
         </Menu> 
