@@ -221,7 +221,7 @@ const Home = () => {
                         onChange={handleChangePrice}
                         valueLabelDisplay="auto"
                         getAriaValueText={(value) => `${value}€`}
-                        max={1500}
+                        max={1500}    
                         step={0.01}
                     />
                 </aside>
