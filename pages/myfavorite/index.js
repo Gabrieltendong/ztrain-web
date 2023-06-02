@@ -16,6 +16,8 @@ import { get_all_favorites } from '../../store/favorite/actionFavorite'
 import { addProductCart } from '../../store/product/actionProduct'
 import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
+import Layout from '../../components/Layout'
+import { Typography } from '@mui/material'
 
 
 const Favorites = () => {
@@ -28,9 +30,8 @@ const Favorites = () => {
     const router = useRouter()
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const { user } = useSelector(state => state.auth?.user_infos)
-    const user_id = useSelector(state => state.auth?.login.data?.user?._id)
+    const user_id = useSelector(state => state.auth?.login?.data?.user?._id)
     const { data } = useSelector(state => state.favorite.list_favorite)
-    const { message } = useSelector(state => state.product.add_product_cart)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
 
@@ -89,7 +90,7 @@ const Favorites = () => {
         if(Object.keys(clearCartData).length != 0){
             onClearCart()
         }
-        if(message || Object.keys(dataCommand).length != 0) {
+        if(Object.keys(dataCommand).length != 0) {
             setTimeout(() => {
                 dispatch({
                     type: `${ADD_PRODUCT_CART}_SUCCESS`,
@@ -105,64 +106,60 @@ const Favorites = () => {
             router.push('/auth/login')
         }
         dispatch(get_all_favorites())
-    }, [user, dataCommand, clearCartData, message])
+    }, [user, dataCommand, clearCartData])
 
     return(
-        <div>
-            { 
-                dataCommand.message || message?
-                <Toast
-                    text = {dataCommand.message?dataCommand.message: message} 
-                />:null
-           }
-            <Cart
-                showCart={show}
-                onClose = {() => setShow(false)}
-                onShowCheckout = {() => setIsShowCheckout(true)}
-            />
-            <CheckoutForm
-                isVisible={isShowCheckout}
-                onClose={onCloseCheckout}
-            />
-            <ProductDetail
-                isVisible={isVisible}
-                product={productDetail}
-                onIncrement = {onIncrement}
-                onDecrement = {onDecrement}
-                onChangeQuantity={onChangeQuantity}
-                quantity = {quantity}
-                addProductCart={handleAddProductCart}
-                onClose = {onCloseDetail}
-            />
-            <Navbar
-                onShowCart = {onShowCart}
-            />
-            <div id={styles.header}>
-                <h3>Mes Produits favoris</h3>
-            </div>
-            <main id={styles.container}>
-                {
-                    data.length > 0?
-                    <div id = {styles.popular_product_wrapper}>
-                    {
-                        data.map((item, index) => (
-                            <ProductItem
-                                key={index} 
-                                item={item.product}
-                                onShowDetail={onShowDetail}
-                                addProductCart={handleAddProductCart}
-                            />
-                        ))
-                    }
-                    </div>
-                    :
-                    <div id={styles.empty_favorite_wrapper}>
-                        <p>Aucun produit dans vos favoris</p>
-                    </div>
+        <Layout>
+            <div>
+                { 
+                    dataCommand.message?
+                    <Toast
+                        text = {dataCommand.message} 
+                    />:null
                 }
-            </main>
-            <Footer />
-        </div>
+                <Cart
+                    showCart={show}
+                    onClose = {() => setShow(false)}
+                    onShowCheckout = {() => setIsShowCheckout(true)}
+                />
+                <CheckoutForm
+                    isVisible={isShowCheckout}
+                    onClose={onCloseCheckout}
+                />
+                <ProductDetail
+                    isVisible={isVisible}
+                    product={productDetail}
+                    onIncrement = {onIncrement}
+                    onDecrement = {onDecrement}
+                    onChangeQuantity={onChangeQuantity}
+                    quantity = {quantity}
+                    addProductCart={handleAddProductCart}
+                    onClose = {onCloseDetail}
+                />
+                <main id={styles.container}>
+                    <Typography variant='h6'>Mes produits favoris</Typography>
+                    {
+                        data.length > 0?
+                        <div id = {styles.popular_product_wrapper}>
+                        {
+                            data.map((item, index) => (
+                                <FavoriteItem
+                                    key={index} 
+                                    item={item.product}
+                                    onShowDetail={onShowDetail}
+                                    addProductCart={handleAddProductCart}
+                                />
+                            ))
+                        }
+                        </div>
+                        :
+                        <div id={styles.empty_favorite_wrapper}>
+                            <p>Aucun produit dans vos favoris</p>
+                        </div>
+                    }
+                </main>
+            </div>
+        </Layout>
     )
 }
 

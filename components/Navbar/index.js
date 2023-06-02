@@ -2,33 +2,46 @@ import styles from './style.module.scss'
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
-import { FiShoppingCart, FiUser, FiChevronDown } from 'react-icons/fi';
+import { FiShoppingCart } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import Dropdown from '../Dropdown';
 import { useEffect, useState } from 'react';
 import { get_all_category, get_products_category } from '../../store/category/actionCategory';
 import { getAllProduct } from '../../store/product/actionProduct';
-import avatarM from './avatar/male.png';
-import avatarF from './avatar/female.png';
-import DropdownComponent from '../DropdownComponent';
-import {  Avatar } from 'antd';
-import { WomanOutlined, UserOutlined, ShoppingCartOutlined, HeartOutlined , LogoutOutlined } from '@ant-design/icons';
+import Dropdown from '../Dropdown';
+import {  Avatar, Badge } from 'antd';
+import { Popover } from '@mui/material';
+import { UserOutlined } from '@ant-design/icons';
+import AuthScreen from '../../pages/auth';
 
 const Navbar = ({
     onShowCart,
     onSearch,
     onBlur,
-    onFocus
+    onFocus,
 }) => {
 
     const dispatch = useDispatch()
     const { t } = useTranslation()
-    const [isShown, setIsShown] = useState(false);
-    const products_cart = useSelector(state => state.cart.products_cart.data)
-    const { user } = useSelector(state => state.auth?.user_infos)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const product_cart = useSelector(state => state.product.product_cart)
+    const user_infos = useSelector(state => state.auth?.user_infos)
     const {data} = useSelector(state => state.category.list_category)
+    const [anchorEl, setAnchorEl] = useState(null);
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    const handleToggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+    };
 
     const findProductByCategory = (value) => {
         window.scrollTo({
@@ -41,8 +54,6 @@ const Navbar = ({
             dispatch(getAllProduct())
         }
     }
-
-    console.log(user);
 
     useEffect(() => {
         dispatch(get_all_category())
@@ -85,27 +96,27 @@ const Navbar = ({
             </div>
             <div id={styles.content_cart_wrapper} onClick={onShowCart}>
                 <FiShoppingCart />
-                <span> {products_cart.length}</span>
+                <span> {product_cart.length}</span>
+            </div>
+           <div id={styles.avatar_wrapper} onClick={user_infos?.user?handleClick:handleToggleModal}>
+                <Badge dot={user_infos?.user}>
+                    <Avatar  icon={<UserOutlined />} />
+                </Badge>
             </div>
             
-           {/*} <div id={styles.avatar_wrapper} onMouseEnter={() => setIsShown(true)}>
-                    <img src={avatarM}  className={styles.avatar_image} />
-                    <span>{user.firstname?user.firstname:'inconnu'}</span>
-                    <span>{user.pseudo?user.pseudo:'inconnu'}</span>
-           </div> */}
-           <div id={styles.avatar_wrapper} onMouseEnter={() => setIsShown(true)} >
-                
-                {/* <FiUser color={user?"#27ae60": "#000"}/> */} 
-                {/* <Avatar size="large" icon={user?.gender='male'?<FiUser color="#27ae60"/>:<WomanOutlined />} />  */}
-                <Avatar size="large"  icon={<FiUser color={user?"#27ae60": "#000"}/> } /> 
-                <span>{user?.firstname?user?.firstname:'inconnu'}</span>
-                {/*<span>{t('navbar:Moi')}</span>*/}
-                {/*<span>{user.gender='female'?:'inconnu'}</span>*/}
-                {/* <FiChevronDown /> */}
-            </div>
-
-            {/* <Dropdown isVisible={isShown} onMouseLeave={() => setIsShown(false)}/> */}
-            <DropdownComponent isVisible={isShown} onMouseLeave={() => setIsShown(false)}/>
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+            >
+                <Dropdown onClose={handleClose} /> 
+            </Popover>
+            <AuthScreen open={isModalOpen} onCancel={handleToggleModal} />
         </nav>
     )
 }

@@ -33,10 +33,9 @@ const Home = () => {
     const [code, setPromoCode] = useState("")
     const [price, setPrice] = useState([0, 1500]);
     const [productDetail, setProductDetail] = useState()
-    const { message } = useSelector(state => state.product.add_product_cart)
-    const { user } = useSelector(state => state.auth?.user_infos)
-    const user_id = useSelector(state => state.auth?.login.data?.user?._id)
+    const user_id = useSelector(state => state.auth?.login?.data?.user?._id)
     const { data, isLoading } = useSelector(state => state.product.list_product)
+    const products_cart = useSelector(state => state.product.product_cart)
     const [listSearch, setListSearch]=useState([])
     const [searchTerm, setSearchTerm]=useState()
     const dataCommand = useSelector(state => state.cart.command.data)
@@ -50,13 +49,12 @@ const Home = () => {
 
     const handleAddProductCart = (product) => {
         let data = {
-                product,user_id,
+                product,
                 quantity: parseInt(quantity)
             }
         if(code){
             data['promo_code'] = code
         }
-        console.log(data)
         dispatch(addProductCart(data))
         onCloseDetail()
     }
@@ -139,38 +137,17 @@ const Home = () => {
             onClearCart()
         }
 
-        if(message || Object.keys(dataCommand).length != 0) {
-            setTimeout(() => {
-                dispatch({
-                    type: `${ADD_PRODUCT_CART}_SUCCESS`,
-                    payload: ''
-                })
-                dispatch({
-                    type: `${CREATE_COMMANDE}_SUCCESS`,
-                    payload: ''
-                })
-            }, 2000);
-        }
-
-        if(!user){
-            router.push('/auth/login')
-        }
+        
 
         if(isInit){
             setIsInit(false)
             dispatch(getAllProduct())
         }
         dispatch(getAllProductCart(user_id))
-    }, [message, user, dataCommand, clearCartData, isFocusSearchBar, listSearch, data])
+    }, [dataCommand, clearCartData, isFocusSearchBar, listSearch, data])
 
     return(
         <div >
-           { 
-                dataCommand.message || message?
-                <Toast
-                    text = {dataCommand.message?dataCommand.message: message} 
-                />:null
-           }
             <Cart 
                 showCart={show}
                 onClose = {() => setShow(false)}

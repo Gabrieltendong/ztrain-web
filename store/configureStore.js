@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
+import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { createFilter, createBlacklistFilter} from 'redux-persist-transform-filter';
@@ -49,6 +50,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 let store = createStore(
   persistedReducer, 
   applyMiddleware(
+    thunk,
     axiosMiddleware(client)
   )
 )

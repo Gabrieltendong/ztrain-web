@@ -12,9 +12,10 @@ const messageCardError = 'Numéro de carte invalide'
 const CheckoutForm = ({isVisible, onClose}) => {
 
     const dispatch = useDispatch()
-    const user_id = useSelector(state => state.auth?.login.data?.user?._id)
+    const user_id = useSelector(state => state.auth?.login?.data?.user?._id)
     const {isLoading, error} = useSelector(state => state.cart.command)
     const list_shipping_method = useSelector(({cart}) => cart.list_shipping_method.data)
+    const products_cart = useSelector(state => state.product.product_cart)
     const [cardNumber, setCardNumber]=useState()
     const [expiry, setExpiry]=useState('')
     const [cvc, setCVC]=useState()
@@ -39,6 +40,7 @@ const CheckoutForm = ({isVisible, onClose}) => {
                 user_id,
                 address,
                 shipping_method,
+                products: products_cart,
                 card: {
                     number: parseInt(cardNumber.replace(/ /g, "")),
                     exp_month: parseInt(expiry.split('/')[0].trim()),
@@ -46,7 +48,6 @@ const CheckoutForm = ({isVisible, onClose}) => {
                     cvc
                 }
             }
-            console.log("data", data)
             dispatch(createCommand(JSON.stringify(data)))
         }
     };

@@ -9,6 +9,7 @@ import Loading from '../Loading';
 import styles from './style.module.scss';
 import { getPromoCode } from '../../store/promo_code/actionPromoCode';
 import { GET_PROMO_CODE } from '../../store/promo_code/type';
+import AuthScreen from '../../pages/auth';
 
 const ProductDetail = ({
     isVisible, 
@@ -25,22 +26,30 @@ const ProductDetail = ({
 }) => {
 
     const dispatch = useDispatch()
-    const {isLoading} = useSelector(state => state.product.add_product_cart)
     const isLoadinglistFavoris = useSelector(state => state.favorite.list_favorite.isLoading)
     const isLoadingaddFavoris = useSelector(state => state.favorite.toggle_Favorite.isLoading)
     const [isPromoCode, setIsPromoCode]=useState(false)
     const [colorSelected, setColorSelected]=useState()
     const [heightSelected, setHeightSelected]=useState()
-    const user_id = useSelector(state => state.auth.login.data?.user?._id)
+    const [showLoginPage, setShowLoginPage] = useState(false)
+    const user_infos = useSelector(state => state.auth.user_infos)
     const { data } = useSelector(state => state.favorite.list_favorite)
     const promoCodeResp = useSelector(({promo_code}) => promo_code.promoCode)
     const initfavoriteState = data.filter(item => item.product._id == product?._id).length>0
 
     const onFavorite = () => {
-        dispatch(toggle_favorite({
-            user: user_id,
-            product: product._id
-        }))
+        if(user_infos?.user){
+            dispatch(toggle_favorite({
+                user: user_infos?.user._id,
+                product: product._id
+            }))
+        }else{
+            handleToggleModal()
+        }
+    }
+
+    const handleToggleModal = () => {
+        setShowLoginPage(!showLoginPage)
     }
 
     const handlePromoCode = () => {
@@ -62,8 +71,9 @@ const ProductDetail = ({
 
     return(
         <div id={isVisible?styles.showDetail:styles.hideDetail}>
+            <AuthScreen open={showLoginPage} onCancel={handleToggleModal} />
             <main id={styles.content_detail}>
-                {isLoading || isLoadinglistFavoris || isLoadingaddFavoris ? <Loading />:null}
+                {isLoadinglistFavoris || isLoadingaddFavoris ? <Loading />:null}
                 <button id={styles.btn_close} onClick={onClose}>
                     <FiX />
                 </button>
@@ -230,7 +240,7 @@ const ProductDetail = ({
                     }
                     <button 
                         id={styles.btn_add_cart}
-                        onClick={() => addProductCart(product._id)}
+                        onClick={() => addProductCart(product)}
                     >
                         <FiShoppingCart className={styles.iconShop} />
                         Ajouter au panier

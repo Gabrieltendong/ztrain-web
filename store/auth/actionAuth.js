@@ -1,14 +1,14 @@
 
 import { LOGIN, REGISTER, RESET_PASSWORD, SET_USER } from "./type";
 
-const setUser = (data) => {
+export const setUser = (data) => {
     return{
         type: SET_USER,
         payload: data
     }
 }
 
-export const auth = (data, router) => {
+export const auth = (data, onClose) => {
     return {
         type: LOGIN,
         payload: {
@@ -24,7 +24,7 @@ export const auth = (data, router) => {
                         type: `${LOGIN}_SUCCESS`,
                         payload: response.data
                     })
-                    router.push('/home')
+                    onClose(false)
                 },
                 onError({getState, dispatch, error}){
                     dispatch({
@@ -36,7 +36,7 @@ export const auth = (data, router) => {
     }
 }
 
-export const google_login = (data, router) => {
+export const google_login = (data, onClose) => {
     return {
         type: LOGIN,
         payload: {
@@ -53,7 +53,7 @@ export const google_login = (data, router) => {
                         type: `${LOGIN}_SUCCESS`,
                         payload: response.data
                     })
-                    router.push('/home')
+                    onClose(false)
                 },
                 onError({getState, dispatch, error}){
                     console.log("error google auth", error)
@@ -66,7 +66,7 @@ export const google_login = (data, router) => {
     }
 }
 
-export const register = (data, router) => {
+export const register = (data, onClose) => {
     return {
         type: REGISTER,
         payload: {
@@ -81,7 +81,7 @@ export const register = (data, router) => {
                         type: `${REGISTER}_SUCCESS`,
                         payload: response.data
                     })
-                    dispatch(auth(data, router))
+                    dispatch(auth(data, onClose))
                 },
                 onError({getState, dispatch, error}){
                     dispatch({

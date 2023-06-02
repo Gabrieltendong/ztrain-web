@@ -6,58 +6,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeProduct, updateQuantityProduct } from '../../store/cart/actionCart';
 import { UPDATE_PRICE } from '../../store/cart/type';
 import styles from './style.module.scss'
+import { decrementProductCart, deleteProductCart, incrementProductCart } from '../../store/product/actionProduct';
 
 const CartItem = ({item}) => {
 
     const dispatch = useDispatch()
     const qtRef = useRef()
     const [product, setProduct] = useState()
+    const products_cart = useSelector(state => state.product.product_cart)
     const {totalPrice} = useSelector(state => state.cart)
-    const user_id = useSelector(state => state.auth?.login.data?.user?._id)
+    const user_id = useSelector(state => state.auth?.login?.data?.user?._id)
     const [quantity, setQuantity] = useState(item?.quantity)
 
-    const handleUpdateQuantity = (quantity) => {
-        const data = {
-             product: item.product._id,
-             user_id,
-             quantity
-         }
-         dispatch(updateQuantityProduct(data))
-    }
-
-    const setTotalPrice = (price) => {
-        dispatch({
-            type: UPDATE_PRICE,
-            payload: totalPrice + (quantity*price)
-        })
-    }
-
     const handleRemoveProduct = () => {
-        const data = {
-            product: item.product._id,
-            user_id
-        }
-        dispatch(removeProduct(data))
+        dispatch(deleteProductCart(item.product._id))
     }
 
     const handleIncrement = () => {
-        const qt = quantity + 1
-        setQuantity(qt)
-        handleUpdateQuantity(qt)
+        dispatch(incrementProductCart(item.product._id))
     }
 
     const handleDecrement = () => {
-        const qt = quantity - 1
-        if(qt == 0){
-            handleRemoveProduct()
-        }
-        setQuantity(qt)
-        handleUpdateQuantity(qt)
+        dispatch(decrementProductCart(item.product._id))
     }
 
-    useEffect(() => {
-        setQuantity(item?.quantity)
-    }, [quantity, item])
+    useEffect(() => {}, [products_cart])
 
     return(
         <div className={styles.card}>
@@ -73,13 +46,13 @@ const CartItem = ({item}) => {
             </div>
             <div className={styles.card_body}>
                 <p className={styles.productName}>{item?.product?.name.substring(0, 15)}{item?.product?.name.length >15?'...':''}</p>
-                <p>{(item?.price*quantity).toFixed(2)} €</p>
+                <p>{(item?.product?.price*item.quantity).toFixed(2)} €</p>
             </div>
             <div className={styles.quantity_wrapper}>
                 <span className={styles.quantity_dec} onClick={handleDecrement}>
                     <FiMinus />
                 </span>
-                <span className={styles.quantity}>{quantity}</span>
+                <span className={styles.quantity}>{item.quantity}</span>
                 <span className={styles.quantity_in} onClick={handleIncrement}>
                     <FiPlus />
                 </span>

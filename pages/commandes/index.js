@@ -14,6 +14,7 @@ import { get_all_favorites } from '../../store/favorite/actionFavorite'
 import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
 import HashLoader from "react-spinners/HashLoader";
+import Layout from '../../components/Layout';
 
 
 
@@ -24,7 +25,6 @@ const Commandes = () => {
     const router = useRouter()
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const { user } = useSelector(state => state.auth?.user_infos)
-    const { message } = useSelector(state => state.product.add_product_cart)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
     
@@ -59,11 +59,12 @@ const Commandes = () => {
 
     console.log("data", data);
     return(
-        <div>
+       <Layout>
+         <div>
             { 
-                dataCommand.message || message?
+                dataCommand.message?
                 <Toast
-                    text = {dataCommand.message?dataCommand.message: message} 
+                    text = {dataCommand.message} 
                 />:null
            }
             <Cart
@@ -75,13 +76,6 @@ const Commandes = () => {
                 isVisible={isShowCheckout}
                 onClose={onCloseCheckout}
             />
-            <Navbar
-                onShowCart = {onShowCart}
-            />
-            
-            <div id={styles.header}>
-                <h1>Mes Commandes </h1>
-            </div>
             <div className={styles.commande_page}>
       {/* {isLoading && 
       <p>Chargement ... <HashLoader 
@@ -117,11 +111,8 @@ const Commandes = () => {
 
       )}
     </div>
-           
-
-            <Footer />
-            
         </div>
+       </Layout>
     )
 }
 

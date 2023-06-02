@@ -1,6 +1,7 @@
 import { getToken, token } from "../../config";
 import { SET_USER } from "../auth/type";
 import { store } from "../configureStore";
+import { deleteAllProductCart } from "../product/actionProduct";
 import { 
     ADD_FAVORITE_CART,
     CREATE_COMMANDE, 
@@ -10,6 +11,7 @@ import {
     REMOVE__ALL_PRODUCT_CART,
     UPDATE_QUANTITY 
 } from "./type";
+import { notification } from 'antd';
 
 export const getAllProductCart = (user_id) => {
     return {
@@ -163,8 +165,10 @@ export const createCommand = (data) => {
             },
             options: {
                 onSuccess({getState, dispatch, response}){
-                    const {user_id} = JSON.parse(data)
-                    dispatch(getAllProductCart(user_id))
+                    notification.success({
+                        message: response.data.message,
+                    });
+                    dispatch(deleteAllProductCart())
                     dispatch({
                         type: `${CREATE_COMMANDE}_SUCCESS`,
                         payload: response.data

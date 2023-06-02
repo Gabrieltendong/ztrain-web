@@ -38,7 +38,7 @@ const ProductItem = ({item, addProductCart, onShowDetail}) => {
                         <p id={styles.initial_price}>{item?.price} €</p>:null
                     }
                 </p>
-                <button onClick={() => addProductCart(item._id)} className={styles.btn_add_cart}>
+                <button onClick={() => addProductCart(item)} className={styles.btn_add_cart}>
                     <FaCartPlus />
                 </button>
             </div>

@@ -3,18 +3,12 @@
 @import '/styles//colors';
 
 .container_cart{
-    width: 30vw;
-    height: 85vh;
+    // width: 30vw;
     background-color: white;
     display: grid;
     grid-template-rows: 10% 70% 20%;
-    position: fixed;
-    box-shadow: 0.5px 0px 5px rgb(161, 161, 161);
-    z-index: 20;
     padding-bottom: 20px;
     margin-top: 20px;
-    border-radius: 5px;
-    right: -500px;
 
     %btn{
         height: 50px;
@@ -37,6 +31,7 @@
     }
     #card_wrapper{
         padding: 20px;
+        margin-top: 20px;
         overflow-y: scroll;
         overflow-x: visible;
 
@@ -101,7 +96,10 @@
         right: -15px;
     }
     #cart_footer{
-        // width: 92%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
         padding: 20px;
         background-color: white;
         @include shadow(10px);

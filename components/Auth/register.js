@@ -13,7 +13,7 @@ import { IsEmail } from "../../utils/isEmail";
 
 const errorMessage = 'Les deux mots de passe ne sont pas identiques'
 
-const Register = () => {
+const Register = ({onClose}) => {
   
   const dispatch = useDispatch()
   const { t } = useTranslation()
@@ -53,7 +53,7 @@ const Register = () => {
         password == passwordConfirm && 
         IsEmail(email)
       ){
-        dispatch(register({email, password}, router))
+        dispatch(register({email, password}, onClose))
       }
   }
 
@@ -88,16 +88,7 @@ const Register = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <div className={styles.col_1}>
-            <div id = {styles.content_header_title}>
-              <h1 className={styles.header_title}>{t('common:welcome')}!!!</h1>
-              <p className={styles.header_subTitle}>{t('common:slogan')}...</p>
-            </div>
-        </div>
-        <div className={styles.col_2}>
-          <h1 className={styles.header_title_form}>Inscription</h1> 
+    <div style={{height: 200}} >
           <div>
             <form id = {styles.content_form} onSubmit={handleRegister}>
               <input
@@ -172,16 +163,8 @@ const Register = () => {
                 }
               </button>
             </form>
-            <div id = {styles.link_signup_wrapper}>
-                <span>{" Vous avez déja un compte? "} </span>
-                <Link href={'/auth/login'}>
-                  <a className={styles.link}>Se connecter</a>
-                </Link>
-            </div>
           </div>
         </div>
-      </main>
-    </div>
   );
 }
 

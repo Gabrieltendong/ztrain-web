@@ -1,33 +1,16 @@
 import React from 'react';
 import styles from './style.module.scss'
 import { useState, useRef } from "react";
-import Link from 'next/link'
 import useTranslation from 'next-translate/useTranslation'
 import { updateuser  } from "../../store/user/actionUser";
 import { useDispatch, useSelector } from "react-redux"
-import { IsEmail } from '../../utils/isEmail';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
 import HashLoader from "react-spinners/HashLoader";
-//----------------------------------------------------------
-import Select from 'react-select';
-import axios from 'axios';
 
+import { FilledInput, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-
-function handleInputChange(event){
-  const input = event.target;
-  if (input.value.length <= 10) {
-    input.classList.add('valid');
-    input.classList.remove('invalid');
-  } else {
-    input.classList.add('invalid');
-    input.classList.remove('valid');
-  }
-
-}
 const RegistrationForm = () => {
 
-  
   const { t, lang } = useTranslation();
   const { user } = useSelector(state => state.auth?.user_infos)
   const dispatch = useDispatch()
@@ -46,247 +29,149 @@ const RegistrationForm = () => {
   const [isVisible, setIsVisible]= useState()
   const {isLoading, error, data} = useSelector(state => state.user?.update_profil)
 
-//--------------------------------------------------------------------------------------------
-  const CountriesDropdown = () => {
+    const handleUpdate = (e) => {
+        e.preventDefault()
+      dispatch(updateuser(
+        {
+          password , 
+          lastname ,
+          firstname,
+          civility ,
+          phone ,
+          adress,
+          addressFacturation,
+          addressLivraison
+      }, user._id)) 
+    }
 
-    const [countries, setCountries] = React.useState([]);
-  
-                React.useEffect(() => {
-                  axios.get('https://unstats.un.org/SDGAPI/v1/sdg/Series/List')
-                    .then(res => {
-                      const countriesList = res.data.map(country => ({ value: country.name, label: country.name }));
-              
-                      // trier le tableau par ordre alphabétique avant de le passer à React-Select 
-                      countriesList.sort((a, b) => (a.label > b.label) ? 1 : -1);
-              
-                      setCountries(countriesList);
-                    })
-                    .catch(err => console.log(err));
-              
-                }, []); }
-    //--------------------------------------------------------------------------------------------
-
-
-              const onVisiblePass = () => {
-                setIsVisible(!isVisible)
-              }
-
-              const handleUpdate = (e) => {
-                  e.preventDefault()
-                dispatch(updateuser(
-                  {
-                    password , 
-                    lastname ,
-                    firstname,
-                    civility ,
-                    phone ,
-                    adress,
-                    addressFacturation,
-                    addressLivraison
-
-
-                }, user._id))
-                  
-              }
-
- 
-
-
-
-               console.log("user",user?._id);
-
-return ( 
-
-            <body className={styles.body}>
-                {/* <div className={styles.wrapper} style={{ backgroundImage: `url('./images/bg-registration-form-2.jpg')` }}>  */}
-                <div className={styles.wrapper} style={{ backgroundImage: `url('./images/istockphoto-1292443598-170667a.jpg)` }}> 
-                  <div className={styles.container2}>
-                    <form className={styles.form } onSubmit={handleUpdate}>
-                        
-                        <div className={styles.formgroup1}>
-                          <div className={styles.formwrapper1}> 
-                              <label htmlFor="lastName" > {t('common:name')} </label> 
-                              <input 
-                              type="text" 
-                              className={styles.formcontrol}  
-                              id="lastName" 
-                              name="lastName"
-                              defaultValue={lastname}
-                              onChange={(e) => {
-                                setlastName(e.target.value)
-                              }} />
-                          </div>
-
-                          
-
-                          <div className={styles.formwrapper1}>
-                              <label htmlFor="firstName"  >{t('common:firstname')}</label>
-                              <input 
-                              type="text"
-                                className={styles.formcontrol}   
-                                id="firstName" 
-                                name="firstName" 
-                                defaultValue={firstname}
-                                onChange={(e) => {
-                                  setfirstName(e.target.value)
-                                }} />
-                          </div>
-
-                        </div>
-              
-                        <div className={styles.formgroup1}>
-                        
-
-                            <div className={styles.formwrapper1}>
-                                  <label htmlFor="address"  >{t('common:address')}</label> 
-                                  < input 
-                                  type = " text " 
-                                  className={styles.formcontrol} 
-                                  id = "address" 
-                                  name="address"
-                                  // placeholder={t('Address')}
-                                  defaultValue={adress}
-                                  onChange={(e) => setaddress(e.target.value)}
-                                  />  
-
-                              </div>
-{/* 
-                            <div className={styles.formwrapper1}>
-                              <label htmlFor="address"  >{t('common:address')}</label> 
-                              <Select 
-                              className={styles.select} 
-                              options={countries}
-                              onChange={(e) => setaddress(e.target.value)}
-                              /> 
-                              
-                            </div> */}
-
-
-                            <div className={styles.formwrapper1}>
-                                <label htmlFor="phone" >{t('common:phone')}</label>
-                                  <input 
-                                      type="tel" 
-                                      className={styles.formcontrol} 
-                                      id="phone" 
-                                      name="phone" 
-                                      //maxlength="10" 
-                                      onInput={handleInputChange}
-                                      defaultValue={phone}
-                                              onChange={(e) => {
-                                                setphone(e.target.value)
-                                              }}
-                                  />
-                              </div>
-
-                        </div>
-                      
-                            
-                      <div className={styles.formgroup1}>
-                            <div className={styles.formwrapper1}>
-                              <label htmlFor="addressFacturation" >{t('common:billing_address')}</label>
-                              <input 
-                              type="text" 
-                              className={styles.formcontrol} 
-                              id="addressFacturation" 
-                              name="addressFacturation"
-                              defaultValue={addressFacturation}
-                              onChange={(e) => setaddressFacturation(e.target.value)}
-                              />
-                            </div>
-
-                            <div className={styles.formwrapper1}>
-                                <label htmlFor="addressLivraison" >{t('common:delivery_address')}</label>
-                                < input 
-                                  type = " text "  
-                                  className={styles.formcontrol} 
-                                  id = "addressLivraison" 
-                                  name="addressLivraison"
-                                  defaultValue={addressLivraison}
-                                onChange={(e) => setaddressLivraison(e.target.value)}/>  
-                            </div>
+    return ( 
+        <body className={styles.body}>
+            {/* <div className={styles.wrapper} style={{ backgroundImage: `url('./images/bg-registration-form-2.jpg')` }}>  */}
+            <div className={styles.wrapper} > 
+              <div className={styles.container2}>
+                <form className={styles.form } onSubmit={handleUpdate}>
+                    <div className={styles.formgroup1}>
+                      <div className={styles.formwrapper1}> 
+                          <TextField
+                            id="lastName"
+                            label={t('common:name')}
+                            defaultValue={lastname}
+                            variant="filled"
+                          />
                       </div>
-                        
-
-                      <div className={styles.formgroup1}>
-                            
-                    
-                            <div className={styles.formwrapper1}>
-                                    <label htmlFor="civility1" >{t('common:Civility')}</label>
-                                    <select className={styles.select}
-                                    onChange={(e) => setcivility(e.target.value)}
-                                    >
-                                      <option value={t('common:sir')}>Monsieur</option>
-                                      <option value={t('common:madam')}>Madame</option>
-                                    </select>
-                            </div>
-
-
+                      <div className={styles.formwrapper1}>
+                          <TextField
+                            id="firstName"
+                            label={t('common:firstname')}
+                            defaultValue={firstname}
+                            variant="filled"
+                          />
+                      </div>
+                    </div>
+                    <div className={styles.formgroup1}>
+                        <div className={styles.formwrapper1}>
+                          <TextField
+                            id="address"
+                            label={t('common:address')}
+                            defaultValue={adress}
+                            variant="filled"
+                          />
                         </div>
-
-                              
-                              <div className={styles.formwrapper1}>
-                                <label htmlFor="password"  >{t('common:password')}</label> 
-                                <input 
-                                type={isVisible?'text':'password'}
-                                className={styles.formcontrolpassword}   
-                                id="password" 
-                                name="password" 
-                                // placeholder={t('password')}
-                                // defaultValue={password}
-                                // Value={password}
-
-                                
-                                onChange={(e) => setPassword(e.target.value)}
-                                />
-                                <div onClick={onVisiblePass}>
-                                  {
-                                    isVisible?
-                                    <FiEye />
-                                    :
-                                    <FiEyeOff />
-                                  }
-                                </div>
-                              </div>
-                          
-                
-                
-                  <button className={styles.btn2} type='submit'>
-                          { isLoading?
-                              <HashLoader 
-                                color={'#fff'} 
-                                loading={true}
-                                css={styles.override}
-                                size={30} 
+                        <div className={styles.formwrapper1}>
+                              <TextField
+                                id="phone"
+                                type='number'
+                                label={t('common:phone')}
+                                defaultValue={phone}
+                                variant="filled"
                               />
-                              :
-                              t('Update')
-                            
-                              
-                            }
-                  </button> 
-                  {
-                    error? <div>
-                                  <p className={styles.popup_error_message}>
-                                    {/* <span>{t('common:updateform_error_msg')}</span> */}
-                                    <span>{error}</span> 
-                                </p>
-                              </div>
-                    : <div ><p className={styles.popup_success_message }> <span>{t('common:updateform_success_msg')}.</span>
-                                    {/* <span>ok.</span> */}
-                                </p>
-                              </div>
-                  }
-                 
-                </form>                                             
-            
-                </div> 
-
-                </div>
-                </body>
-
-
-    )
-}
-
+                          </div>
+                    </div>
+                    <div className={styles.formgroup1}>
+                          <div className={styles.formwrapper1}>
+                            <TextField
+                              id="addressFacturation"
+                              label={t('common:billing_address')}
+                              defaultValue={addressFacturation}
+                              variant="filled"
+                              onChange={(e) => setaddressFacturation(e.target.value)}
+                            />
+                          </div>
+                          <div className={styles.formwrapper1}>
+                              <TextField
+                                id="addressLivraison"
+                                label={t('common:delivery_address')}
+                                defaultValue={addressLivraison}
+                                variant="filled"
+                                onChange={(e) => setaddressLivraison(e.target.value)}
+                            /> 
+                          </div>
+                    </div>
+                    <div className={styles.formgroup1}>
+                        <div className={styles.formwrapper1}>
+                          <FormControl fullWidth>
+                            <InputLabel id="civility_label">{t('common:Civility')}</InputLabel>
+                            <Select
+                              labelId="civility_label"
+                              id="civility"
+                              value={age}
+                              label={t('common:Civility')}
+                              onChange={(e) => setcivility(e.target.value)}
+                            >
+                              <MenuItem value={t('common:sir')}>Monsieur</MenuItem>
+                              <MenuItem value={t('common:madam')}>Madame</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </div>
+                    </div>
+                    <div className={styles.formwrapper1}>
+                      <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                        <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                        <FilledInput
+                          id="filled-adornment-password"
+                          type={isVisible ? 'text' : 'password'}
+                          onChange={(e) => setPassword(e.target.value)}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={() => setIsVisible(true)}
+                                onMouseDown={() => setIsVisible(false)}
+                                edge="end"
+                              >
+                                {isVisible ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                        />
+                      </FormControl>
+                    </div>
+                    <button className={styles.btn2} type='submit'>
+                            { isLoading?
+                                <HashLoader 
+                                  color={'#fff'} 
+                                  loading={true}
+                                  css={styles.override}
+                                  size={30} 
+                                />
+                                :
+                                t('Update')  
+                              }
+                    </button> 
+                    {
+                      error && 
+                        <div>
+                            <p className={styles.popup_error_message}>
+                              {/* <span>{t('common:updateform_error_msg')}</span> */}
+                              <span>{error}</span> 
+                          </p>
+                        </div>
+                    }
+                </form>
+              </div> 
+            </div>
+        </body>
+      )
+    }
 
 export default RegistrationForm 

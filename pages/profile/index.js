@@ -15,6 +15,8 @@ import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type
 import { get_all_favorites } from '../../store/favorite/actionFavorite'
 import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
+import Layout from '../../components/Layout'
+import { Typography } from '@mui/material'
 
 
 const Profile = () => {
@@ -24,7 +26,6 @@ const Profile = () => {
     const router = useRouter()
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const { user } = useSelector(state => state.auth?.user_infos)
-    const { message } = useSelector(state => state.product.add_product_cart)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
 
@@ -49,7 +50,7 @@ const Profile = () => {
         if(Object.keys(clearCartData).length != 0){
             onClearCart()
         }
-        if(message || Object.keys(dataCommand).length != 0) {
+        if(Object.keys(dataCommand).length != 0) {
             setTimeout(() => {
                 dispatch({
                     type: `${ADD_PRODUCT_CART}_SUCCESS`,
@@ -65,40 +66,32 @@ const Profile = () => {
             router.push('/auth/login')
         }
         dispatch(get_all_favorites())
-    }, [user, dataCommand, clearCartData, message])
+    }, [user, dataCommand, clearCartData])
 
     return(
-        <div>
-            { 
-                dataCommand.message || message?
-                <Toast
-                    text = {dataCommand.message?dataCommand.message: message} 
-                />:null
-           }
-            <Cart
-                showCart={show}
-                onClose = {() => setShow(false)}
-                onShowCheckout = {() => setIsShowCheckout(true)}
-            />
-            <CheckoutForm
-                isVisible={isShowCheckout}
-                onClose={onCloseCheckout}
-            />
-            <Navbar
-                onShowCart = {onShowCart}
-            />
-            
-            <div id={styles.header}>
-                <h1>Update Profile</h1>
-            </div>
+        <Layout>
             <div>
-            <RegistrationForm/> 
+                { 
+                    dataCommand.message?
+                    <Toast
+                        text = {dataCommand.message} 
+                    />:null
+                }
+                <Cart
+                    showCart={show}
+                    onClose = {() => setShow(false)}
+                    onShowCheckout = {() => setIsShowCheckout(true)}
+                />
+                <CheckoutForm
+                    isVisible={isShowCheckout}
+                    onClose={onCloseCheckout}
+                />
+                <div>
+                    <Typography mb={3} variant='h6'>Mes informations personnelles</Typography>
+                    <RegistrationForm/> 
+                </div>
             </div>
-           
-
-            <Footer />
-            
-        </div>
+        </Layout>
     )
 }
 
