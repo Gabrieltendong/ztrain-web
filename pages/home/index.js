@@ -19,6 +19,7 @@ import CheckoutForm from '../../components/CheckoutForm';
 import Stripecontainer from '../../stripe/StripeContainer';
 import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type';
 import Loading from '../../components/Loading';
+import Category from '../../components/Category';
 
 const Home = () => {
 
@@ -180,7 +181,7 @@ const Home = () => {
             />
             <header id={styles.header_home} onMouseDown={onCloseMadal}>
                 <div className={styles.content_text_header}>
-                    <h1>{t('home:title')}</h1>
+                    <h1>{t('home:title')} <span className={styles.text_color}>{t('home:title_suit')}</span></h1>
                     <p>{t('home:subTitle')}</p>
                 </div>
                 <div className={styles.content_img}>
@@ -188,8 +189,9 @@ const Home = () => {
                 </div>
                 <div className={styles.form}></div>
             </header>
+            <Category />
             <main id={styles.content_home} onMouseDown={onCloseMadal} >
-                <aside id={styles.filter_wrapper}>
+                {/* <aside id={styles.filter_wrapper}>
                     <h3>Flitrer par prix</h3>
                     <Slider
                         getAriaLabel={() => 'Minimum distance shift'}
@@ -201,7 +203,7 @@ const Home = () => {
                         max={1500}    
                         step={0.01}
                     />
-                </aside>
+                </aside> */}
                 <div id={styles.main_content}>
                     <h2 className={styles.section_title}>{t('home:product')}</h2>
                     {isLoading && <Loading />}

@@ -33,14 +33,13 @@ const RegistrationForm = () => {
         e.preventDefault()
       dispatch(updateuser(
         {
-          password , 
-          lastname ,
-          firstname,
-          civility ,
-          phone ,
-          adress,
-          addressFacturation,
-          addressLivraison
+          ...(lastname && {lastname} ),
+          ...(firstname && {firstname}),
+          ...(civility && {civility}) ,
+          ...(phone && {phone}) ,
+          ...(adress && {adress}),
+          ...(addressFacturation && {addressFacturation}),
+          ...(addressLivraison && {addressLivraison})
       }, user._id)) 
     }
 
@@ -57,6 +56,7 @@ const RegistrationForm = () => {
                             label={t('common:name')}
                             defaultValue={lastname}
                             variant="filled"
+                            onChange={(e) => setlastName(e.target.value)}
                           />
                       </div>
                       <div className={styles.formwrapper1}>
@@ -65,6 +65,7 @@ const RegistrationForm = () => {
                             label={t('common:firstname')}
                             defaultValue={firstname}
                             variant="filled"
+                            onChange={(e) => setfirstName(e.target.value)}
                           />
                       </div>
                     </div>
@@ -75,6 +76,7 @@ const RegistrationForm = () => {
                             label={t('common:address')}
                             defaultValue={adress}
                             variant="filled"
+                            onChange={(e) => setaddress(e.target.value)}
                           />
                         </div>
                         <div className={styles.formwrapper1}>
@@ -84,6 +86,7 @@ const RegistrationForm = () => {
                                 label={t('common:phone')}
                                 defaultValue={phone}
                                 variant="filled"
+                                onChange={(e) => setphone(e.target.value)}
                               />
                           </div>
                     </div>
@@ -114,7 +117,7 @@ const RegistrationForm = () => {
                             <Select
                               labelId="civility_label"
                               id="civility"
-                              value={age}
+                              value={civility}
                               label={t('common:Civility')}
                               onChange={(e) => setcivility(e.target.value)}
                             >
@@ -123,28 +126,6 @@ const RegistrationForm = () => {
                             </Select>
                           </FormControl>
                         </div>
-                    </div>
-                    <div className={styles.formwrapper1}>
-                      <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
-                        <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
-                        <FilledInput
-                          id="filled-adornment-password"
-                          type={isVisible ? 'text' : 'password'}
-                          onChange={(e) => setPassword(e.target.value)}
-                          endAdornment={
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={() => setIsVisible(true)}
-                                onMouseDown={() => setIsVisible(false)}
-                                edge="end"
-                              >
-                                {isVisible ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          }
-                        />
-                      </FormControl>
                     </div>
                     <button className={styles.btn2} type='submit'>
                             { isLoading?

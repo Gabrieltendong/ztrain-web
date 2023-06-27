@@ -15,6 +15,7 @@ import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
 import HashLoader from "react-spinners/HashLoader";
 import Layout from '../../components/Layout';
+import { Table, TableCell, TableHead, TableRow } from '@mui/material';
 
 
 
@@ -27,22 +28,11 @@ const Commandes = () => {
     const { user } = useSelector(state => state.auth?.user_infos)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
-    
-
- 
     const { error, data , isLoading} = useSelector((state) => state.commandes?.fetch_commandes);
-    
-   
-  
-    
   
     useEffect(() => {
       dispatch(fetchCommandes(user._id)); // Appel de l'action pour récupérer les commandes de l'utilisateur connecté
     }, []);
-  
-  
-
-   
 
     const onShowCart = () => {
         setShow(true)
@@ -76,41 +66,7 @@ const Commandes = () => {
                 isVisible={isShowCheckout}
                 onClose={onCloseCheckout}
             />
-            <div className={styles.commande_page}>
-      {/* {isLoading && 
-      <p>Chargement ... <HashLoader 
-                                color={'#fff'} 
-                                loading={true}
-                                className={styles.override}
-                                size={20} 
-                              /> </p>}
-      */}
-      {isLoading && 
-      <p>Chargement...</p>}
-     
-      {error && <p className={styles.error_message}>Une erreur est survenue : {error}</p>}
-      {data.length > 0 && (
-        <div className={styles.commande_page} >
-        {data.map((d) => (
-          <div key={d._id} className={styles.commande_list}>
-            <h3 className={styles.commande_item_h3} >Commande_id({d._id})</h3>
-            <ul >
-              {d.products.map((product) => (
-                <li key={product._id} className={styles.commande_item}>
-                  {/* {product.product.name} = {product.quantity} x {product.price} € */}
-                  product_id({product._id}) = {product.quantity} x {product.price} €
-                </li>
-              ))}
-            </ul>
-            <p>Adresse: {d.address}</p>
-            <p>Carte: ****{d.card.number % 10000}</p>
-            <p>Date de la commande: {new Date(d.createdAt).toLocaleDateString()}</p>
-          </div>
-        ))}
-      </div>
-
-      )}
-    </div>
+            
         </div>
        </Layout>
     )

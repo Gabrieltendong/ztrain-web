@@ -19,9 +19,9 @@ function Layout({children}) {
             <Navbar
                 onShowCart = {onShowCart}
             />
-            <Box pt={20} pl={10} mb={7}>
+            <Box pt={20} pl={{xs: 0, md:10}} mb={7}>
                 <Grid container gap={3} >
-                    <Grid xs={2} item sx={{bgcolor: '#fff', height: 400, borderRadius: 5, paddingY: 3}}>
+                    <Grid md={2} item sx={{bgcolor: '#fff', height: 400, borderRadius: 5, paddingY: 3, display: {xs: 'none', md: 'block'}}}>
                         <Typography variant='h5' pl={3}>Paramètres</Typography>
                         <Link href={'/profile'}>
                             <Grid container pl={3} mt={5} alignItems={'center'} height={40} sx={{borderRightColor: router.pathname!='/profile'?'#fff':'#FF7643', borderRightWidth: 2, borderRightStyle: 'solid', cursor: 'pointer'}}>
@@ -55,10 +55,11 @@ function Layout({children}) {
                         </Link>
                     </Grid>
                     <Grid 
-                        xs={9} 
+                        md={9}
+                        xs={12}
                         item 
                         container 
-                        sx={{ borderRadius: 5, mr: 4, bgcolor: '#fff'}} 
+                        sx={{ borderRadius: 5, mr: {xs: 0, md: 4}, bgcolor: '#fff'}} 
                         p={4}
                     >
                         {children}

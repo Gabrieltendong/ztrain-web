@@ -9,7 +9,7 @@ import { get_all_category, get_products_category } from '../../store/category/ac
 import { getAllProduct } from '../../store/product/actionProduct';
 import Dropdown from '../Dropdown';
 import {  Avatar, Badge } from 'antd';
-import { Popover } from '@mui/material';
+import { Popover, Typography } from '@mui/material';
 import { UserOutlined } from '@ant-design/icons';
 import AuthScreen from '../../pages/auth';
 
@@ -99,9 +99,10 @@ const Navbar = ({
                 <span> {product_cart.length}</span>
             </div>
            <div id={styles.avatar_wrapper} onClick={user_infos?.user?handleClick:handleToggleModal}>
-                <Badge dot={user_infos?.user}>
+                <Badge dot={user_infos?.user} color='green' style={{right: 10, top: 5, height: 8, width: 8}}>
                     <Avatar  icon={<UserOutlined />} />
                 </Badge>
+                {user_infos?.user && <Typography>{user_infos?.user.email}</Typography>}
             </div>
             
             <Popover

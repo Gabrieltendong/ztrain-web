@@ -1,4 +1,4 @@
-import { UPDATE_USER } from "./type";
+import { UPDATE_USER, UPDATE_USER_PASSWORD } from "./type";
 
 const initialState = {
     update_profil: {
@@ -6,6 +6,11 @@ const initialState = {
         isLoading: false,
         error: ""
     },
+    update_password: {
+        data: {},
+        isLoading: false,
+        error: ""
+    }
 }
 
 const userReducer = (state = initialState, action) => {
@@ -33,6 +38,35 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 update_profil: {
                     ...state.update_profil,
+                    isLoading: false,
+                    data: {},
+                    error: action.error
+                }
+            }
+
+        case UPDATE_USER_PASSWORD:
+            return {
+                ...state,
+                update_password: {
+                    ...state.update_password,
+                    isLoading: true
+                }
+            }
+        case `${UPDATE_USER_PASSWORD}_SUCCESS`:
+            return {
+                ...state,
+                update_password: {
+                    ...state.update_password,
+                    isLoading: false,
+                    data: action.payload,
+                    error: ""
+                }
+            }
+        case `${UPDATE_USER_PASSWORD}_FAIL`:
+            return {
+                ...state,
+                update_password: {
+                    ...state.update_password,
                     isLoading: false,
                     data: {},
                     error: action.error
