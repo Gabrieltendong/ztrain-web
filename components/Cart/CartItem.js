@@ -38,7 +38,7 @@ const CartItem = ({item}) => {
                 {
                     item?.product?.image &&
                     <Image
-                        src={`/api/imageproxy?url=${encodeURIComponent(item?.product?.image[0])}`}
+                        src={item?.product?.image[0]}
                         height={70}
                         width={70} 
                     />

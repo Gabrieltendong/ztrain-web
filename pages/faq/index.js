@@ -22,7 +22,6 @@ const Faq = () => {
     const router = useRouter()
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const { user } = useSelector(state => state.auth?.user_infos)
-    const { message } = useSelector(state => state.product.add_product_cart)
     const dataCommand = useSelector(state => state.cart.command.data)
     const clearCartData = useSelector(state => state.cart.clearCart.data)
 
@@ -76,32 +75,16 @@ const Faq = () => {
         if(Object.keys(clearCartData).length != 0){
             onClearCart()
         }
-        if(message || Object.keys(dataCommand).length != 0) {
-            setTimeout(() => {
-                dispatch({
-                    type: `${ADD_PRODUCT_CART}_SUCCESS`,
-                    payload: ''
-                })
-                dispatch({
-                    type: `${CREATE_COMMANDE}_SUCCESS`,
-                    payload: ''
-                })
-            }, 2000);
-        }
+        
         if(!user){
             router.push('/auth/login')
         }
         dispatch(get_all_favorites())
-    }, [user, dataCommand, clearCartData, message])
+    }, [user, dataCommand, clearCartData])
 
     return(
         <div>
-            { 
-                dataCommand.message || message?
-                <Toast
-                    text = {dataCommand.message?dataCommand.message: message} 
-                />:null
-           }
+           
             <Cart
                 showCart={show}
                 onClose = {() => setShow(false)}

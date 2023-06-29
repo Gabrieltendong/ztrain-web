@@ -95,7 +95,7 @@ const ProductDetail = ({
                                 product?.image.map((img, index) => (
                                     <Dot key={index} slide={index}>
                                         <Image
-                                            src={`/api/imageproxy?url=${encodeURIComponent(img)}`}
+                                            src={img}
                                             height={60}
                                             width={60}
                                             id={styles.img}
@@ -109,7 +109,7 @@ const ProductDetail = ({
                                 product?.image.map((img, index) => (
                                     <Slide key={index}>
                                         <Image
-                                            src={`/api/imageproxy?url=${encodeURIComponent(img)}`}
+                                            src={img}
                                             height={500}
                                             width={400}
                                             className={styles.img_large}
