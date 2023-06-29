@@ -122,7 +122,8 @@ const Commandes = () => {
                                     </TableCell>
                                 </TableRow>
                             ))
-                            :null
+                            :
+                            <Typography>Aucune n'avez aucune commande</Typography>
                         }
                     </TableBody>
                 </Table>
