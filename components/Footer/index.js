@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
 import styles from './style.module.scss'
+import { Grid } from '@mui/material'
+import { Facebook, LinkedIn, Twitter, YouTube } from '@mui/icons-material'
 
 
 const Footer = () => {
@@ -44,11 +46,20 @@ const Footer = () => {
                 </div>
                 <div id={styles.section_follow_us}>
                     <h5>Follow us</h5>
-                    <div className={styles.content_menu_item}>
-                        <a className={styles.item_menu}>Facebook</a>
-                        <a className={styles.item_menu}>Twitter</a>
-                        <a className={styles.item_menu}>Instagram</a>
-                    </div>
+                    <Grid container gap={1} display={'flex'} justifyContent={'center'}>
+                        <Grid item>
+                            <Facebook sx={{color: 'white'}} />
+                        </Grid>
+                        <Grid item>
+                            <Twitter sx={{color: 'white'}} />
+                        </Grid>
+                        <Grid item>
+                            <LinkedIn sx={{color: 'white'}} />
+                        </Grid>
+                        <Grid item>
+                            <YouTube sx={{color: 'white'}} />
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
         </footer>

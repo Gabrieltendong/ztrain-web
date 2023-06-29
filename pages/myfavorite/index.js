@@ -17,7 +17,8 @@ import { addProductCart } from '../../store/product/actionProduct'
 import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
 import Layout from '../../components/Layout'
-import { Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
+import Image from 'next/image'
 
 
 const Favorites = () => {
@@ -138,6 +139,7 @@ const Favorites = () => {
                 />
                 <main id={styles.container}>
                     <Typography variant='h6'>Mes produits favoris</Typography>
+                    
                     {
                         data.length > 0?
                         <div id = {styles.popular_product_wrapper}>
@@ -153,9 +155,14 @@ const Favorites = () => {
                         }
                         </div>
                         :
-                        <div id={styles.empty_favorite_wrapper}>
-                            <p>Aucun produit dans vos favoris</p>
-                        </div>
+                        <Box sx={{width: '70vw'}} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                            <Box sx={{height: 250, width: 250, position: 'relative'}}>
+                                <Image src={'/assets/favorite.png'} width={250} height={250} />
+                            </Box>
+                            <Typography variant='h5'>Oups!! Aucun produit dans vos favoris </Typography>
+                            <Typography variant='caption'>Rendez-vous dans le catalogue des produits pour ajouter un produit à vos favoris</Typography>
+                            <Button onClick={() => router.push('/home')}  sx={{borderRadius: 25, backgroundColor: '#FF7643', color: '#fff', textTransform: 'initial', mt: 5}} variant='contained'>Catalogue de produit</Button>
+                        </Box>
                     }
                 </main>
             </div>

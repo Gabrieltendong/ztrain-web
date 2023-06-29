@@ -1,9 +1,28 @@
 #footer_home{
-    // height: 300px;
-    background-color: rgb(19, 19, 20);
+    height: 350px;
+    background-color: #37474F;
     box-sizing: border-box;
+    padding-bottom: 40px;
+    padding-top: 50px;
+    // border-top-left-radius: 150px;
+    border-top-right-radius: 70px;
+    position: relative;
+    margin-top:100px;
+
+    &::before{
+        content: "";
+        height: 70px;
+        width: 100%;
+        border-top-left-radius: 150px;
+        border-top-right-radius: 80px;
+        transform: skewY(2deg);
+        background-color: #37474F;
+        position: absolute;
+        top: -30px;
+    }
     #content_footer{
         display: grid;
+        // transform: skew(-2deg);
         grid-template-columns: 35% 25% 20% 20%;
     }
     #section_logo{

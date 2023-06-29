@@ -8,7 +8,7 @@ import Toast from '../../components/Toast'
 import styles from './style.module.scss'
 import HashLoader from "react-spinners/HashLoader";
 import Layout from '../../components/Layout';
-import { Box, Chip, Grid, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, Chip, Grid, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import moment from 'moment';
 import Image from 'next/image';
 import { Popover } from 'antd';
@@ -28,6 +28,7 @@ const ProductDetail = (product) => (<Box sx={{width: 150}}>
 
 const Commandes = () => {
 
+    const router = useRouter()
     const [show, setShow] = useState(false)
     const [showArrow, setShowArrow] = useState(true);
     const [arrowAtCenter, setArrowAtCenter] = useState(false);
@@ -70,6 +71,16 @@ const Commandes = () => {
                 onClose={onCloseCheckout}
             />
             <Typography mb={3} variant='h6'>Mes commandes</Typography>
+            { data.length == 0?
+                <Box sx={{width: '70vw'}} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
+                    <Box sx={{height: 250, width: 250, position: 'relative'}}>
+                        <Image src={'/assets/Catalogue-pana.png'} width={250} height={250} />
+                    </Box>
+                    <Typography variant='h5'>Vous n'avez pas de commande</Typography>
+                    <Typography variant='caption'>Rendez-vous dans le catalogue des produits pour passer votre première commande</Typography>
+                    <Button onClick={() => router.push('/home')}  sx={{borderRadius: 25, backgroundColor: '#FF7643', color: '#fff', textTransform: 'initial', mt: 5}} variant='contained'>Catalogue de produit</Button>
+                </Box>:null
+            }
             <Paper>
                 <Table>
                     <TableHead>
@@ -116,7 +127,7 @@ const Commandes = () => {
                                 </TableRow>
                             ))
                             :
-                            <Typography>Aucune n'avez aucune commande</Typography>
+                            'null'
                         }
                     </TableBody>
                 </Table>
