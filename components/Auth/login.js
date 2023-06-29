@@ -94,8 +94,8 @@ const Login = ({onClose}) => {
               }
             </div>
           </div>
-          <Link href={'/auth/resetPassword'}>
-            <a className={styles.forgotpass}>{t('common:forgot_pass')}</a>
+          <Link href={'/auth/resetPassword'} className={styles.forgotpass}>
+            {t('common:forgot_pass')}
           </Link>
           {
             error &&

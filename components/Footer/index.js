@@ -23,13 +23,13 @@ const Footer = () => {
                             <a className={styles.item_menu}>Join us</a>
                         </div>
                         <div className={styles.content_menu_item}>
-                            <Link href="/faq">
-                                <a className={styles.item_menu}>FAQ</a>
+                            <Link href="/faq" className={styles.item_menu}>
+                                FAQ
                             </Link>
                             <a className={styles.item_menu}>CGV</a>
                             <a className={styles.item_menu}>Terms of services</a>
-                            <Link href={'/privacy-policy'}>
-                                <a className={styles.item_menu}>Privacy policy</a>
+                            <Link href={'/privacy-policy'} className={styles.item_menu}>
+                                Privacy policy
                             </Link>
                         </div>
                     </div>

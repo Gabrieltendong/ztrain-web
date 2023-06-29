@@ -16,7 +16,7 @@ import { Popover } from 'antd';
 const ProductDetail = (product) => (<Box sx={{width: 150}}>
     <Box sx={{width: 150, height: 100, position: 'relative'}}>
         <Image 
-            src={`/api/imageproxy?url=${encodeURIComponent(product.product.image)}`}
+            src={product.product.image[0]}
             layout='fill'
             alt='product detail'
             className={styles.card_body_img}
@@ -101,7 +101,7 @@ const Commandes = () => {
                                                         <Box sx={{position: 'relative', height: 40, width: 40, borderRadius: 20, backgroundColor: '#eee', padding: 2, margin: 1}}>
                                                             <Popover placement="bottom" content={() => ProductDetail(product)} arrow={mergedArrow}>
                                                                 <Image 
-                                                                    src={`/api/imageproxy?url=${encodeURIComponent(product.product.image)}`}
+                                                                    src={product.product.image[0]}
                                                                     layout='fill'
                                                                     alt='product image'
                                                                     className={styles.card_body_img}
