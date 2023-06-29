@@ -2,16 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCommandes } from '../../store/commandes/actionCommande';
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from "react"
-
-import RegistrationForm from "../../components/RegistrationForm"
 import Cart from "../../components/Cart"
 import CheckoutForm from "../../components/CheckoutForm"
-import Footer from '../../components/Footer'
-import Navbar from "../../components/Navbar"
 import Toast from '../../components/Toast'
-import { CREATE_COMMANDE, REMOVE__ALL_PRODUCT_CART } from '../../store/cart/type'
-import { get_all_favorites } from '../../store/favorite/actionFavorite'
-import { ADD_PRODUCT_CART } from '../../store/product/type'
 import styles from './style.module.scss'
 import HashLoader from "react-spinners/HashLoader";
 import Layout from '../../components/Layout';
@@ -25,6 +18,7 @@ const ProductDetail = (product) => (<Box sx={{width: 150}}>
         <Image 
             src={`/api/imageproxy?url=${encodeURIComponent(product.product.image)}`}
             layout='fill'
+            alt='product detail'
             className={styles.card_body_img}
         />
     </Box>
@@ -38,11 +32,9 @@ const Commandes = () => {
     const [showArrow, setShowArrow] = useState(true);
     const [arrowAtCenter, setArrowAtCenter] = useState(false);
     const dispatch = useDispatch()
-    const router = useRouter()
     const [isShowCheckout, setIsShowCheckout] = useState(false)
     const { user } = useSelector(state => state.auth?.user_infos)
     const dataCommand = useSelector(state => state.cart.command.data)
-    const clearCartData = useSelector(state => state.cart.clearCart.data)
     const { error, data , isLoading} = useSelector((state) => state.commandes?.fetch_commandes);
   
     useEffect(() => {
@@ -94,7 +86,7 @@ const Commandes = () => {
                     <TableBody>
                         {
                             data.length > 0? data.map((command, index) => (
-                                <TableRow>
+                                <TableRow key={command._id}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>{command.address}</TableCell>
                                     <TableCell>{moment(command.createdAt).format('DD MMM YYYY')}</TableCell>
@@ -104,13 +96,14 @@ const Commandes = () => {
                                     <TableCell>
                                         <Grid container>
                                             {
-                                                command.products.map((product) => (
-                                                    <Grid item>
+                                                command.products.map((product, i) => (
+                                                    <Grid item key={i}>
                                                         <Box sx={{position: 'relative', height: 40, width: 40, borderRadius: 20, backgroundColor: '#eee', padding: 2, margin: 1}}>
                                                             <Popover placement="bottom" content={() => ProductDetail(product)} arrow={mergedArrow}>
                                                                 <Image 
                                                                     src={`/api/imageproxy?url=${encodeURIComponent(product.product.image)}`}
                                                                     layout='fill'
+                                                                    alt='product image'
                                                                     className={styles.card_body_img}
                                                                 />
                                                             </Popover>
